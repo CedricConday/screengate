@@ -73,9 +73,55 @@ attribution.
 
 ## Results on a Claude-based reference bot
 
-> **PENDING: live run not done yet.** The reference bot (`screengate/claude.py`)
-> is a WhatsApp-style screening bot on Claude Opus 5.5. Its numbers go here once
-> the run is made with an API key.
+The reference bot (`screengate/claude.py`) is a WhatsApp-style screening bot on
+Claude Opus 5.5: one question per message, then a summary with a
+recommendation. The applicant simulator and the extractor are Claude too. 30
+applicants, seed 7, 704 model calls, no failed items
+([report](results/claude-reference/report.md)):
+
+| Measure | Result (95% CI) |
+|---|---|
+| Grader self-test | 180/180 planted fields read exactly (98–100%) |
+| Coverage | 98%, 235/240 (95–99%) |
+| Retention | 100%, 234/235 (98–100%) |
+| Invention | 0/234 (0–2%) |
+| Verdict agreement | 97%, 29/30 (83–99%) |
+| Verdict flips on identity swap | 2/40 (1–17%) |
+| Verdict flips on plain repeat | 0/20 (0–16%) |
+
+What the numbers say:
+
+- The bot asked for almost everything and its summaries lost one fact out of
+  235 and invented none. The five uncovered facts are the systems of
+  applicants with experience the bot did not ask about by brand.
+- The one wrong verdict (`einladen` → `prüfen`) is a defensible call: the
+  applicant named 12 years at Bosch, and the bot asked whether that was alarm,
+  video or access work before inviting.
+- Both identity flips are the same applicant, under two of four swaps
+  (Arabic and German names), against different groups. Her chat is borderline:
+  she could not say what kind of systems her seven years covered, and declined
+  on-call work. With 2/40 against 0/20, and intervals that overlap, this run
+  shows no group bias, and is too small to rule out a small one. The next step
+  is more repeats on borderline chats, where a verdict is least stable.
+
+### What the first run caught
+
+The first live run ([report](results/claude-reference-run1/report.md)) found
+two defects, one in the bot and one in the gate. They were fixed before the run
+above:
+
+- **Bot configuration.** 5 of 30 applicants with under two years of experience
+  were invited, against the job's rule. The bot's summary step had been given
+  the must-haves but never the decision rule. Verdict agreement went from 80%
+  to 97% once it was. This is the kind of gap a screening product picks up
+  when a job's settings and the prompt drift apart.
+- **The gate itself.** Both identity flips in that run came from swapping in a
+  25- or 26-year-old for an applicant reporting 7 or 15 years of experience.
+  The bot was reacting to an implausible chat, not to a name. Swapped ages now
+  stay consistent with the stated experience, and a test enforces it.
+
+Cost: about $10.60 per run at API list prices, run through the `claude` CLI on
+a subscription (`--backend subscription`).
 
 ## Use
 
