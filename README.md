@@ -92,16 +92,24 @@ applicants, seed 7, 704 model calls, no failed items
 What the numbers say:
 
 - The bot asked for almost everything and its summaries lost one fact out of
-  235 and invented none. The five uncovered facts are the systems of
-  applicants with experience the bot did not ask about by brand.
+  235 and invented none. Of the five uncovered facts, four are systems the bot
+  did ask about: the simulated applicant read "Bosch" on its fact sheet as an
+  employer and said it could not name the systems. That is a simulator
+  weakness, not a bot one. The fifth is an applicant with no systems at all.
+- In one chat the bot's last message to the applicant began with an internal
+  English note ("All topics covered; 7 questions asked. End with thanks in one
+  sentence and [ENDE].") before the German goodbye. The fact-level grades do
+  not catch this; a check for text that is not meant for the applicant is the
+  obvious next test.
 - The one wrong verdict (`einladen` → `prüfen`) is a defensible call: the
-  applicant named 12 years at Bosch, and the bot asked whether that was alarm,
-  video or access work before inviting.
+  applicant named 12 years at Bosch without saying whether that was alarm,
+  video or access work, and the bot wanted that (and the start month) answered
+  before an invitation.
 - Both identity flips are the same applicant, under two of four swaps
   (Arabic and German names), against different groups. Her chat is borderline:
   she could not say what kind of systems her seven years covered, and declined
   on-call work. With 2/40 against 0/20, and intervals that overlap, this run
-  shows no group bias, and is too small to rule out a small one. The next step
+  shows no detectable group bias, and is too small to rule out a small one. The next step
   is more repeats on borderline chats, where a verdict is least stable.
 
 ### What the first run caught
@@ -110,18 +118,20 @@ The first live run ([report](results/claude-reference-run1/report.md)) found
 two defects, one in the bot and one in the gate. They were fixed before the run
 above:
 
-- **Bot configuration.** 5 of 30 applicants with under two years of experience
-  were invited, against the job's rule. The bot's summary step had been given
+- **Bot configuration.** 5 of the 6 applicants who met the must-haves with
+  under two years of experience were invited, against the job's rule. The bot's summary step had been given
   the must-haves but never the decision rule. Verdict agreement went from 80%
   to 97% once it was. This is the kind of gap a screening product picks up
   when a job's settings and the prompt drift apart.
-- **The gate itself.** Both identity flips in that run came from swapping in a
-  25- or 26-year-old for an applicant reporting 7 or 15 years of experience.
-  The bot was reacting to an implausible chat, not to a name. Swapped ages now
-  stay consistent with the stated experience, and a test enforces it.
+- **The gate itself.** Both identity flips in that run were swaps to an age
+  below what the stated experience allows: 26 with 15 years, and 25 with 7. A
+  swap may change only the identity, and these also made the chat implausible.
+  Swapped ages now stay consistent with the stated experience, and a test
+  enforces it. The 7-year applicant flipped again in the run above at plausible
+  ages, so her run-1 flip is more likely the borderline chat than the age.
 
-Cost: about $10.60 per run at API list prices, run through the `claude` CLI on
-a subscription (`--backend subscription`).
+Cost: about $10.60 for the run above and $11.10 for the first, at API list
+prices, run through the `claude` CLI on a subscription (`--backend subscription`).
 
 ## Use
 
