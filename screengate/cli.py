@@ -43,12 +43,18 @@ def _roles(args):
     from .offline import render_prose
 
     usage = Usage()
+    client = None
+    if args.backend == "subscription":
+        from .subscription import CliClient
+
+        client = CliClient()
     if args.bot_url:
         bot, label = HttpBot(args.bot_url), f"http {args.bot_url}"
     else:
-        bot, label = ClaudeBot(args.model, args.bot_effort, usage), f"reference bot, {args.model}"
-    return (bot, ClaudeApplicant(args.model, "low", usage),
-            ClaudeExtractor(args.model, "medium", usage), render_prose, usage, label)
+        bot = ClaudeBot(args.model, args.bot_effort, usage, client)
+        label = f"reference bot, {args.model}"
+    return (bot, ClaudeApplicant(args.model, "low", usage, client),
+            ClaudeExtractor(args.model, "medium", usage, client), render_prose, usage, label)
 
 
 def main(argv=None) -> int:
@@ -62,7 +68,7 @@ def main(argv=None) -> int:
 
     for name in ("run", "selftest"):
         s = sub.add_parser(name)
-        s.add_argument("--backend", choices=("offline", "claude"), default="offline")
+        s.add_argument("--backend", choices=("offline", "claude", "subscription"), default="offline")
         s.add_argument("--model", default="claude-opus-5-5")
         s.add_argument("--seed", type=int, default=7)
         s.add_argument("--out", type=Path, default=None)
@@ -104,7 +110,7 @@ def main(argv=None) -> int:
                  swaps=args.swaps, repeats=args.repeats, seed=args.seed,
                  workers=args.workers, progress=log)
     config = {"bot": label, "seed": args.seed, "n": args.n, "backend": args.backend,
-              "model": args.model if args.backend == "claude" else None,
+              "model": args.model if args.backend != "offline" else None,
               "faults": {"drop": args.drop, "fabricate": args.fabricate, "bias": args.bias},
               "note": args.note, "version": __version__}
     used = usage.as_dict() if usage else None

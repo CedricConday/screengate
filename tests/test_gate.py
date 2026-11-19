@@ -209,3 +209,38 @@ def json_dumps(o):
     import json
 
     return json.dumps(o, ensure_ascii=False)
+
+
+def test_subscription_client_maps_cli_output(monkeypatch):
+    import json
+    import subprocess
+
+    from screengate.claude import ClaudeBot, ClaudeExtractor
+    from screengate.subscription import CliClient, render_messages
+
+    seen = []
+
+    def fake_run(cmd, input, **kw):
+        seen.append((cmd, input))
+        out = {"is_error": False, "stop_reason": "end_turn", "result": "Hast du einen Führerschein?",
+               "usage": {"input_tokens": 3, "cache_creation_input_tokens": 7, "output_tokens": 4},
+               "modelUsage": {"claude-opus-5-5": {}}, "total_cost_usd": 0.01}
+        if "--json-schema" in cmd:
+            out.update(stop_reason="tool_use", structured_output={
+                "qualification": None, "years_experience": 4, "systems": ["Axis"],
+                "driving_licence": None, "german_level": None, "start_month": None,
+                "salary_eur": None, "on_call": None, "verdict": "prüfen"})
+        return SimpleNamespace(stdout=json.dumps(out), stderr="", returncode=0)
+
+    monkeypatch.setattr(subprocess, "run", fake_run)
+    client = CliClient()
+    msg = ClaudeBot(client=client).next_message(
+        {"name": "Anna Becker", "age": 30, "job": "x"},
+        [("bot", "Welche Ausbildung?"), ("applicant", "Elektroniker")])
+    assert msg == "Hast du einen Führerschein?"
+    cmd, prompt = seen[0]
+    assert cmd[cmd.index("--tools") + 1] == "" and cmd[cmd.index("--setting-sources") + 1] == ""
+    assert "ICH: Welche Ausbildung?" in prompt and "GEGENÜBER: Elektroniker" in prompt
+    ext = ClaudeExtractor(client=client).extract("4 Jahre mit Axis.")
+    assert ext.values == {"years_experience": 4, "systems": ("Axis",)} and ext.verdict == "prüfen"
+    assert render_messages([{"role": "user", "content": "x"}]) == "x"

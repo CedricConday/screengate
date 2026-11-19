@@ -32,6 +32,7 @@ class Usage:
         self.input_tokens = 0
         self.output_tokens = 0
         self.models = Counter()  # which model actually served each call
+        self.cost_usd = 0.0  # only known on the subscription backend (list-price equivalent)
 
     def add(self, response) -> None:
         with self._lock:
@@ -39,10 +40,12 @@ class Usage:
             self.input_tokens += getattr(response.usage, "input_tokens", 0) or 0
             self.output_tokens += getattr(response.usage, "output_tokens", 0) or 0
             self.models[getattr(response, "model", None) or "unknown"] += 1
+            self.cost_usd += getattr(response, "cost_usd", 0.0) or 0.0
 
     def as_dict(self) -> dict:
         return {"calls": self.calls, "input_tokens": self.input_tokens,
-                "output_tokens": self.output_tokens, "served_by": dict(self.models)}
+                "output_tokens": self.output_tokens, "served_by": dict(self.models),
+                **({"list_price_usd": round(self.cost_usd, 2)} if self.cost_usd else {})}
 
 
 class Refused(RuntimeError):

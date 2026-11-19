@@ -97,7 +97,9 @@ def render(run: dict, config: dict, selftest: dict | None = None,
                 (f"{usage['calls']} model calls, {usage['input_tokens']:,} input and "
                 f"{usage['output_tokens']:,} output tokens. Served by: "
                 + ", ".join(f"{k} ({v})" for k, v in usage.get("served_by", {}).items())
-                + "."), ""]
+                + "."
+                + (f" At API list prices this is about ${usage['list_price_usd']:,.2f}."
+                   if usage.get("list_price_usd") else "")), ""]
     out += [
         "## How this was measured",
         "",
