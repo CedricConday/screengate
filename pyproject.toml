@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "screengate"
+version = "0.1.0"
+description = "Recovery gate for AI applicant screening: plant known facts in synthetic applicants, run the screening bot, score what its summary kept, invented, and whether the verdict moves when only the name changes."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+authors = [{name = "Cedric Conday"}]
+keywords = ["recruiting", "LLM evaluation", "AI Act", "fairness", "chatbot", "ground truth"]
+dependencies = []
+
+[project.optional-dependencies]
+claude = ["anthropic>=2.11", "pydantic>=2"]
+dev = ["pytest", "ruff", "anthropic>=2.11", "pydantic>=2"]
+
+[project.urls]
+Homepage = "https://github.com/CedricConday/screengate"
+
+[project.scripts]
+screengate = "screengate.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["screengate*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
