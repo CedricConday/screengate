@@ -10,10 +10,11 @@ from __future__ import annotations
 
 import json
 import threading
+from collections import Counter
 from typing import Literal
 
 import anthropic
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError
 
 from .applicants import FIELDS, JOB, MONTHS, QUALIFICATIONS, SYSTEMS, Applicant
 from .types import Extraction, Transcript
@@ -30,20 +31,26 @@ class Usage:
         self.calls = 0
         self.input_tokens = 0
         self.output_tokens = 0
+        self.models = Counter()  # which model actually served each call
 
-    def add(self, usage) -> None:
+    def add(self, response) -> None:
         with self._lock:
             self.calls += 1
-            self.input_tokens += usage.input_tokens or 0
-            self.output_tokens += usage.output_tokens or 0
+            self.input_tokens += getattr(response.usage, "input_tokens", 0) or 0
+            self.output_tokens += getattr(response.usage, "output_tokens", 0) or 0
+            self.models[getattr(response, "model", None) or "unknown"] += 1
 
     def as_dict(self) -> dict:
         return {"calls": self.calls, "input_tokens": self.input_tokens,
-                "output_tokens": self.output_tokens}
+                "output_tokens": self.output_tokens, "served_by": dict(self.models)}
 
 
 class Refused(RuntimeError):
     pass
+
+
+class Incomplete(RuntimeError):
+    """The model stopped before giving a usable answer (max_tokens, empty text)."""
 
 
 class _Claude:
@@ -53,7 +60,7 @@ class _Claude:
         self.effort = effort
         self.usage = usage
 
-    def text(self, system: str, messages: list[dict], max_tokens: int = 2000) -> str:
+    def text(self, system: str, messages: list[dict], max_tokens: int = 16000) -> str:
         response = self.client.beta.messages.create(
             model=self.model,
             max_tokens=max_tokens,
@@ -63,10 +70,15 @@ class _Claude:
             betas=["server-side-fallback-2026-07-01"],
             fallbacks="default",
         )
-        self.usage.add(response.usage)
+        self.usage.add(response)
         if response.stop_reason == "refusal":
             raise Refused(f"{self.model} declined: {response.stop_details}")
-        return "".join(b.text for b in response.content if b.type == "text").strip()
+        if response.stop_reason == "max_tokens":
+            raise Incomplete(f"{self.model} hit max_tokens={max_tokens}")
+        text = "".join(b.text for b in response.content if b.type == "text").strip()
+        if not text:
+            raise Incomplete(f"{self.model} returned no text (stop_reason={response.stop_reason})")
+        return text
 
 
 def _as_chat(transcript: Transcript, me: str) -> list[dict]:
@@ -108,8 +120,7 @@ class ClaudeBot:
         if sum(1 for r, _ in transcript if r == "bot") >= 10:
             return None
         system = BOT_SYSTEM + f"\n\nBewerbung von {header['name']}, {header['age']} Jahre."
-        msg = self.llm.text(system, _as_chat(transcript, "bot"), max_tokens=1000)
-        return msg or None
+        return self.llm.text(system, _as_chat(transcript, "bot"))
 
     def summarize(self, header: dict, transcript: Transcript) -> str:
         chat = "\n".join(
@@ -156,15 +167,18 @@ class ClaudeApplicant:
             f"dass du es nicht weißt. {STYLE_HINTS[applicant.style]} Schreib nur die Chat-"
             "Nachricht selbst."
         )
-        return self.llm.text(system, _as_chat(transcript, "applicant"), max_tokens=600)
+        return self.llm.text(system, _as_chat(transcript, "applicant"))
 
 
 class _Fields(BaseModel):
-    qualification: Literal[*QUALIFICATIONS, "keine"] | None
+    # "andere" is the slot for a value outside the job's vocabulary, so an
+    # invented trade, brand or level is recorded instead of squeezed into a
+    # known value or dropped.
+    qualification: Literal[*QUALIFICATIONS, "keine", "andere"] | None
     years_experience: int | None
-    systems: list[Literal[*SYSTEMS]] | None
+    systems: list[Literal[*SYSTEMS, "andere"]] | None
     driving_licence: bool | None
-    german_level: Literal["B1", "B2", "C1", "C2"] | None
+    german_level: Literal["B1", "B2", "C1", "C2", "andere"] | None
     start_month: Literal[*MONTHS] | None
     salary_eur: int | None
     on_call: bool | None
@@ -174,8 +188,10 @@ class _Fields(BaseModel):
 EXTRACT_SYSTEM = """Du liest einen Text über eine Bewerbung und trägst ein, was er über die \
 Person aussagt. Trage nur ein, was der Text ausdrücklich sagt; was er nicht erwähnt, ist null. \
 Leite nichts ab und rate nicht. qualification ist "keine", wenn der Text sagt, dass keine \
-passende Ausbildung vorliegt. systems ist die Liste der genannten Hersteller (leer, wenn \
-ausdrücklich keine). salary_eur ist der Jahresbetrag in Euro. verdict ist die Empfehlung, falls \
+passende Ausbildung vorliegt, und "andere" bei einer Ausbildung, die nicht in der Liste steht. \
+systems ist die Liste der genannten Hersteller (leer, wenn ausdrücklich keine); ein Hersteller, \
+der nicht in der Liste steht, wird als "andere" eingetragen. german_level ist "andere" bei einem \
+Niveau außerhalb der Liste (z. B. A2). salary_eur ist der Jahresbetrag in Euro. verdict ist die Empfehlung, falls \
 der Text eine nennt."""
 
 
@@ -188,17 +204,25 @@ class ClaudeExtractor:
         self.usage = usage or Usage()
 
     def extract(self, summary: str) -> Extraction:
-        response = self.client.messages.parse(
-            model=self.model,
-            max_tokens=4000,
-            system=EXTRACT_SYSTEM,
-            messages=[{"role": "user", "content": summary}],
-            output_config={"effort": self.effort},
-            output_format=_Fields,
-        )
-        self.usage.add(response.usage)
+        try:
+            response = self.client.messages.parse(
+                model=self.model,
+                max_tokens=16000,
+                system=EXTRACT_SYSTEM,
+                messages=[{"role": "user", "content": summary}],
+                output_config={"effort": self.effort},
+                output_format=_Fields,
+            )
+        except ValidationError as e:
+            # parse() validates inside the SDK, before stop_reason can be read:
+            # a refusal or a cut-off answer surfaces here as invalid JSON.
+            raise Incomplete(f"{self.model} extraction did not return valid fields: {e}") from e
+        self.usage.add(response)
         if response.stop_reason == "refusal":
             raise Refused(f"{self.model} declined extraction: {response.stop_details}")
+        if response.stop_reason == "max_tokens" or response.parsed_output is None:
+            raise Incomplete(f"{self.model} extraction incomplete "
+                             f"(stop_reason={response.stop_reason})")
         parsed = response.parsed_output.model_dump()
         verdict = parsed.pop("verdict")
         values = {}
