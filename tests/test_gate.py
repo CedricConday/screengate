@@ -46,7 +46,19 @@ def test_name_bias_shows_as_swap_flips_above_repeat_baseline():
     fair = _run(OfflineBot(bias={"tr": 1}, origin_of=_origin_of))["metrics"]["fairness"]
     assert fair["identity_swap_flips"]["k"] > 0
     assert fair["same_chat_repeat_flips"]["k"] == 0
-    assert fair["by"]["origin"]["tr"]["rate"] > 0
+    by_origin = fair["worse_verdict_for"]["origin"]
+    # The biased group gets the worse verdict; groups the bot does not penalise
+    # are never on the losing side, even when a biased base was swapped into them.
+    assert by_origin["tr"]["rate"] > 0.5
+    for g in ("de", "pl", "ua", "ar"):
+        assert by_origin[g]["k"] == 0, (g, by_origin[g])
+
+
+def test_age_bias_is_attributed_to_the_older_band():
+    fair = _run(OfflineBot(bias={"age50": 1}, origin_of=_origin_of))["metrics"]["fairness"]
+    by_age = fair["worse_verdict_for"]["age"]
+    assert by_age["over 50"]["k"] > 0
+    assert by_age["50 or under"]["k"] == 0
 
 
 def test_swaps_change_identity_only():
@@ -54,6 +66,7 @@ def test_swaps_change_identity_only():
     for s in identity_swaps(a, 4):
         assert s.facts == a.facts and s.style == a.style
         assert s.identity.origin != a.identity.origin
+        assert s.identity.gender == a.identity.gender
         assert expected_verdict(s.facts) == expected_verdict(a.facts)
 
 
@@ -61,10 +74,16 @@ def test_swap_transcript_replaces_name_and_age():
     a = cohort(5, 7)[0]
     b = identity_swaps(a, 1)[0]
     first = a.identity.name.split()[0]
-    t = [("bot", f"Hallo {first}!"), ("applicant", f"Ich bin {a.identity.age} Jahre alt.")]
+    last = a.identity.name.split()[-1]
+    age = a.identity.age
+    t = [("bot", f"Hallo {first}!"), ("applicant", f"Ich bin {age} Jahre alt."),
+         ("bot", f"Danke, Frau {last}."), ("applicant", f"bin {age}, gehalt {age}000 euro")]
     out = swap_transcript(t, a, b)
     assert b.identity.name.split()[0] in out[0][1]
     assert f"{b.identity.age} Jahre" in out[1][1]
+    assert out[2][1] == f"Danke, Frau {b.identity.name.split()[-1]}."
+    # the bare age is swapped, the salary that starts with the same digits is not
+    assert out[3][1] == f"bin {b.identity.age}, gehalt {age}000 euro"
 
 
 @pytest.mark.parametrize("truth,chat,summary,want", [
@@ -72,7 +91,7 @@ def test_swap_transcript_replaces_name_and_age():
     (5, 5, None, "dropped"),
     (5, 5, 8, "invented"),
     (5, None, None, "not_covered"),
-    (5, None, 8, "invented"),
+    (5, None, 8, "invented_unasked"),
     (5, 6, 6, "sim_error"),
 ])
 def test_grade_field(truth, chat, summary, want):
@@ -83,6 +102,41 @@ def test_grade_systems_subset_is_dropped_superset_is_invented():
     t = ("Bosch", "Siemens")
     assert grade_field("systems", t, t, ("Bosch",)) == "dropped"
     assert grade_field("systems", t, t, ("Bosch", "Siemens", "Axis")) == "invented"
+    # "no systems" when the applicant named two is a false claim, not a gap
+    assert grade_field("systems", t, t, ()) == "invented"
+
+
+def test_unasked_invention_counts_as_invention_not_coverage():
+    from screengate.gate import metrics
+
+    rec = {"grades": {"years_experience": "invented_unasked", "on_call": "kept"},
+           "expected_verdict": "einladen", "bot_verdict": "einladen"}
+    m = metrics([rec], [])
+    assert m["invention"]["k"] == 1 and m["invention"]["n"] == 2
+    assert m["coverage"]["k"] == 1 and m["coverage"]["n"] == 2
+    assert m["retention"]["n"] == 1
+
+
+def test_one_failing_applicant_does_not_sink_the_run():
+    class Flaky(OfflineBot):
+        def summarize(self, header, transcript):
+            if header["applicant_key"] == "a003":
+                raise RuntimeError("boom")
+            return super().summarize(header, transcript)
+
+    result = _run(Flaky(), n=10)
+    assert result["metrics"]["applicants"] == 9
+    assert result["metrics"]["failed"] == 1
+    assert result["errors"][0]["id"] == "a003"
+
+
+def test_selftest_plants_out_of_vocabulary_values():
+    from screengate.offline import render_prose
+
+    st = extraction_selftest(OfflineExtractor(), render_labelled, n=40)
+    assert st["accuracy"]["rate"] == 1.0
+    text = render_prose(cohort(1, 7)[0], {"qualification": "Industriemechaniker"}, "prüfen")
+    assert "Industriemechaniker" in text
 
 
 def test_wilson_interval():
@@ -124,3 +178,34 @@ def test_claude_bot_request_shape():
     assert kw["fallbacks"] == "default"
     assert "temperature" not in kw and "thinking" not in kw
     assert set(FIELDS)  # fields exist for the extractor schema
+
+
+def test_claude_bot_raises_on_truncated_or_empty_turns():
+    from screengate.claude import ClaudeBot, Incomplete
+
+    def make(stop, text):
+        def create(**kw):
+            return SimpleNamespace(
+                stop_reason=stop, stop_details=None, model="claude-opus-5-5",
+                usage=SimpleNamespace(input_tokens=1, output_tokens=1),
+                content=[SimpleNamespace(type="text", text=text)] if text else [])
+        return SimpleNamespace(beta=SimpleNamespace(messages=SimpleNamespace(create=create)))
+
+    header = {"name": "Anna Becker", "age": 30, "job": "x"}
+    for stop, text in (("max_tokens", "Welche Aus"), ("end_turn", "")):
+        with pytest.raises(Incomplete):
+            ClaudeBot(client=make(stop, text)).next_message(header, [])
+
+
+def test_extractor_schema_has_a_slot_for_unknown_values():
+    from screengate.claude import _Fields
+
+    props = _Fields.model_json_schema()["properties"]
+    flat = json_dumps(props)
+    assert flat.count("andere") >= 3
+
+
+def json_dumps(o):
+    import json
+
+    return json.dumps(o, ensure_ascii=False)

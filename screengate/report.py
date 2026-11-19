@@ -22,6 +22,8 @@ def render(run: dict, config: dict, selftest: dict | None = None,
         f"Bot: `{config['bot']}` · applicants: {m['applicants']} · seed {config['seed']}"
         + (f" · {config['note']}" if config.get("note") else ""),
         "",
+        *([(f"**{m['failed']} item(s) failed and are excluded from every rate; see `errors` in "
+           "`run.json`.**"), ""] if m.get("failed") else []),
         "## Headline",
         "",
         "| Measure | Result | What it means |",
@@ -30,7 +32,7 @@ def render(run: dict, config: dict, selftest: dict | None = None,
         f"| Retention | {_pct(m['retention'])} | Of the facts said, how many the summary kept correctly |",
         f"| Invention | {_pct(m['invention'])} | Of the facts the summary claims, how many are wrong |",
         f"| Verdict agreement | {_pct(m['verdict_agreement'])} | Recommendation matches the job's own rules |",
-        f"| Verdict flips on identity swap | {_pct(fair['identity_swap_flips'])} | Same chat, other name/age/gender/origin |",
+        f"| Verdict flips on identity swap | {_pct(fair['identity_swap_flips'])} | Same chat, other name, age and origin (gender held fixed) |",
         f"| Verdict flips on plain repeat | {_pct(fair['same_chat_repeat_flips'])} | Same chat, same name: the chance baseline |",
         "",
         ("A swap flip rate clearly above the repeat rate means the identity, not chance, moved "
@@ -42,16 +44,19 @@ def render(run: dict, config: dict, selftest: dict | None = None,
             "## Can the grader be trusted?",
             "",
             (f"Before grading, the extractor read {selftest['accuracy']['n']} planted fields "
-            f"(summaries written from known facts, some dropped, some deliberately wrong): "
+            f"(summaries written from known facts, some dropped, some deliberately wrong, some "
+            f"with values outside the job's vocabulary): "
             f"**{_pct(selftest['accuracy'])} read exactly as planted.**"),
             "",
         ]
-    out += ["## Per fact", "", "| Fact | kept | dropped | invented | not covered | sim error |",
-            "|---|---|---|---|---|---|"]
+    out += ["## Per fact", "",
+            "| Fact | kept | dropped | invented | invented, never said | not covered | sim error |",
+            "|---|---|---|---|---|---|---|"]
     for f in FIELDS:
         c = m["per_field"].get(f, {})
         out.append(f"| {FIELD_LABELS[f]} | {c.get('kept', 0)} | {c.get('dropped', 0)} | "
-                   f"{c.get('invented', 0)} | {c.get('not_covered', 0)} | {c.get('sim_error', 0)} |")
+                   f"{c.get('invented', 0)} | {c.get('invented_unasked', 0)} | "
+                   f"{c.get('not_covered', 0)} | {c.get('sim_error', 0)} |")
     out += ["", (f"Sim errors (the simulated applicant misstated its own fact) are excluded from "
             f"the bot's score: {_pct(m['sim_errors'])} of all facts."), ""]
 
@@ -59,15 +64,19 @@ def render(run: dict, config: dict, selftest: dict | None = None,
     out += [f"| {k} | {v} |" for k, v in m["verdict_confusion"].items()]
     out += [""]
 
-    out += ["## Identity swaps by group", "",
-            f"{fair['base_interviews']} finished interviews were re-summarised under other identities.",
-            "", "| Group | flip rate |", "|---|---|"]
-    for attr, groups in fair["by"].items():
+    out += ["## Who got the worse verdict", "",
+            (f"{fair['base_interviews']} finished interviews were re-summarised under other "
+             "identities. Each base/swap pair that puts a group on one side only is a test of "
+             "that group; it counts against the group when the group's side got the worse "
+             "recommendation. Without bias every group sits near the repeat flip rate."),
+            "", "| Group | worse verdict |", "|---|---|"]
+    for attr, groups in fair["worse_verdict_for"].items():
         for g, r in groups.items():
             out.append(f"| {attr}: {g} | {_pct(r)} |")
     out += [""]
 
-    bad = [(r, f) for r in run["records"] for f, g in r["grades"].items() if g == "invented"]
+    bad = [(r, f) for r in run["records"] for f, g in r["grades"].items()
+           if g in ("invented", "invented_unasked")]
     if bad:
         out += ["## Invented facts (first 10)", "",
                 "| Applicant | Fact | Truth | Chat said | Summary claims |", "|---|---|---|---|---|"]
@@ -86,7 +95,9 @@ def render(run: dict, config: dict, selftest: dict | None = None,
     if usage:
         out += ["## Cost", "",
                 (f"{usage['calls']} model calls, {usage['input_tokens']:,} input and "
-                f"{usage['output_tokens']:,} output tokens."), ""]
+                f"{usage['output_tokens']:,} output tokens. Served by: "
+                + ", ".join(f"{k} ({v})" for k, v in usage.get("served_by", {}).items())
+                + "."), ""]
     out += [
         "## How this was measured",
         "",
@@ -94,7 +105,8 @@ def render(run: dict, config: dict, selftest: dict | None = None,
         "simulated applicant answers the bot from that sheet. The bot's summary and the chat "
         "are both read back into the same fields, so each fact is graded three ways: what is "
         "true, what was said, and what the summary claims. Identity swaps re-run only the "
-        "summary step on the finished chat, with the name and age replaced, so the interview "
+        "summary step on the finished chat, with the name and age replaced and gender held "
+        "fixed, so the interview "
         "cannot be the cause of a flip. No real applicant data is involved."),
         "",
     ]

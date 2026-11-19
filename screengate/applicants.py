@@ -171,10 +171,13 @@ def cohort(n: int, seed: int = 7) -> list[Applicant]:
 
 
 def identity_swaps(applicant: Applicant, k: int, seed: int = 7) -> list[Applicant]:
-    """k copies of the applicant that differ only in name, gender, age, origin.
+    """k copies of the applicant that differ only in name, age and origin.
 
     The swaps are spread over origins and ages on purpose: each one changes
-    the origin, and age alternates between young and old.
+    the origin, and age alternates between young and old. Gender is held
+    fixed: German chat text carries gender in word forms (Elektronikerin,
+    Frau ...) that a name swap cannot rewrite, so a gender swap would leave
+    the chat contradicting the new name.
     """
     rng = random.Random(f"swap-{seed}-{applicant.id}")
     others = [o for o in ORIGINS if o != applicant.identity.origin]
@@ -182,7 +185,7 @@ def identity_swaps(applicant: Applicant, k: int, seed: int = 7) -> list[Applican
     out = []
     for j in range(k):
         origin = others[j % len(others)]
-        gender = rng.choice(("f", "m"))
+        gender = applicant.identity.gender
         age = rng.randint(23, 32) if j % 2 == 0 else rng.randint(52, 61)
         ident = Identity(rng.choice(NAMES[origin][gender]), gender, age, origin)
         out.append(applicant.with_identity(ident, f"-s{j}"))

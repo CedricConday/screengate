@@ -251,7 +251,14 @@ def _unfmt(field: str, raw: str):
     if field in ("driving_licence", "on_call"):
         return raw == "ja"
     if field == "systems":
-        return () if raw == "keine" else tuple(sorted(s.strip() for s in raw.split(",")))
+        if raw == "keine":
+            return ()
+        names = [s.strip() for s in raw.split(",")]
+        return tuple(sorted({s if s in SYSTEMS else "andere" for s in names}))
+    if field == "qualification":
+        return raw if raw in (*QUALIFICATIONS, "keine") else "andere"
+    if field == "german_level":
+        return raw if raw in GERMAN_LEVELS else "andere"
     if field in ("years_experience", "salary_eur"):
         m = re.search(r"\d+", raw)
         return int(m.group()) if m else None
