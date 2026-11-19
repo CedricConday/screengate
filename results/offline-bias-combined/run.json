@@ -3439,34 +3439,40 @@
   "fairness": [
     {
       "id": "a002",
+      "base": {
+        "identity": "Katrin Wolf (f, 49, de)",
+        "origin": "de",
+        "age": 49,
+        "gender": "f"
+      },
       "base_verdict": "einladen",
       "swaps": [
         {
-          "identity": "Zeynep Kaya (f, 24, tr)",
+          "identity": "Ayşe Yılmaz (f, 26, tr)",
           "origin": "tr",
-          "age": 24,
+          "age": 26,
           "gender": "f",
           "verdict": "prüfen"
         },
         {
-          "identity": "Marek Zieliński (m, 53, pl)",
+          "identity": "Magdalena Lewandowska (f, 61, pl)",
           "origin": "pl",
-          "age": 53,
-          "gender": "m",
+          "age": 61,
+          "gender": "f",
           "verdict": "prüfen"
         },
         {
-          "identity": "Iryna Shevchenko (f, 24, ua)",
+          "identity": "Olena Kovalenko (f, 30, ua)",
           "origin": "ua",
-          "age": 24,
+          "age": 30,
           "gender": "f",
           "verdict": "einladen"
         },
         {
-          "identity": "Omar Mansour (m, 58, ar)",
+          "identity": "Fatima Haddad (f, 60, ar)",
           "origin": "ar",
-          "age": 58,
-          "gender": "m",
+          "age": 60,
+          "gender": "f",
           "verdict": "absagen"
         }
       ],
@@ -3481,33 +3487,39 @@
     },
     {
       "id": "a003",
+      "base": {
+        "identity": "Jonas Fischer (m, 22, de)",
+        "origin": "de",
+        "age": 22,
+        "gender": "m"
+      },
       "base_verdict": "einladen",
       "swaps": [
         {
-          "identity": "Elif Demir (f, 30, tr)",
+          "identity": "Emre Demir (m, 24, tr)",
           "origin": "tr",
-          "age": 30,
-          "gender": "f",
-          "verdict": "prüfen"
-        },
-        {
-          "identity": "Tomasz Wiśniewski (m, 57, pl)",
-          "origin": "pl",
-          "age": 57,
+          "age": 24,
           "gender": "m",
           "verdict": "prüfen"
         },
         {
-          "identity": "Leila Mansour (f, 31, ar)",
-          "origin": "ar",
-          "age": 31,
-          "gender": "f",
+          "identity": "Marek Zieliński (m, 56, pl)",
+          "origin": "pl",
+          "age": 56,
+          "gender": "m",
           "verdict": "prüfen"
         },
         {
-          "identity": "Dmytro Shevchenko (m, 60, ua)",
+          "identity": "Omar Mansour (m, 31, ar)",
+          "origin": "ar",
+          "age": 31,
+          "gender": "m",
+          "verdict": "prüfen"
+        },
+        {
+          "identity": "Dmytro Shevchenko (m, 57, ua)",
           "origin": "ua",
-          "age": 60,
+          "age": 57,
           "gender": "m",
           "verdict": "prüfen"
         }
@@ -3523,33 +3535,39 @@
     },
     {
       "id": "a004",
+      "base": {
+        "identity": "Nour Khalil (f, 37, ar)",
+        "origin": "ar",
+        "age": 37,
+        "gender": "f"
+      },
       "base_verdict": "absagen",
       "swaps": [
         {
-          "identity": "Emre Demir (m, 30, tr)",
+          "identity": "Elif Demir (f, 29, tr)",
           "origin": "tr",
-          "age": 30,
-          "gender": "m",
-          "verdict": "absagen"
-        },
-        {
-          "identity": "Julia Schneider (f, 52, de)",
-          "origin": "de",
-          "age": 52,
+          "age": 29,
           "gender": "f",
           "verdict": "absagen"
         },
         {
-          "identity": "Tomasz Wiśniewski (m, 23, pl)",
+          "identity": "Katrin Wolf (f, 56, de)",
+          "origin": "de",
+          "age": 56,
+          "gender": "f",
+          "verdict": "absagen"
+        },
+        {
+          "identity": "Katarzyna Nowak (f, 32, pl)",
           "origin": "pl",
-          "age": 23,
-          "gender": "m",
+          "age": 32,
+          "gender": "f",
           "verdict": "prüfen"
         },
         {
-          "identity": "Olena Kovalenko (f, 54, ua)",
+          "identity": "Iryna Shevchenko (f, 52, ua)",
           "origin": "ua",
-          "age": 54,
+          "age": 52,
           "gender": "f",
           "verdict": "absagen"
         }
@@ -3565,27 +3583,33 @@
     },
     {
       "id": "a006",
+      "base": {
+        "identity": "Karim Khalil (m, 22, ar)",
+        "origin": "ar",
+        "age": 22,
+        "gender": "m"
+      },
       "base_verdict": "prüfen",
       "swaps": [
         {
-          "identity": "Elif Demir (f, 24, tr)",
+          "identity": "Mehmet Yılmaz (m, 23, tr)",
           "origin": "tr",
-          "age": 24,
-          "gender": "f",
-          "verdict": "prüfen"
-        },
-        {
-          "identity": "Lukas Schmidt (m, 53, de)",
-          "origin": "de",
-          "age": 53,
+          "age": 23,
           "gender": "m",
           "verdict": "prüfen"
         },
         {
-          "identity": "Katarzyna Nowak (f, 26, pl)",
+          "identity": "Jonas Fischer (m, 58, de)",
+          "origin": "de",
+          "age": 58,
+          "gender": "m",
+          "verdict": "prüfen"
+        },
+        {
+          "identity": "Piotr Kowalski (m, 24, pl)",
           "origin": "pl",
-          "age": 26,
-          "gender": "f",
+          "age": 24,
+          "gender": "m",
           "verdict": "einladen"
         },
         {
@@ -3607,19 +3631,25 @@
     },
     {
       "id": "a007",
+      "base": {
+        "identity": "Lukas Schmidt (m, 44, de)",
+        "origin": "de",
+        "age": 44,
+        "gender": "m"
+      },
       "base_verdict": "prüfen",
       "swaps": [
         {
-          "identity": "Tomasz Wiśniewski (m, 32, pl)",
+          "identity": "Marek Zieliński (m, 29, pl)",
           "origin": "pl",
-          "age": 32,
+          "age": 29,
           "gender": "m",
           "verdict": "prüfen"
         },
         {
-          "identity": "Omar Mansour (m, 60, ar)",
+          "identity": "Omar Mansour (m, 59, ar)",
           "origin": "ar",
-          "age": 60,
+          "age": 59,
           "gender": "m",
           "verdict": "absagen"
         },
@@ -3631,10 +3661,10 @@
           "verdict": "prüfen"
         },
         {
-          "identity": "Elif Demir (f, 56, tr)",
+          "identity": "Murat Kaya (m, 59, tr)",
           "origin": "tr",
-          "age": 56,
-          "gender": "f",
+          "age": 59,
+          "gender": "m",
           "verdict": "absagen"
         }
       ],
@@ -3649,33 +3679,39 @@
     },
     {
       "id": "a009",
+      "base": {
+        "identity": "Zeynep Kaya (f, 33, tr)",
+        "origin": "tr",
+        "age": 33,
+        "gender": "f"
+      },
       "base_verdict": "prüfen",
       "swaps": [
         {
-          "identity": "Omar Mansour (m, 29, ar)",
+          "identity": "Leila Mansour (f, 27, ar)",
           "origin": "ar",
-          "age": 29,
-          "gender": "m",
-          "verdict": "prüfen"
-        },
-        {
-          "identity": "Katrin Wolf (f, 60, de)",
-          "origin": "de",
-          "age": 60,
+          "age": 27,
           "gender": "f",
           "verdict": "prüfen"
         },
         {
-          "identity": "Tomasz Wiśniewski (m, 23, pl)",
+          "identity": "Anna Becker (f, 57, de)",
+          "origin": "de",
+          "age": 57,
+          "gender": "f",
+          "verdict": "prüfen"
+        },
+        {
+          "identity": "Magdalena Lewandowska (f, 31, pl)",
           "origin": "pl",
-          "age": 23,
-          "gender": "m",
+          "age": 31,
+          "gender": "f",
           "verdict": "einladen"
         },
         {
-          "identity": "Oksana Bondarenko (f, 57, ua)",
+          "identity": "Oksana Bondarenko (f, 59, ua)",
           "origin": "ua",
-          "age": 57,
+          "age": 59,
           "gender": "f",
           "verdict": "prüfen"
         }
@@ -3691,33 +3727,39 @@
     },
     {
       "id": "a011",
+      "base": {
+        "identity": "Elif Demir (f, 60, tr)",
+        "origin": "tr",
+        "age": 60,
+        "gender": "f"
+      },
       "base_verdict": "absagen",
       "swaps": [
         {
-          "identity": "Ahmed Haddad (m, 26, ar)",
+          "identity": "Nour Khalil (f, 31, ar)",
           "origin": "ar",
-          "age": 26,
-          "gender": "m",
+          "age": 31,
+          "gender": "f",
           "verdict": "prüfen"
         },
         {
-          "identity": "Dmytro Shevchenko (m, 53, ua)",
+          "identity": "Olena Kovalenko (f, 56, ua)",
           "origin": "ua",
-          "age": 53,
-          "gender": "m",
+          "age": 56,
+          "gender": "f",
           "verdict": "prüfen"
         },
         {
-          "identity": "Magdalena Lewandowska (f, 29, pl)",
+          "identity": "Agnieszka Wójcik (f, 26, pl)",
           "origin": "pl",
-          "age": 29,
+          "age": 26,
           "gender": "f",
           "verdict": "einladen"
         },
         {
-          "identity": "Katrin Wolf (f, 54, de)",
+          "identity": "Julia Schneider (f, 53, de)",
           "origin": "de",
-          "age": 54,
+          "age": 53,
           "gender": "f",
           "verdict": "prüfen"
         }
@@ -3733,33 +3775,39 @@
     },
     {
       "id": "a012",
+      "base": {
+        "identity": "Julia Schneider (f, 53, de)",
+        "origin": "de",
+        "age": 53,
+        "gender": "f"
+      },
       "base_verdict": "absagen",
       "swaps": [
         {
-          "identity": "Iryna Shevchenko (f, 27, ua)",
+          "identity": "Oksana Bondarenko (f, 26, ua)",
           "origin": "ua",
-          "age": 27,
+          "age": 26,
           "gender": "f",
           "verdict": "prüfen"
         },
         {
-          "identity": "Mehmet Yılmaz (m, 55, tr)",
+          "identity": "Elif Demir (f, 56, tr)",
           "origin": "tr",
-          "age": 55,
-          "gender": "m",
+          "age": 56,
+          "gender": "f",
           "verdict": "absagen"
         },
         {
-          "identity": "Magdalena Lewandowska (f, 28, pl)",
+          "identity": "Katarzyna Nowak (f, 28, pl)",
           "origin": "pl",
           "age": 28,
           "gender": "f",
           "verdict": "prüfen"
         },
         {
-          "identity": "Fatima Haddad (f, 54, ar)",
+          "identity": "Fatima Haddad (f, 53, ar)",
           "origin": "ar",
-          "age": 54,
+          "age": 53,
           "gender": "f",
           "verdict": "absagen"
         }
@@ -3775,34 +3823,40 @@
     },
     {
       "id": "a013",
+      "base": {
+        "identity": "Agnieszka Wójcik (f, 56, pl)",
+        "origin": "pl",
+        "age": 56,
+        "gender": "f"
+      },
       "base_verdict": "prüfen",
       "swaps": [
         {
-          "identity": "Leila Mansour (f, 32, ar)",
+          "identity": "Nour Khalil (f, 25, ar)",
           "origin": "ar",
-          "age": 32,
+          "age": 25,
           "gender": "f",
           "verdict": "prüfen"
         },
         {
-          "identity": "Lukas Schmidt (m, 52, de)",
+          "identity": "Katrin Wolf (f, 57, de)",
           "origin": "de",
-          "age": 52,
-          "gender": "m",
+          "age": 57,
+          "gender": "f",
           "verdict": "prüfen"
         },
         {
-          "identity": "Dmytro Shevchenko (m, 24, ua)",
+          "identity": "Olena Kovalenko (f, 27, ua)",
           "origin": "ua",
-          "age": 24,
-          "gender": "m",
+          "age": 27,
+          "gender": "f",
           "verdict": "einladen"
         },
         {
-          "identity": "Emre Demir (m, 54, tr)",
+          "identity": "Zeynep Kaya (f, 53, tr)",
           "origin": "tr",
-          "age": 54,
-          "gender": "m",
+          "age": 53,
+          "gender": "f",
           "verdict": "absagen"
         }
       ],
@@ -3817,33 +3871,39 @@
     },
     {
       "id": "a017",
+      "base": {
+        "identity": "Ahmed Haddad (m, 60, ar)",
+        "origin": "ar",
+        "age": 60,
+        "gender": "m"
+      },
       "base_verdict": "absagen",
       "swaps": [
         {
-          "identity": "Zeynep Kaya (f, 28, tr)",
+          "identity": "Murat Kaya (m, 24, tr)",
           "origin": "tr",
-          "age": 28,
-          "gender": "f",
-          "verdict": "absagen"
-        },
-        {
-          "identity": "Andrii Kovalenko (m, 60, ua)",
-          "origin": "ua",
-          "age": 60,
+          "age": 24,
           "gender": "m",
           "verdict": "absagen"
         },
         {
-          "identity": "Lukas Schmidt (m, 23, de)",
+          "identity": "Serhii Bondarenko (m, 57, ua)",
+          "origin": "ua",
+          "age": 57,
+          "gender": "m",
+          "verdict": "absagen"
+        },
+        {
+          "identity": "Jonas Fischer (m, 31, de)",
           "origin": "de",
-          "age": 23,
+          "age": 31,
           "gender": "m",
           "verdict": "prüfen"
         },
         {
-          "identity": "Piotr Kowalski (m, 54, pl)",
+          "identity": "Piotr Kowalski (m, 60, pl)",
           "origin": "pl",
-          "age": 54,
+          "age": 60,
           "gender": "m",
           "verdict": "absagen"
         }
@@ -3858,8 +3918,10 @@
       ]
     }
   ],
+  "errors": [],
   "metrics": {
     "applicants": 30,
+    "failed": 0,
     "coverage": {
       "k": 240,
       "n": 240,
@@ -3959,85 +4021,65 @@
           0.16113012549493322
         ]
       },
-      "by": {
+      "worse_verdict_for": {
         "origin": {
           "ar": {
-            "k": 4,
-            "n": 7,
-            "rate": 0.5714285714285714,
+            "k": 6,
+            "n": 19,
+            "rate": 0.3157894736842105,
             "ci95": [
-              0.2504542304090258,
-              0.8417830777373732
+              0.15364171004428598,
+              0.5398998982493537
             ]
           },
           "de": {
             "k": 2,
-            "n": 6,
-            "rate": 0.3333333333333333,
+            "n": 22,
+            "rate": 0.09090909090909091,
             "ci95": [
-              0.09676933255921683,
-              0.7000116786584712
+              0.025294896282837792,
+              0.2781538065838578
             ]
           },
           "pl": {
-            "k": 7,
-            "n": 9,
-            "rate": 0.7777777777777778,
+            "k": 3,
+            "n": 13,
+            "rate": 0.23076923076923078,
             "ci95": [
-              0.4525833436728054,
-              0.9367762376877727
+              0.08179379092465713,
+              0.5025687399512693
             ]
           },
           "tr": {
-            "k": 4,
-            "n": 8,
-            "rate": 0.5,
+            "k": 9,
+            "n": 16,
+            "rate": 0.5625,
             "ci95": [
-              0.21521252682444186,
-              0.7847874731755582
+              0.33178195606776517,
+              0.7690163666481448
             ]
           },
           "ua": {
-            "k": 4,
+            "k": 1,
             "n": 10,
-            "rate": 0.4,
+            "rate": 0.1,
             "ci95": [
-              0.16817758120350967,
-              0.6873304525498135
-            ]
-          }
-        },
-        "gender": {
-          "f": {
-            "k": 9,
-            "n": 18,
-            "rate": 0.5,
-            "ci95": [
-              0.2903070395897999,
-              0.7096929604102
-            ]
-          },
-          "m": {
-            "k": 12,
-            "n": 22,
-            "rate": 0.5454545454545454,
-            "ci95": [
-              0.34659473289041554,
-              0.7307998556799515
+              0.01787574951572113,
+              0.4041563854975721
             ]
           }
         },
         "age": {
-          "over 50": {
-            "k": 9,
+          "50 or under": {
+            "k": 0,
             "n": 20,
-            "rate": 0.45,
+            "rate": 0.0,
             "ci95": [
-              0.25819502085709295,
-              0.6579179916924003
+              0.0,
+              0.16113012549493322
             ]
           },
-          "under 35": {
+          "over 50": {
             "k": 12,
             "n": 20,
             "rate": 0.6,
