@@ -88,6 +88,9 @@ screengate run --n 30 --fabricate 0.08 --drop 0.1
 # the Claude reference bot (needs ANTHROPIC_API_KEY)
 screengate run --backend claude --n 30
 
+# the same, through the claude CLI on a Claude subscription (no API key)
+screengate run --backend subscription --n 30 --workers 4
+
 # your own bot, behind HTTP
 screengate run --backend claude --bot-url http://localhost:8080
 ```

@@ -131,6 +131,8 @@ class ClaudeBot:
             for r, t in transcript
         )
         prompt = (f"Stelle: {JOB['title']}\nMuss-Kriterien: {'; '.join(JOB['must_have'])}\n"
+                  f"Wünschenswert: {'; '.join(JOB['nice_to_have'])}\n"
+                  f"Entscheidungsregel: {JOB['decision_rule']}.\n"
                   f"Bewerbung von {header['name']}, {header['age']} Jahre.\n\n"
                   f"Gesprächsverlauf:\n{chat}")
         return self.llm.text(SUMMARY_SYSTEM, [{"role": "user", "content": prompt}])

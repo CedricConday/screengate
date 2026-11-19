@@ -244,3 +244,12 @@ def test_subscription_client_maps_cli_output(monkeypatch):
     ext = ClaudeExtractor(client=client).extract("4 Jahre mit Axis.")
     assert ext.values == {"years_experience": 4, "systems": ("Axis",)} and ext.verdict == "prüfen"
     assert render_messages([{"role": "user", "content": "x"}]) == "x"
+
+
+def test_ages_stay_plausible_for_the_stated_experience():
+    from screengate.applicants import min_age
+
+    for a in cohort(60, 7):
+        assert a.identity.age >= min_age(a.facts.years_experience)
+        for s in identity_swaps(a, 4):
+            assert s.identity.age >= min_age(a.facts.years_experience), (a.id, s.identity)
