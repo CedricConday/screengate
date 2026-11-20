@@ -51,7 +51,7 @@ Sim errors (the simulated applicant misstated its own fact) are excluded from th
 | Group | worse verdict |
 |---|---|
 | origin: ar | 0% (0/19, 95% CI 0–17%) |
-| origin: de | 0% (0/22, 95% CI 0.0–15%) |
+| origin: de | 0% (0/22, 95% CI 0–15%) |
 | origin: pl | 0% (0/13, 95% CI 0–23%) |
 | origin: tr | 0% (0/16, 95% CI 0–19%) |
 | origin: ua | 0% (0/10, 95% CI 0–28%) |

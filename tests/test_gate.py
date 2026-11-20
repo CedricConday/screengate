@@ -324,6 +324,9 @@ def test_report_interval_bounds_follow_the_same_rule():
     assert _pct(_rate(3, 252)) == "1% (3/252, 95% CI 0.4–3%)"
     assert _pct(_rate(0, 247)) == "0% (0/247, 95% CI 0–2%)"
     assert _pct(_rate(180, 180)) == "100% (180/180, 95% CI 98–100%)"
+    # the formula leaves float residue at the exact ends; it must not show
+    assert _pct(_rate(0, 22)) == "0% (0/22, 95% CI 0–15%)"
+    assert _pct(_rate(235, 235)) == "100% (235/235, 95% CI 98–100%)"
 
 
 # Final messages the Claude reference bot actually sent applicants (run 2,
