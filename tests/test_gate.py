@@ -423,3 +423,18 @@ def test_bot_url_is_refused_on_the_offline_backend(tmp_path, capsys):
     assert exit_.value.code == 2
     assert "--bot-url needs --backend" in capsys.readouterr().err
     assert not (tmp_path / "r").exists()
+
+
+def test_regrade_skips_directories_without_a_run(tmp_path, capsys):
+    import json
+
+    from screengate.cli import main
+
+    run_dir, other = tmp_path / "run", tmp_path / "replay"
+    other.mkdir()
+    assert main(["run", "--n", "4", "--fairness-n", "1", "--out", str(run_dir)]) == 0
+    before = json.loads((run_dir / "run.json").read_text())
+    capsys.readouterr()
+    assert main(["regrade", str(other), str(run_dir)]) == 0
+    assert f"{other}: no run.json, skipped" in capsys.readouterr().err
+    assert json.loads((run_dir / "run.json").read_text()) == before

@@ -150,6 +150,10 @@ def _regrade(dirs: list[Path]) -> int:
     """
     status = 0
     for d in dirs:
+        if not (d / "run.json").is_file():
+            # e.g. results/claude-leak-replay, so that results/* just works
+            print(f"{d}: no run.json, skipped", file=sys.stderr)
+            continue
         saved = json.loads((d / "run.json").read_text())
         new = regrade(saved)
         old_m, new_m = saved["metrics"], new["metrics"]
