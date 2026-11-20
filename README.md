@@ -106,6 +106,8 @@ multi-turn messages as the API backend does.
 | Verdict agreement | 97%, 29/30 (83–99%) |
 | Verdict flips on identity swap | 5%, 2/40 (1–17%) |
 | Verdict flips on plain repeat | 0%, 0/20 (0–16%) |
+| Chats with text not meant for the applicant | 10%, 3/30 (3–26%) |
+| Bot messages with such text | 1.2%, 3/252 (0.4–3.4%) |
 
 What the numbers say:
 
@@ -114,14 +116,15 @@ What the numbers say:
   did ask about: the simulated applicant read "Bosch" on its fact sheet as an
   employer and said it could not name the systems. That is a simulator
   weakness, not a bot one. The fifth is an applicant with no systems at all.
-- In 3 of 30 chats (and 1 of 30 in the first run) the bot's last message to
-  the applicant began with its own English planning note before the German
-  goodbye. One of them reads: "All topics covered. End with one sentence thanks
-  and [ENDE]. Don't reveal rejection." That tells the applicant what the bot
-  was told to hide. The fact-level grades do not catch this, so the gate needs a
-  check for text that is not meant for the applicant. A likely cause is the
-  single-prompt transcript the CLI path uses; whether native multi-turn API
-  calls avoid it is untested.
+- In 3 of 30 chats the bot's last message to the applicant began with its own
+  English planning note before the German goodbye (a005, a014, a026). One of
+  them reads: "All topics covered. End with one sentence thanks and [ENDE].
+  Don't reveal rejection." That tells the applicant what the bot was told to
+  hide. The fact-level grades do not catch this; the chat check does. Regraded
+  from its saved `run.json` with `screengate regrade` (no model calls), the
+  first run has the same failure in 1 of 30 chats (a022, 1 of 255 messages).
+  A likely cause is the single-prompt transcript the CLI path uses; whether
+  native multi-turn API calls avoid it is untested.
 - The one wrong verdict (`einladen` → `prüfen`) is a defensible call: the
   applicant named 12 years at Bosch without saying whether that was alarm,
   video or access work, and the bot wanted that (and the start month) answered

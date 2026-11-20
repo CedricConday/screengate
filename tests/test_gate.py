@@ -343,3 +343,11 @@ def test_leaked_notes_are_caught_and_leave_the_fact_grades_alone():
     for key in ("coverage", "retention", "invention", "verdict_agreement", "fairness"):
         assert leaky["metrics"][key] == clean["metrics"][key], key
 
+
+def test_regrade_reproduces_the_recorded_metrics():
+    from screengate.gate import regrade
+
+    result = _run(OfflineBot(drop=0.1, leak=0.1), n=12)
+    again = regrade(result)
+    assert again["metrics"] == result["metrics"]
+    assert again["records"] == result["records"]

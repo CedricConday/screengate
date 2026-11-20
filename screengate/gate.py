@@ -292,6 +292,25 @@ def metrics(records: list[dict], fairness: list[dict], errors: int = 0) -> dict:
     }
 
 
+def regrade(saved: dict) -> dict:
+    """Grade a saved run again with the current checks, without any model call.
+
+    Transcripts, summaries and extractions are kept as recorded; checks that
+    read only the transcript (the internal-text check) are recomputed, and so
+    are the metrics. Returns the updated run.
+    """
+    records = []
+    for r in saved["records"]:
+        r = {k: v for k, v in r.items() if k != "leaks"}
+        at = list(r).index("transcript") + 1  # keep run_one's field order
+        items = list(r.items())
+        records.append(dict(items[:at] + [("leaks", transcript_leaks(r["transcript"]))]
+                            + items[at:]))
+    out = {**saved, "records": records}
+    out["metrics"] = metrics(records, saved["fairness"], len(saved.get("errors", ())))
+    return out
+
+
 def _jsonable(v):
     return list(v) if isinstance(v, tuple) else v
 

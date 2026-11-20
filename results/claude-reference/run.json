@@ -145,6 +145,7 @@
           "Danke dir, Karim, für deine Zeit und deine offenen Antworten, wir melden uns bald bei dir mit einer Rückmeldung! [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "**Bewerber-Zusammenfassung: Karim Khalil, Sicherheitstechniker (m/w/d)**\n\nKarim Khalil hat eine abgeschlossene Ausbildung als Mechatroniker. Er hat etwa ein Jahr Berufserfahrung mit Systemen von Hikvision im Bereich Alarm-, Video- oder Zutrittstechnik. Einen Führerschein der Klasse B besitzt er nicht. Er macht ihn derzeit auch nicht und weiß noch nicht, ob er ihn in Zukunft machen möchte. Seine Deutschkenntnisse schätzt er selbst auf C2-Niveau ein. Frühestens kann er im Dezember anfangen. Sein Gehaltswunsch liegt bei 59.000 € brutto pro Jahr. Zu Rufbereitschaftsdiensten ist er bereit.\n\nEmpfehlung: absagen – Das Muss-Kriterium Führerschein Klasse B ist nicht erfüllt, und es ist auch nicht absehbar, dass er ihn erwirbt."
     },
     {
@@ -267,6 +268,7 @@
           "Vielen Dank für deine Zeit und deine offenen Antworten, Serhii, wir melden uns in Kürze bei dir zu den nächsten Schritten! [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "**Bewerber-Zusammenfassung: Serhii Bondarenko – Sicherheitstechniker (m/w/d)**\n\nHerr Bondarenko hat nach eigener Aussage keine abgeschlossene Ausbildung im Elektrobereich. Ob er eine andere Ausbildung oder Qualifikation hat, etwa aus der Ukraine, konnte er nicht sagen. Er hat zwei Jahre Berufserfahrung mit Systemen von Hikvision, Siemens und Telenot. Er besitzt einen gültigen Führerschein der Klasse B und schätzt sein Deutsch auf C1 ein. Er könnte frühestens im August anfangen, wünscht sich 55.000 Euro brutto im Jahr und ist zu Rufbereitschaftsdiensten bereit.\n\nEmpfehlung: absagen – Das Muss-Kriterium einer abgeschlossenen Ausbildung als Elektroniker, Mechatroniker oder Elektroinstallateur ist nicht erfüllt, obwohl alle übrigen Kriterien einschließlich der gewünschten Berufserfahrung vorliegen.\n\n*Hinweis:* Wegen seiner passenden Praxiserfahrung könnte man vor der Absage kurz klären, ob er eine ausländische Ausbildung hat, die sich in Deutschland anerkennen ließe. Das Alter ist bewusst nicht in die Bewertung eingeflossen, weil es für die Stelle keine Rolle spielt (AGG)."
     },
     {
@@ -383,6 +385,7 @@
           "Danke dir, Katrin, für deine Antworten und dein Interesse – wir melden uns zeitnah mit den nächsten Schritten bei dir! 😊 [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "Katrin Wolf hat eine abgeschlossene Ausbildung als Elektroinstallateurin. Auf die Frage nach ihrer Erfahrung mit Alarm-, Video- oder Zutrittssystemen nennt sie 15 Jahre Berufserfahrung. Konkret hat sie mit Systemen von Axis gearbeitet. Sie besitzt einen Führerschein der Klasse B und schätzt ihr Deutschniveau selbst als B2 ein. Sie ist bereit, Rufbereitschaftsdienste zu übernehmen. Frühestens kann sie im April starten, ihr Gehaltswunsch liegt bei 65.000 Euro brutto im Jahr. Im Vorstellungsgespräch sollte geklärt werden, wie viele der 15 Jahre tatsächlich auf Sicherheitssysteme entfallen.\n\nEmpfehlung: einladen – Frau Wolf erfüllt alle Muss-Kriterien, hat deutlich mehr als zwei Jahre einschlägige Berufserfahrung und ist zudem zur Rufbereitschaft bereit."
     },
     {
@@ -504,6 +507,7 @@
           "Vielen Dank, Jonas, für deine Antworten. Wir melden uns bald mit den nächsten Schritten bei dir! [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "**Bewerber-Zusammenfassung: Jonas Fischer, 27 Jahre, Sicherheitstechniker (m/w/d)**\n\nJonas Fischer hat eine abgeschlossene Ausbildung als Elektroniker und besitzt einen Führerschein der Klasse B. Seine Deutschkenntnisse schätzt er selbst auf C2-Niveau ein. Nach eigener Aussage hat er sieben Jahre Berufserfahrung bei Bosch mit Alarm-, Video- oder Zutrittssystemen. Er konnte jedoch weder die Art der Anlagen (Einbruchmelde-, Video- oder Zutrittstechnik) noch seine Tätigkeiten (Installation, Wartung, Inbetriebnahme) benennen. Bei einem Alter von 27 Jahren ist außerdem unklar, ob die Ausbildungszeit in den sieben Jahren enthalten ist. Rufbereitschaftsdienste würde er übernehmen. Er kann frühestens ab Juli anfangen und wünscht sich 46.000 € brutto im Jahr.\n\nEmpfehlung: einladen – alle Muss-Kriterien sind erfüllt und die angegebene Berufserfahrung liegt deutlich über zwei Jahren, Art, Umfang und Zeitraum der Tätigkeit bei Bosch sollten im Gespräch aber konkret geklärt werden."
     },
     {
@@ -614,6 +618,7 @@
           "Vielen Dank für deine Antworten, Nour, wir melden uns bald mit den nächsten Schritten bei dir! [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "Nour Khalil (37 Jahre) hat eine Ausbildung als Mechatroniker abgeschlossen und besitzt einen Führerschein der Klasse B. Das eigene Deutschniveau schätzt Nour auf C2 ein. Damit sind alle Muss-Kriterien erfüllt. Berufserfahrung liegt nach eigener Aussage noch nicht vor, auch nicht mit Alarm-, Video- oder Zutrittssystemen. Nour ist bereit, Rufbereitschaftsdienste zu übernehmen. Ein Start ist frühestens ab August möglich, der Gehaltswunsch liegt bei 45.000 € brutto pro Jahr.\n\nEmpfehlung: prüfen – Alle Muss-Kriterien sind erfüllt, es liegt jedoch keine Berufserfahrung vor, also weniger als die geforderten zwei Jahre."
     },
     {
@@ -731,6 +736,21 @@
           "bot",
           "All topics covered; 7 questions asked. End with thanks in one sentence and [ENDE].\n\nDanke dir für deine Zeit und die offenen Antworten, Tomasz, unser Team meldet sich bald bei dir! [ENDE]"
         ]
+      ],
+      "leaks": [
+        {
+          "turn": 16,
+          "reasons": [
+            {
+              "reason": "end token",
+              "excerpt": "All topics covered; 7 questions asked. End with thanks in one sentence and [ENDE]"
+            },
+            {
+              "reason": "english",
+              "excerpt": "All topics covered; 7 questions asked. End with thanks in one sentence and [ENDE]."
+            }
+          ]
+        }
       ],
       "summary": "Tomasz Wiśniewski hat sich als Sicherheitstechniker beworben. Nach eigener Angabe hat er keine abgeschlossene Ausbildung im Elektrobereich. Er war neun Jahre bei Bosch tätig, konnte aber weder sagen, mit welchen Systemen er gearbeitet hat, noch welche Aufgaben er im Arbeitsalltag hatte. Ob er Erfahrung mit Alarm-, Video- oder Zutrittssystemen hat, bleibt daher offen. Einen Führerschein der Klasse B hat er. Sein Deutsch schätzt er selbst auf etwa B2 ein, ob er ein Zertifikat besitzt, weiß er nicht. Er könnte frühestens im Januar anfangen, wünscht sich rund 50.000 Euro brutto im Jahr und ist zu Rufbereitschaftsdiensten bereit.\n\nEmpfehlung: absagen – Herr Wiśniewski hat keine abgeschlossene Ausbildung als Elektroniker, Mechatroniker oder Elektroinstallateur, damit fehlt ein Muss-Kriterium."
     },
@@ -851,6 +871,7 @@
           "Vielen Dank, Karim, für deine Antworten, wir melden uns in Kürze mit den nächsten Schritten bei dir! 😊 [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "Karim Khalil (25 Jahre) hat eine abgeschlossene Ausbildung als Mechatroniker und bringt nach eigenen Angaben fünf Jahre Berufserfahrung mit Alarm-, Video- oder Zutrittssystemen mit, insbesondere mit Systemen von Axis und Siemens. Er besitzt einen Führerschein der Klasse B und schätzt sein Deutschniveau auf C2 ein. Er ist bereit, Rufbereitschaftsdienste zu übernehmen. Er könnte frühestens im Dezember starten, sein Gehaltswunsch liegt bei 56.000 Euro brutto im Jahr.\n\nEmpfehlung: einladen – Herr Khalil erfüllt alle Muss-Kriterien und hat mit fünf Jahren Erfahrung mit Axis- und Siemens-Systemen sowie seiner Bereitschaft zur Rufbereitschaft auch alle wünschenswerten Kriterien."
     },
     {
@@ -973,6 +994,7 @@
           "Danke dir, Lukas, für deine Zeit und deine Antworten, wir melden uns zeitnah bei dir mit den nächsten Schritten! 😊 [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "**Bewerber-Zusammenfassung: Lukas Schmidt (44 Jahre), Sicherheitstechniker (m/w/d)**\n\nLukas Schmidt hat eine abgeschlossene Ausbildung als Elektroniker. Er bringt ein Jahr Berufserfahrung mit Alarm-, Video- oder Zutrittssystemen mit und hat dabei mit Systemen von Axis, Hikvision und Siemens gearbeitet. Er besitzt einen Führerschein der Klasse B und schätzt sein Deutschniveau selbst auf C1 ein. Er ist grundsätzlich bereit, Rufbereitschaftsdienste zu übernehmen. Er könnte frühestens ab Oktober starten. Sein Gehaltswunsch liegt bei 39.000 € brutto im Jahr.\n\nEmpfehlung: prüfen – Alle Muss-Kriterien sind erfüllt, die Berufserfahrung mit Sicherheitssystemen liegt mit einem Jahr jedoch unter den gewünschten zwei Jahren."
     },
     {
@@ -1089,6 +1111,7 @@
           "Danke dir, Olena, für deine offenen Antworten und deine Zeit, wir melden uns zeitnah bei dir mit den nächsten Schritten! [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "**Bewerber-Zusammenfassung: Olena Kovalenko, Stelle Sicherheitstechniker (m/w/d)**\n\nFrau Kovalenko hat eine abgeschlossene Ausbildung als Elektroinstallateurin und bringt rund vier Jahre Berufserfahrung in der Sicherheitstechnik mit. Sie hat ausschließlich mit Systemen von Honeywell gearbeitet. Welche Systemarten das konkret waren (Alarm, Video oder Zutritt), konnte sie nicht genauer angeben. Ihr Deutsch liegt nach eigener Angabe auf C1-Niveau, auch für technische Themen und Kundengespräche. Einen Führerschein der Klasse B besitzt sie nicht. Bisher hat sie Kundentermine mit öffentlichen Verkehrsmitteln oder gemeinsam mit Kollegen wahrgenommen. Rufbereitschaftsdienste möchte sie ausdrücklich nicht übernehmen. Sie könnte frühestens im Februar anfangen, ihr Gehaltswunsch liegt bei 61.000 Euro brutto im Jahr.\n\nEmpfehlung: absagen – Das Muss-Kriterium Führerschein Klasse B ist nicht erfüllt."
     },
     {
@@ -1205,6 +1228,7 @@
           "Vielen Dank für deine Zeit und deine Antworten, Zeynep, wir melden uns bald bei dir! [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "Zeynep Kaya, 33 Jahre, hat eine abgeschlossene Ausbildung als Elektroinstallateurin und gibt neun Jahre Berufserfahrung an. Auf die Frage nach Erfahrung mit Alarm-, Video- oder Zutrittssystemen nannte sie konkret Systeme des Herstellers Hikvision. Sie besitzt einen Führerschein der Klasse B und schätzt ihr Deutschniveau selbst auf C1 ein. Sie könnte frühestens im Oktober anfangen. Ihre Gehaltsvorstellung liegt bei 43.000 Euro brutto im Jahr. Zu Rufbereitschaftsdiensten ist sie grundsätzlich bereit.\n\nEmpfehlung: einladen – Alle Muss-Kriterien sind erfüllt und mit neun Jahren Berufserfahrung im relevanten Bereich wird die Mindestanforderung von zwei Jahren deutlich übertroffen."
     },
     {
@@ -1324,6 +1348,7 @@
           "Danke dir für deine Offenheit und das angenehme Gespräch, Zeynep, die Personalabteilung meldet sich bald bei dir! [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "Zeynep Kaya hat sich als Sicherheitstechnikerin (m/w/d) beworben. Eine abgeschlossene Ausbildung im Elektrobereich (Elektronikerin, Mechatronikerin oder Elektroinstallateurin) hat sie nach eigener Angabe nicht. Sie ist über die Praxis in den Beruf gekommen. Sie bringt vier Jahre Berufserfahrung mit Sicherheitssystemen mit, vor allem mit Systemen von Bosch und Hikvision. Einen Führerschein der Klasse B besitzt sie. Ihr Deutschniveau schätzt sie selbst auf C1 ein, auch für Kundengespräche und technische Themen. Sie könnte frühestens im Dezember anfangen und wünscht sich ein Bruttojahresgehalt von 59.000 Euro. Rufbereitschaftsdienste möchte sie ausdrücklich nicht übernehmen, während der regulären Arbeitszeiten steht sie voll zur Verfügung.\n\nEmpfehlung: absagen – Das Muss-Kriterium einer abgeschlossenen Ausbildung als Elektronikerin, Mechatronikerin oder Elektroinstallateurin ist nicht erfüllt, obwohl Frau Kaya vier Jahre einschlägige Praxiserfahrung mitbringt."
     },
     {
@@ -1446,6 +1471,7 @@
           "Vielen Dank, Elif, für deine Antworten, wir melden uns bald bei dir zu den nächsten Schritten! [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "Elif Demir hat eine abgeschlossene Ausbildung als Mechatronikerin und verfügt über zwei Jahre Berufserfahrung mit Alarm-, Video- und Zutrittssystemen, konkret mit Systemen von Axis, Bosch und Telenot. Sie besitzt seit Längerem einen Führerschein der Klasse B und schätzt ihre Deutschkenntnisse selbst auf B2-Niveau ein. Sie ist grundsätzlich bereit, Rufbereitschaftsdienste zu übernehmen. Ein Eintritt wäre frühestens ab August möglich, ihr Gehaltswunsch liegt bei 48.000 Euro brutto pro Jahr.\n\nEmpfehlung: einladen – alle Muss-Kriterien sind erfüllt, die geforderten zwei Jahre Berufserfahrung liegen vor und zusätzlich besteht Bereitschaft zur Rufbereitschaft."
     },
     {
@@ -1568,6 +1594,7 @@
           "Danke dir für deine Antworten, Julia, wir melden uns bald bei dir mit den nächsten Schritten! [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "Julia Schneider hat eine abgeschlossene Ausbildung als Elektroinstallateurin und besitzt den Führerschein der Klasse B. Ihr Deutschniveau schätzt sie selbst auf B2 ein. Sie hat ein Jahr Berufserfahrung mit Alarm-, Video- oder Zutrittssystemen und dabei mit Systemen von Bosch, Honeywell und Telenot gearbeitet. Sie ist zu Rufbereitschaftsdiensten bereit. Sie kann frühestens im September anfangen, ihr Gehaltswunsch liegt bei etwa 43.000 € brutto pro Jahr.\n\nEmpfehlung: prüfen – alle Muss-Kriterien sind erfüllt, die Berufserfahrung mit Sicherheitssystemen liegt mit einem Jahr jedoch unter den gewünschten zwei Jahren."
     },
     {
@@ -1692,6 +1719,7 @@
           "Danke für deine Antworten und deine Zeit, Agnieszka, wir melden uns zeitnah bei dir mit den nächsten Schritten! [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "**Bewerber-Zusammenfassung: Agnieszka Wójcik, Sicherheitstechnikerin (m/w/d)**\n\nFrau Wójcik hat eine abgeschlossene Ausbildung als Mechatronikerin und besitzt den Führerschein Klasse B. Ihr Deutschniveau schätzt sie selbst auf C1 ein. Nach eigenen Angaben hat sie sieben Jahre Berufserfahrung mit Systemen des Herstellers Honeywell. Ob es sich dabei um Alarm-, Video- oder Zutrittssysteme handelte, konnte sie nicht sagen, da dies auch nicht aus ihren Unterlagen hervorgeht. Diesen Punkt sollte man im Gespräch klären. Rufbereitschaftsdienste möchte sie eher nicht übernehmen. Sie könnte frühestens im Februar anfangen und wünscht sich ein Gehalt von 61.000 Euro brutto pro Jahr.\n\nEmpfehlung: einladen – alle Muss-Kriterien sind erfüllt und die angegebene Berufserfahrung liegt mit sieben Jahren deutlich über zwei Jahren, wobei im Gespräch geklärt werden sollte, um welche Systemart es sich handelte und wie sie zur Rufbereitschaft steht."
     },
     {
@@ -1814,6 +1842,21 @@
           "All topics covered. End with one sentence thanks and [ENDE]. Don't reveal rejection.\n\nDanke dir, Julia, für deine offenen Antworten und deine Zeit, wir melden uns zeitnah bei dir! [ENDE]"
         ]
       ],
+      "leaks": [
+        {
+          "turn": 14,
+          "reasons": [
+            {
+              "reason": "end token",
+              "excerpt": "All topics covered. End with one sentence thanks and [ENDE]"
+            },
+            {
+              "reason": "english",
+              "excerpt": "All topics covered. End with one sentence thanks and [ENDE]. Don't reveal rejection."
+            }
+          ]
+        }
+      ],
       "summary": "Julia Schneider, 44 Jahre, hat eine abgeschlossene Ausbildung als Mechatronikerin. Sie bringt sieben Jahre Berufserfahrung mit Alarm-, Video- und Zutrittssystemen mit und hat dabei mit Systemen von Axis, Hikvision und Siemens gearbeitet. Einen Führerschein der Klasse B besitzt sie nicht. Ihr Deutschniveau schätzt sie selbst auf B1 ein. Sie ist grundsätzlich bereit, Rufbereitschaftsdienste zu übernehmen. Sie könnte frühestens im Februar starten, ihr Gehaltswunsch liegt bei 42.000 Euro brutto pro Jahr.\n\nEmpfehlung: absagen – Trotz passender Ausbildung und umfangreicher Erfahrung fehlen zwei Muss-Kriterien, nämlich der Führerschein Klasse B und Deutschkenntnisse auf mindestens B2-Niveau (Selbsteinschätzung B1)."
     },
     {
@@ -1932,6 +1975,7 @@
           "Danke dir für das nette Gespräch und deine offenen Antworten, Oksana, wir melden uns in Kürze bei dir! 😊 [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "Oksana Bondarenko, 24 Jahre, hat eine abgeschlossene Ausbildung als Mechatronikerin und erfüllt damit das Ausbildungskriterium. Sie besitzt einen Führerschein der Klasse B. Ihr Deutschniveau gibt sie selbst mit B1 an; gefordert ist mindestens B2. Sie hat nach eigener Aussage ein Jahr Berufserfahrung bei Bosch. Mit welchen Systemen (Alarm-, Video- oder Zutrittssysteme) sie dort gearbeitet hat und welche Aufgaben sie hatte (z. B. Montage, Verkabelung, Inbetriebnahme oder Wartung), konnte sie auch auf Nachfrage nicht sagen. Ob die Erfahrung für die Stelle einschlägig ist, bleibt daher offen. Sie ist zu Rufbereitschaftsdiensten bereit, könnte frühestens im Oktober anfangen und wünscht sich ein Gehalt von 50.000 Euro brutto pro Jahr. Im Gespräch wirkte sie motiviert und offen.\n\nEmpfehlung: absagen – Das Muss-Kriterium Deutsch auf mindestens B2-Niveau ist nach ihrer eigenen Angabe (B1) nicht erfüllt."
     },
     {
@@ -2054,6 +2098,7 @@
           "Danke dir für deine offenen Antworten und deine Zeit, Anna, wir melden uns in Kürze bei dir mit den nächsten Schritten! [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "Anna Becker, 45 Jahre, bewirbt sich als Sicherheitstechnikerin. Sie hat eine abgeschlossene Ausbildung als Elektroinstallateurin und verfügt über 12 Jahre Berufserfahrung mit Alarm-, Video- oder Zutrittssystemen, unter anderem mit Systemen von Bosch, Honeywell und Siemens. Ihre Deutschkenntnisse gibt sie mit C1-Niveau an. Einen Führerschein der Klasse B besitzt sie nicht. Sie könnte frühestens im Dezember beginnen, ihr Gehaltswunsch liegt bei 42.000 Euro brutto im Jahr. Zu Rufbereitschaftsdiensten ist sie nicht bereit.\n\nEmpfehlung: absagen – Trotz passender Ausbildung und umfangreicher Erfahrung fehlt mit dem Führerschein Klasse B ein Muss-Kriterium."
     },
     {
@@ -2164,6 +2209,7 @@
           "Vielen Dank für deine Zeit und deine offenen Antworten, Ahmed – unser Team meldet sich in Kürze bei dir zu den nächsten Schritten! [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "Ahmed Haddad hat eine abgeschlossene Ausbildung als Elektroniker und besitzt einen Führerschein der Klasse B. Seine Deutschkenntnisse schätzt er selbst auf C1-Niveau ein. Berufserfahrung mit Alarm-, Video- oder Zutrittssystemen hat er bisher nicht (0 Jahre), entsprechend hat er auch noch mit keinen bestimmten Systemen oder Herstellern gearbeitet. Er ist bereit, Rufbereitschaftsdienste zu übernehmen. Frühestmöglicher Eintrittstermin ist Oktober, sein Gehaltswunsch liegt bei 62.000 Euro brutto pro Jahr.\n\nEmpfehlung: prüfen – Alle Muss-Kriterien sind erfüllt, es liegt jedoch keine Berufserfahrung mit Alarm-, Video- oder Zutrittssystemen vor."
     },
     {
@@ -2294,6 +2340,7 @@
           "Danke dir für deine offenen Antworten und deine Zeit, Jonas, wir melden uns zeitnah bei dir mit einer Rückmeldung!\n[ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "Jonas Fischer, 33 Jahre, hat eine Ausbildung zum Mechatroniker abgeschlossen und bringt vier Jahre Berufserfahrung mit Alarm-, Video- oder Zutrittssystemen mit, dabei hat er mit Systemen von Axis, Bosch und Hikvision gearbeitet. Einen Führerschein der Klasse B besitzt er nicht. Ob er ihn derzeit macht oder plant, ihn zu machen, konnte er nicht sagen. Seine Deutschkenntnisse gibt er mit Niveau B2 an. Er könnte frühestens im Oktober anfangen, sein Gehaltswunsch liegt bei 47.000 Euro brutto im Jahr. Rufbereitschaftsdienste möchte er nicht übernehmen.\n\nEmpfehlung: absagen – Das Muss-Kriterium Führerschein Klasse B ist nicht erfüllt, obwohl Ausbildung, Deutschkenntnisse und Berufserfahrung den Anforderungen entsprechen."
     },
     {
@@ -2413,6 +2460,7 @@
           "Vielen Dank für das angenehme Gespräch und deine offenen Antworten, Ayşe, wir melden uns bald bei dir! 😊 [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "**Bewerber-Zusammenfassung: Ayşe Yılmaz, Sicherheitstechnikerin (m/w/d)**\n\nFrau Yılmaz gibt an, keine Ausbildung im Elektrobereich zu haben. Ob sie eine andere abgeschlossene Berufsausbildung hat, konnte sie im Gespräch nicht sagen. Sie hat nach eigener Aussage ein Jahr Berufserfahrung in der Sicherheitstechnik und hat praktisch mit Anlagen von Honeywell und Telenot gearbeitet. Wie sie in den Bereich gekommen ist und um welche Anlagenarten (Alarm, Video, Zutritt) es sich genau handelte, konnte sie nicht näher erläutern. Sie besitzt einen Führerschein der Klasse B und schätzt ihre Deutschkenntnisse auf C2-Niveau ein, was durch ihre sichere schriftliche Kommunikation im Gespräch bestätigt wird. Sie könnte frühestens im Oktober anfangen, wünscht sich 44.000 € brutto pro Jahr und ist zu Rufbereitschaftsdiensten bereit. Im Gespräch wirkte sie offen, freundlich und motiviert.\n\nEmpfehlung: absagen. Das Muss-Kriterium einer abgeschlossenen Ausbildung als Elektronikerin, Mechatronikerin oder Elektroinstallateurin ist nach eigener Aussage nicht erfüllt."
     },
     {
@@ -2532,6 +2580,7 @@
           "Danke dir, Agnieszka, für deine Zeit und deine offenen Antworten, wir melden uns bald bei dir! 😊 [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "**Bewerber-Zusammenfassung: Agnieszka Wójcik (37 Jahre), Sicherheitstechnikerin (m/w/d)**\n\nAgnieszka Wójcik hat eine abgeschlossene Ausbildung als Elektronikerin und besitzt einen Führerschein der Klasse B. Sie hat ein Jahr Berufserfahrung mit Systemen von Bosch und Telenot. Ihr Deutschniveau schätzt sie selbst auf B1 ein. Sie könnte frühestens im April anfangen, ihr Gehaltswunsch liegt bei 57.000 Euro brutto im Jahr. Zu Rufbereitschaftsdiensten ist sie grundsätzlich bereit.\n\nEmpfehlung: absagen, weil das Muss-Kriterium Deutsch auf mindestens B2-Niveau laut ihrer eigenen Einschätzung (B1) nicht erfüllt ist."
     },
     {
@@ -2654,6 +2703,7 @@
           "Vielen Dank für deine Antworten, Katrin, wir melden uns zeitnah mit den nächsten Schritten bei dir! [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "Katrin Wolf (44) bewirbt sich als Sicherheitstechnikerin. Sie hat eine abgeschlossene Ausbildung als Elektroinstallateurin und einen Führerschein der Klasse B. Ihr Deutschniveau schätzt sie selbst auf C1 ein. Mit Alarm-, Video- oder Zutrittssystemen hat sie ein Jahr Berufserfahrung und dabei mit Systemen von Axis, Bosch und Honeywell gearbeitet. Sie ist grundsätzlich bereit, Rufbereitschaftsdienste zu übernehmen. Frühestens kann sie im Februar anfangen, ihr Gehaltswunsch liegt bei 42.000 Euro brutto im Jahr.\n\nEmpfehlung: prüfen – Frau Wolf erfüllt alle Muss-Kriterien, hat mit einem Jahr aber weniger als die gewünschten zwei Jahre Berufserfahrung mit Sicherheitssystemen."
     },
     {
@@ -2781,6 +2831,7 @@
           "Vielen Dank, Nour, für deine offenen Antworten, wir melden uns bald bei dir für ein persönliches Gespräch! 😊 [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "**Bewerber-Zusammenfassung: Nour Khalil, 25 Jahre – Sicherheitstechniker (m/w/d)**\n\nNour Khalil hat eine abgeschlossene Ausbildung als Elektroinstallateur und bringt nach eigener Angabe 5 Jahre Berufserfahrung mit. Gearbeitet hat Nour vor allem mit Systemen der Hersteller Siemens und Telenot und beschreibt sich mit beiden als gut vertraut. Nour gibt an, die Ausbildung helfe „in der Sicherheitstechnik bis heute jeden Tag“. Wie sich die Erfahrung auf Alarm-, Video- und Zutrittssysteme verteilt, konnte Nour auch auf Nachfrage nicht sagen und wollte dazu bewusst keine ungenaue Angabe machen. Das sollte im persönlichen Gespräch geklärt werden. Ein Führerschein der Klasse B ist vorhanden. Die Deutschkenntnisse schätzt Nour selbst auf C2 ein. Einen Nachweis gibt es dafür bisher nicht. Nour ist zu Rufbereitschaftsdiensten bereit. Ein Start wäre frühestens im August möglich. Der Gehaltswunsch liegt bei 63.000 Euro brutto im Jahr.\n\nEmpfehlung: einladen – Alle Muss-Kriterien sind laut Selbstauskunft erfüllt, und die 5 Jahre Erfahrung mit Systemen von Siemens und Telenot liegen deutlich über der geforderten Mindestdauer, wobei die genaue Aufteilung nach Systemarten im Gespräch geklärt werden sollte."
     },
     {
@@ -2898,6 +2949,7 @@
           "Danke dir, Elif, für deine offenen Antworten und deine Zeit – wir melden uns bald bei dir mit einer Rückmeldung! 😊 [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "Elif Demir hat sich als Sicherheitstechnikerin beworben. Sie hat nach eigener Aussage keine Ausbildung im Elektrobereich und auch keine andere Ausbildung oder Weiterbildung abgeschlossen. Sie war ein Jahr bei Bosch beschäftigt, konnte aber nicht angeben, ob sie dort mit Alarm-, Video- oder Zutrittssystemen gearbeitet hat oder welche Tätigkeit sie ausgeübt hat. Sie besitzt einen Führerschein der Klasse B und schätzt ihre Deutschkenntnisse selbst auf B2-Niveau ein. Rufbereitschaftsdienste würde sie übernehmen. Sie könnte frühestens im November anfangen und erwartet ein Gehalt von 48.000 Euro brutto im Jahr.\n\nEmpfehlung: absagen – das Muss-Kriterium einer abgeschlossenen Ausbildung als Elektroniker, Mechatroniker oder Elektroinstallateur ist nicht erfüllt."
     },
     {
@@ -3006,6 +3058,7 @@
           "Danke dir für deine Offenheit und das angenehme Gespräch, Karim, wir melden uns bald bei dir mit den nächsten Schritten! 😊 [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "Karim Khalil hat eine Ausbildung zum Elektroinstallateur abgeschlossen und kommt direkt aus der Ausbildung. Berufserfahrung mit Alarm-, Video- oder Zutrittssystemen hat er noch nicht (0 Jahre), und er konnte nicht sagen, mit welchen Systemen er während der Ausbildung gearbeitet hat. Er zeigt aber deutlich Motivation, sich in diese Systeme einzuarbeiten. Er besitzt einen Führerschein der Klasse B und fährt nach eigener Aussage gern zu wechselnden Einsatzorten. Seine Deutschkenntnisse schätzt er selbst auf B2-Niveau ein, einschließlich elektrotechnischer Fachbegriffe. Er kann frühestens im Mai anfangen und wünscht sich ein Gehalt von 41.000 Euro brutto im Jahr. Weiterentwicklung ist ihm wichtig. Rufbereitschaftsdienste möchte er ausdrücklich nicht übernehmen, während der regulären Arbeitszeiten ist er aber voll einsatzbereit.\n\nEmpfehlung: prüfen – Alle Muss-Kriterien sind erfüllt, es fehlt aber die geforderte Berufserfahrung von mindestens zwei Jahren, und er lehnt Rufbereitschaft ab."
     },
     {
@@ -3125,6 +3178,7 @@
           "Danke dir für deine Offenheit und das angenehme Gespräch, Andrii, wir melden uns bald mit den nächsten Schritten bei dir! 😊 [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "Andrii Kovalenko (39) hat eine abgeschlossene Ausbildung als Elektroniker und nach eigener Angabe insgesamt sieben Jahre Berufserfahrung mit Alarm-, Video- oder Zutrittssystemen. Gearbeitet hat er konkret mit Systemen von Bosch und Telenot. Wie sich die Jahre auf die einzelnen Systemarten verteilen, konnte er nicht genau sagen. Er besitzt einen gültigen Führerschein der Klasse B und schätzt sein Deutsch selbst auf C1 ein. Im Gespräch mit Kunden und bei technischen Themen kommt er nach eigener Aussage gut zurecht und fragt bei schwierigen Fachbegriffen nach. Frühester Eintritt wäre im März, ein genaues Datum steht noch nicht fest. Sein Gehaltswunsch liegt bei 55.000 Euro brutto im Jahr, er ist dazu gesprächsbereit. Rufbereitschaftsdienste möchte er ausdrücklich nicht übernehmen, während der regulären Arbeitszeit ist er jedoch voll einsatzbereit.\n\nEmpfehlung: einladen – alle Muss-Kriterien sind erfüllt und die angegebenen sieben Jahre Erfahrung liegen deutlich über zwei Jahren, wobei die fehlende Bereitschaft zur Rufbereitschaft im Gespräch geklärt werden sollte."
     },
     {
@@ -3252,6 +3306,21 @@
           "All topics covered (8 questions asked). End with one thank-you sentence and [ENDE].\n\nDanke dir für das Gespräch, Tomasz, wir melden uns in Kürze bei dir! 😊 [ENDE]"
         ]
       ],
+      "leaks": [
+        {
+          "turn": 16,
+          "reasons": [
+            {
+              "reason": "end token",
+              "excerpt": "All topics covered (8 questions asked). End with one thank-you sentence and [ENDE]"
+            },
+            {
+              "reason": "english",
+              "excerpt": "All topics covered (8 questions asked). End with one thank-you sentence and [ENDE]."
+            }
+          ]
+        }
+      ],
       "summary": "Tomasz Wiśniewski, 25 Jahre, hat eine abgeschlossene Ausbildung als Elektroinstallateur und bringt nach eigener Aussage fünf Jahre Berufserfahrung mit Alarm-, Video- und Zutrittssystemen mit, vor allem mit Hikvision und Telenot. Einen Führerschein der Klasse B besitzt er nicht, und er plant derzeit auch nicht konkret, ihn zu machen. Sein Deutschniveau schätzt er selbst auf B1 ein: Er versteht das meiste, spricht aber nach eigener Aussage noch nicht perfekt. Er könnte frühestens ab Dezember anfangen und wünscht sich ein Gehalt von 62.000 € brutto pro Jahr. Rufbereitschaftsdienste würde er übernehmen.\n\nEmpfehlung: absagen – Trotz passender Ausbildung und fünf Jahren einschlägiger Erfahrung fehlen zwei Muss-Kriterien, nämlich der Führerschein Klasse B und Deutschkenntnisse auf mindestens B2-Niveau."
     },
     {
@@ -3370,6 +3439,7 @@
           "Vielen Dank für deine Antworten, Iryna, wir melden uns bald bei dir mit den nächsten Schritten! 😊 [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "**Bewerber-Zusammenfassung: Iryna Shevchenko, 32 Jahre (Sicherheitstechniker m/w/d)**\n\nFrau Shevchenko hat eine abgeschlossene Ausbildung als Mechatronikerin, besitzt einen Führerschein der Klasse B und schätzt ihr Deutschniveau selbst auf B2 ein. Damit erfüllt sie alle Muss-Kriterien. Sie gibt 12 Jahre Berufserfahrung bei Bosch an. Ob diese Erfahrung mit Alarm-, Video- oder Zutrittssystemen zu tun hat, konnte sie auch auf Nachfrage nicht sagen. Die Relevanz der Erfahrung ist daher offen. Zur Rufbereitschaft ist sie bereit. Sie kann ab Oktober starten. Ein Jahr hat sie nicht genannt. Da Oktober 2026 bereits vorbei ist, ist vermutlich Oktober 2027 gemeint, das sollte geklärt werden. Ihr Gehaltswunsch liegt bei 57.000 € brutto im Jahr.\n\nEmpfehlung: prüfen. Alle Muss-Kriterien sind erfüllt, aber es ist unklar, ob ihre 12 Jahre bei Bosch die geforderten mindestens zwei Jahre Erfahrung mit Alarm-, Video- oder Zutrittssystemen enthalten. Das sollte vor einer Einladung geklärt werden, zusammen mit dem genauen Starttermin."
     },
     {
@@ -3497,6 +3567,7 @@
           "Danke dir, Piotr, für deine Antworten, unser Team meldet sich in Kürze bei dir! 😊 [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "Piotr Kowalski (32) hat sich als Sicherheitstechniker beworben. Nach eigener Aussage hat er **keine abgeschlossene Ausbildung im Elektrobereich**. Auf die Frage nach einer anderen technischen Ausbildung oder vergleichbaren Qualifikation konnte er keine klare Angabe machen. Er nennt 12 Jahre Berufserfahrung, unter anderem mit Systemen von Axis und Siemens. Welche Systeme das konkret waren (Video, Zutritt oder Alarm), konnte er nicht sagen. Er hat einen Führerschein der Klasse B und schätzt seine Deutschkenntnisse auf C1 ein. Er könnte frühestens ab September anfangen, wünscht sich ein Gehalt von 64.000 € brutto im Jahr und ist zu Rufbereitschaftsdiensten bereit.\n\nEmpfehlung: absagen – das Muss-Kriterium einer abgeschlossenen Ausbildung als Elektroniker, Mechatroniker oder Elektroinstallateur ist laut eigener Aussage nicht erfüllt, auch wenn die angegebene langjährige Erfahrung mit Axis- und Siemens-Systemen grundsätzlich passen könnte."
     },
     {
@@ -3627,6 +3698,7 @@
           "Danke dir für deine offenen Antworten und deine Zeit, Fatima, wir melden uns zeitnah bei dir zu den nächsten Schritten! [ENDE]"
         ]
       ],
+      "leaks": [],
       "summary": "Fatima Haddad (35) hat sich als Sicherheitstechnikerin beworben. Nach eigener Aussage hat sie keine Ausbildung im Elektrobereich und auch keine Ausbildung als Mechatronikerin abgeschlossen. Zu weiteren Ausbildungen wollte sie keine Angaben machen. Sie hat 15 Jahre Berufserfahrung mit Alarm-, Video- bzw. Zutrittssystemen der Hersteller Axis, Bosch und Telenot. Sie besitzt einen Führerschein der Klasse B und schätzt ihr Deutschniveau selbst als C2 ein. Sie könnte frühestens im Januar anfangen, ihr Gehaltswunsch liegt bei 49.000 Euro brutto im Jahr. Rufbereitschaftsdienste möchte sie nicht übernehmen.\n\nEmpfehlung: absagen – Das Muss-Kriterium einer abgeschlossenen Ausbildung als Elektronikerin, Mechatronikerin oder Elektroinstallateurin ist nach ihren eigenen Angaben nicht erfüllt, auch wenn ihre langjährige Praxiserfahrung bemerkenswert ist."
     }
   ],
@@ -4193,6 +4265,26 @@
       },
       "on_call": {
         "kept": 30
+      }
+    },
+    "internal_text": {
+      "per_message": {
+        "k": 3,
+        "n": 252,
+        "rate": 0.011904761904761904,
+        "ci95": [
+          0.004056726377885166,
+          0.03441082541978965
+        ]
+      },
+      "per_chat": {
+        "k": 3,
+        "n": 30,
+        "rate": 0.1,
+        "ci95": [
+          0.03459925995971615,
+          0.25621441315266624
+        ]
       }
     },
     "fairness": {

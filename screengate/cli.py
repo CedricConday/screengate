@@ -10,7 +10,7 @@ from pathlib import Path
 
 from . import __version__
 from .applicants import NAMES, cohort
-from .gate import extraction_selftest, run
+from .gate import extraction_selftest, regrade, run
 from .report import render
 
 
@@ -91,8 +91,13 @@ def main(argv=None) -> int:
                        help="share of chat messages that start with a planning note")
     st = sub.choices["selftest"]
     st.add_argument("--n", type=int, default=40)
+    rg = sub.add_parser("regrade", help="grade a saved run again with the current checks; "
+                                        "no model calls")
+    rg.add_argument("dirs", type=Path, nargs="+", help="run directories holding run.json")
 
     args = p.parse_args(argv)
+    if args.cmd == "regrade":
+        return _regrade(args.dirs)
     bot, sim, extractor, renderer, usage, label = _roles(args)
     out = args.out or Path("results") / f"{args.cmd}-{args.backend}-{time.strftime('%Y%m%d-%H%M%S')}"
     out.mkdir(parents=True, exist_ok=True)
@@ -123,6 +128,33 @@ def main(argv=None) -> int:
     log(f"wrote {out}/report.md")
     print(json.dumps(result["metrics"], ensure_ascii=False, indent=2))
     return 0
+
+
+def _regrade(dirs: list[Path]) -> int:
+    """Rewrite run.json and report.md of saved runs; print what moved.
+
+    Any metric other than ones the current code adds must come out unchanged,
+    since the transcripts and extractions are the recorded ones. A change there
+    means grading drifted, and the run is left untouched.
+    """
+    status = 0
+    for d in dirs:
+        saved = json.loads((d / "run.json").read_text())
+        new = regrade(saved)
+        old_m, new_m = saved["metrics"], new["metrics"]
+        drift = [k for k in old_m if old_m[k] != new_m.get(k)]
+        if drift:
+            print(f"{d}: metrics changed on regrade: {', '.join(drift)}; not written",
+                  file=sys.stderr)
+            status = 1
+            continue
+        st = d / "selftest.json"
+        selftest = json.loads(st.read_text()) if st.exists() else None
+        (d / "run.json").write_text(json.dumps(new, ensure_ascii=False, indent=2))
+        (d / "report.md").write_text(render(new, new["config"], selftest, new.get("usage")))
+        added = {k: new_m[k] for k in new_m if k not in old_m}
+        print(f"{d}: {json.dumps(added, ensure_ascii=False)}")
+    return status
 
 
 if __name__ == "__main__":
