@@ -400,3 +400,13 @@ def test_regrade_reproduces_the_recorded_metrics():
     again = regrade(result)
     assert again["metrics"] == result["metrics"]
     assert again["records"] == result["records"]
+
+
+def test_bot_url_is_refused_on_the_offline_backend(tmp_path, capsys):
+    from screengate.cli import main
+
+    with pytest.raises(SystemExit) as exit_:
+        main(["run", "--bot-url", "http://localhost:1", "--out", str(tmp_path / "r")])
+    assert exit_.value.code == 2
+    assert "--bot-url needs --backend" in capsys.readouterr().err
+    assert not (tmp_path / "r").exists()

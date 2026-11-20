@@ -99,6 +99,11 @@ def main(argv=None) -> int:
     args = p.parse_args(argv)
     if args.cmd == "regrade":
         return _regrade(args.dirs)
+    if getattr(args, "bot_url", None) and args.backend == "offline":
+        # The offline backend has its own stand-in bot; a URL there would be
+        # ignored and the report would describe the wrong system.
+        p.error("--bot-url needs --backend claude or --backend subscription "
+                "(the applicant simulator and the extractor still run on Claude)")
     with ExitStack() as stack:
         return _execute(args, stack)
 
