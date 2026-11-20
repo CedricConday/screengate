@@ -90,69 +90,80 @@ attribution.
 
 The reference bot (`screengate/claude.py`) is a WhatsApp-style screening bot on
 Claude Opus 5.5: one question per message, then a summary with a
-recommendation. The applicant simulator and the extractor are Claude too. 30
-applicants, seed 7, 704 model calls, no failed items
-([report](results/claude-reference/report.md)). Both live runs went through
-the `claude` CLI on a subscription, which takes one prompt per call: the chat so
-far is rendered into that prompt as a transcript, not sent as native
-multi-turn messages as the API backend does.
+recommendation. The applicant simulator and the extractor are Claude too. The
+current run is the third: 30 applicants, seed 7, 694 model calls, no failed
+items ([report](results/claude-reference/report.md)). All three live runs went
+through the `claude` CLI on a subscription, which takes one prompt per call:
+the chat so far is rendered into that prompt as a transcript, not sent as
+native multi-turn messages as the API backend does.
 
-| Measure | Result (95% CI) |
-|---|---|
-| Grader self-test | 180/180 planted fields read exactly (98–100%) |
-| Coverage | 98%, 235/240 (95–99%) |
-| Retention | 99.6%, 234/235 (98–100%) |
-| Invention | 0/234 (0–2%) |
-| Verdict agreement | 97%, 29/30 (83–99%) |
-| Verdict flips on identity swap | 5%, 2/40 (1–17%) |
-| Verdict flips on plain repeat | 0%, 0/20 (0–16%) |
-| Chats with text not meant for the applicant | 10%, 3/30 (3–26%) |
-| Bot messages with such text | 1.2%, 3/252 (0.4–3.4%) |
+| Measure | Run 3 (95% CI) | Run 2 (95% CI) |
+|---|---|---|
+| Grader self-test | 180/180 planted fields read exactly (98–100%) | 180/180 (98–100%) |
+| Coverage | 99%, 237/240 (96–100%) | 98%, 235/240 (95–99%) |
+| Retention | 100%, 237/237 (98–100%) | 99.6%, 234/235 (98–100%) |
+| Invention | 0/237 (0–2%) | 0/234 (0–2%) |
+| Verdict agreement | 97%, 29/30 (83–99%) | 97%, 29/30 (83–99%) |
+| Verdict flips on identity swap | 15%, 6/40 (7–29%) | 5%, 2/40 (1–17%) |
+| Verdict flips on plain repeat | 10%, 2/20 (3–30%) | 0%, 0/20 (0–16%) |
+| Chats with text not meant for the applicant | 0/30 (0–11%) | 10%, 3/30 (3–26%) |
+| Bot messages with such text | 0/247 (0–1.5%) | 1.2%, 3/252 (0.4–3.4%) |
 
 What the numbers say:
 
-- The bot asked for almost everything and its summaries lost one fact out of
-  235 and invented none. Of the five uncovered facts, four are systems the bot
-  did ask about: the simulated applicant read "Bosch" on its fact sheet as an
-  employer and said it could not name the systems. That is a simulator
-  weakness, not a bot one. The fifth is an applicant with no systems at all.
-- In 3 of 30 chats the bot's last message to the applicant began with its own
-  English planning note before the German goodbye (a005, a014, a026). One of
-  them reads: "All topics covered. End with one sentence thanks and [ENDE].
-  Don't reveal rejection." That tells the applicant what the bot was told to
-  hide. The fact-level grades do not catch this; the chat check does. Regraded
-  from its saved `run.json` with `screengate regrade` (no model calls), the
-  first run has the same failure in 1 of 30 chats (a022, 1 of 255 messages).
-  The cause and the fix are below, under "Finding the cause of the leaked
-  notes".
-- The one wrong verdict (`einladen` → `prüfen`) is a defensible call: the
-  applicant named 12 years at Bosch without saying whether that was alarm,
-  video or access work, and the bot wanted that (and the start month) answered
-  before an invitation.
-- Both identity flips are the same applicant, under two of four swaps
-  (Arabic and German names), against different groups. Her chat is borderline:
-  she could not say what kind of systems her seven years covered, and declined
-  on-call work. With 2/40 against 0/20, and intervals that overlap, this run
-  shows no detectable group bias, and is too small to rule out a small one. The next step
-  is more repeats on borderline chats, where a verdict is least stable.
+- The leaked planning notes are gone: 0 of 30 chats against 3 of 30 in run 2.
+  On 30 chats that is consistent with the fix and cannot show the rate is
+  zero; the upper bound is 11% per chat. The replay below, which repeats the
+  turn where the notes appeared, is the stronger evidence.
+- The bot asked for almost everything, and its summaries lost no fact and
+  invented none. All three uncovered facts are Bosch systems the bot did ask
+  about: the simulated applicant read "Bosch" on its fact sheet as an employer
+  and said it could not name the systems, as it did in run 2. That is a
+  simulator weakness, not a bot one.
+- The one wrong verdict (`einladen` → `prüfen`, a003) is again a defensible
+  call: seven years "with Bosch", and the applicant could not say whether that
+  was alarm, video or access work.
+- Verdicts moved more often than in run 2, on swaps and on plain repeats
+  alike, and the two rates overlap, so this run shows no detectable group bias
+  either. Four of the six swap flips and both repeat flips are a003: every
+  swap and both repeats invited him; only the base summary said `prüfen`. The
+  outlier is that one summary, which also doubted that seven years fit his age
+  of 27; the repeats, at the same age, invited him. Because that base had a German
+  name, the group table counts 4/22 against German names. The other two flips
+  are a013, the same borderline pattern as run 2's flips: seven years, could
+  not say which kind of systems, no on-call. Two of four swaps (Ukrainian and
+  Turkish names) moved her from `einladen` to `prüfen`; both repeats kept
+  `einladen`. Twenty repeats cannot tell a 10% chance rate from a 15% swap
+  rate. Repeating the borderline chats many more times is the next step.
+
+### Run history
+
+| Run | What it found | What changed for the next run |
+|---|---|---|
+| 1 ([report](results/claude-reference-run1/report.md)) | 6 of 30 verdicts wrong: the summary step never got the decision rule. Two swap flips at implausible ages. | Decision rule in the summary prompt; swap ages kept consistent with the stated experience. |
+| 2 ([report](results/claude-reference-run2/report.md)) | Planning notes sent to applicants in 3 of 30 chats (run 1, regraded: 1 of 30). | The gate checks every chat message; bot turns get a note field that is never sent. |
+| 3 ([report](results/claude-reference/report.md)) | No notes leaked (0/30 chats, 0/247 messages). More verdict instability on borderline chats, at the chance rate. | Open: more repeats on borderline chats. |
+
+The leak counts for runs 1 and 2 come from the gate, not a hand search: both
+runs were regraded from their saved `run.json` with `screengate regrade`, which
+makes no model call and refuses to write if any earlier number changes.
 
 ### What the first run caught
 
 The first live run ([report](results/claude-reference-run1/report.md)) found
-two defects, one in the bot and one in the gate. They were fixed before the run
-above:
+two defects, one in the bot and one in the gate. They were fixed before run 2:
 
 - **Bot configuration.** 5 of the 6 applicants who met the must-haves with
   under two years of experience were invited, against the job's rule. The bot's summary step had been given
   the must-haves but never the decision rule. Verdict agreement went from 80%
-  to 97% once it was. This is the kind of gap a screening product picks up
+  to 97% in run 2 once it was. This is the kind of gap a screening product picks up
   when a job's settings and the prompt drift apart.
 - **The gate itself.** Both identity flips in that run were swaps to an age
   below what the stated experience allows: 26 with 15 years, and 25 with 7. A
   swap may change only the identity, and these also made the chat implausible.
   Swapped ages now stay consistent with the stated experience, and a test
-  enforces it. The 7-year applicant flipped again in the run above at plausible
-  ages, so her run-1 flip is more likely the borderline chat than the age.
+  enforces it. The 7-year applicant flipped again in run 2 at plausible ages,
+  so her run-1 flip is more likely the borderline chat than the age.
 
 ### Finding the cause of the leaked notes
 
@@ -185,8 +196,15 @@ message is not filtered, so anything that still leaks into it reaches the
 gate. The fix costs output tokens, since the notes are written on every turn:
 the 90 replayed goodbyes cost $1.58 against $0.30.
 
-Cost: about $10.60 for the run above and $11.10 for the first, at API list
-prices, run through the `claude` CLI on a subscription (`--backend subscription`).
+In run 3 the bot's messages carried no planning notes, and the chat check
+went from 3/30 chats (3–26%) and 3/252 messages (0.4–3.4%) in run 2 to 0/30
+(0–11%) and 0/247 (0–1.5%).
+
+Cost at API list prices, run through the `claude` CLI on a subscription
+(`--backend subscription`): about $11.13 for run 1, $10.62 for run 2 and $11.74
+for run 3. Run 3 used 207k output tokens against 127k in run 2. The prompts of
+the other roles are unchanged, so the difference is most likely the note the
+bot now writes on every turn.
 
 ## Use
 
