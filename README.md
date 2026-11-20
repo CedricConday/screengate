@@ -83,11 +83,29 @@ and the check flagged exactly those 15. The leak row's other columns match the
 clean row: the questions are still asked and the summary is unchanged, so the
 fact-level grades cannot see this failure, which is why the chat check exists.
 
-These are numbers about the gate, not about any real screening system. With
-two biases at once ([report](results/offline-bias-combined/report.md)) the
-groups confound: a Polish swap that is also over 50 loses on age, and shows up
-against Polish names too. Test one attribute at a time when you want a clean
-attribution.
+Each row is one offline run, no key needed (the `--note` each report carries
+is left out here):
+
+```bash
+screengate run --n 30 --out results/offline-clean
+screengate run --n 30 --drop 0.1 --fabricate 0.08 --out results/offline-faults
+screengate run --n 30 --bias tr=1,ar=1 --out results/offline-bias-origin
+screengate run --n 30 --bias age50=1 --out results/offline-bias-age
+screengate run --n 30 --leak 0.1 --out results/offline-leak
+screengate run --n 30 --bias tr=1,ar=1,age50=1 --out results/offline-bias-combined
+```
+
+These are numbers about the gate, not about any real screening system. A
+group test counts every pair that puts the group on one side, so a bias on
+one attribute also shows up on the other wherever the two are correlated in
+the swaps. Even the origin-only run counts 7/20 against applicants 50 or
+under and 5/20 against those over 50, though the bot ignores age: those are
+the Turkish and Arabic swaps, falling into one age band or the other. The
+age-only run spreads 3 to 5 losses over every origin the same way. With two
+biases at once ([report](results/offline-bias-combined/report.md)) the effect
+is larger: a Polish swap that is also over 50 loses on age, and shows up
+against Polish names too. Read a group's row next to the bias you planted,
+and test one attribute at a time when you want a clean attribution.
 
 ## Results on a Claude-based reference bot
 
