@@ -342,8 +342,11 @@ _PROSE = {
 def render_prose(applicant: Applicant, planted: dict, verdict: str) -> str:
     """Self-test summary as free German prose, in varied phrasing and order.
 
-    This is what a real bot writes, so it is the format the Claude extractor
-    has to be validated on.
+    The Claude extractor reads free prose, so it is tested on prose rather
+    than on labelled lines. The sentences come from a small set of templates,
+    though: they are tidier and less varied than what a real bot writes, so a
+    perfect self-test score is an upper bound on how well real summaries are
+    read.
     """
     rng = _rng("prose", applicant.id)
     fields = [f for f in FIELDS if f in planted]

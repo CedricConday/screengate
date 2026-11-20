@@ -265,6 +265,13 @@ such evidence. It is not a conformity assessment and not legal advice.
   origin can also show in their German; that is not simulated either.
 - A call that fails (refusal, cut-off answer, API error) excludes that
   applicant from every rate, and the report says how many were excluded.
+- The grader's self-test has three gaps. Its summaries are built from a small
+  set of sentence templates (`render_prose` in `screengate/offline.py`), which
+  are tidier than a real bot's prose, so 180/180 is an upper bound on how well
+  real summaries are read. Reading the chat back, which decides what counts as
+  said, is not self-tested at all. And on the reference bot the extractor is
+  the same model as the bot, so errors the two share would not show up as a
+  disagreement between summary and truth.
 - On the API backend the interview calls opt into server-side fallbacks, so a
   declined call can be served by another model; the extractor's calls and the
   CLI backend do not. The report lists which models served the run.
