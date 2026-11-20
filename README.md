@@ -273,6 +273,9 @@ such evidence. It is not a conformity assessment and not legal advice.
   said, is not self-tested at all. And on the reference bot the extractor is
   the same model as the bot, so errors the two share would not show up as a
   disagreement between summary and truth.
+- The leak fix changes two things at once: the bot gets a note field, and its
+  turns become structured output. No replay separates the two, so it is not
+  known whether either alone would have been enough.
 - On the API backend the interview calls opt into server-side fallbacks, so a
   declined call can be served by another model; the extractor's calls and the
   CLI backend do not. The report lists which models served the run.
