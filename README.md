@@ -77,7 +77,10 @@ The reference bot (`screengate/claude.py`) is a WhatsApp-style screening bot on
 Claude Opus 5.5: one question per message, then a summary with a
 recommendation. The applicant simulator and the extractor are Claude too. 30
 applicants, seed 7, 704 model calls, no failed items
-([report](results/claude-reference/report.md)):
+([report](results/claude-reference/report.md)). Both live runs went through
+the `claude` CLI on a subscription, which takes one prompt per call: the chat so
+far is rendered into that prompt as a transcript, not sent as native
+multi-turn messages as the API backend does.
 
 | Measure | Result (95% CI) |
 |---|---|
@@ -86,8 +89,8 @@ applicants, seed 7, 704 model calls, no failed items
 | Retention | 99.6%, 234/235 (98–100%) |
 | Invention | 0/234 (0–2%) |
 | Verdict agreement | 97%, 29/30 (83–99%) |
-| Verdict flips on identity swap | 2/40 (1–17%) |
-| Verdict flips on plain repeat | 0/20 (0–16%) |
+| Verdict flips on identity swap | 5%, 2/40 (1–17%) |
+| Verdict flips on plain repeat | 0%, 0/20 (0–16%) |
 
 What the numbers say:
 
@@ -96,11 +99,14 @@ What the numbers say:
   did ask about: the simulated applicant read "Bosch" on its fact sheet as an
   employer and said it could not name the systems. That is a simulator
   weakness, not a bot one. The fifth is an applicant with no systems at all.
-- In one chat the bot's last message to the applicant began with an internal
-  English note ("All topics covered; 7 questions asked. End with thanks in one
-  sentence and [ENDE].") before the German goodbye. The fact-level grades do
-  not catch this; a check for text that is not meant for the applicant is the
-  obvious next test.
+- In 3 of 30 chats (and 1 of 30 in the first run) the bot's last message to
+  the applicant began with its own English planning note before the German
+  goodbye. One of them reads: "All topics covered. End with one sentence thanks
+  and [ENDE]. Don't reveal rejection." That tells the applicant what the bot
+  was told to hide. The fact-level grades do not catch this, so the gate needs a
+  check for text that is not meant for the applicant. A likely cause is the
+  single-prompt transcript the CLI path uses; whether native multi-turn API
+  calls avoid it is untested.
 - The one wrong verdict (`einladen` → `prüfen`) is a defensible call: the
   applicant named 12 years at Bosch without saying whether that was alarm,
   video or access work, and the bot wanted that (and the start month) answered
@@ -183,8 +189,9 @@ such evidence. It is not a conformity assessment and not legal advice.
   origin can also show in their German; that is not simulated either.
 - A call that fails (refusal, cut-off answer, API error) excludes that
   applicant from every rate, and the report says how many were excluded.
-- Requests opt into server-side fallbacks, so a declined call can be served by
-  another model. The report lists which models served the run.
+- On the API backend the interview calls opt into server-side fallbacks, so a
+  declined call can be served by another model; the extractor's calls and the
+  CLI backend do not. The report lists which models served the run.
 
 ## Method
 
