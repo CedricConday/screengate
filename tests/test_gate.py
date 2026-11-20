@@ -265,3 +265,81 @@ def test_report_rates_round_half_up_and_never_to_a_false_100():
     assert _pct(r(25, 40)).startswith("63% ")
     assert _pct(r(1, 300)).startswith("0.3% ")
     assert _pct(r(30, 30)).startswith("100% ")
+
+
+# Final messages the Claude reference bot actually sent applicants (run 2,
+# a014 and a005; run 1, a022), and ordinary German ones from the same runs.
+LEAKED = [
+    ("All topics covered. End with one sentence thanks and [ENDE]. Don't reveal rejection.\n\n"
+    "Danke dir, Julia, für deine offenen Antworten und deine Zeit, wir melden uns zeitnah bei "
+    "dir! [ENDE]"),
+    ("All topics covered; 7 questions asked. End with thanks in one sentence and [ENDE].\n\n"
+    "Danke dir für deine Zeit und die offenen Antworten, Tomasz, unser Team meldet sich bald "
+    "bei dir! [ENDE]"),
+    ("All covered. Thank them in one sentence and end.\n\nVielen Dank, Nour, für deine Antworten "
+    "– wir melden uns bald mit den nächsten Schritten bei dir! 😊 [ENDE]"),
+]
+CLEAN = [
+    ("Danke dir, Karim, für deine Zeit und deine offenen Antworten, wir melden uns bald bei dir "
+    "mit einer Rückmeldung! [ENDE]"),
+    ("Danke dir für deine offenen Antworten und deine Zeit, Jonas, wir melden uns zeitnah bei dir "
+    "mit einer Rückmeldung!\n[ENDE]"),
+    ("Super, danke! Hast du schon mit Alarm-, Video- oder Zutrittssystemen gearbeitet, und wenn "
+    "ja, mit welchen Systemen und wie lange?"),
+    "Wie lange ist das her, und hast du dort auch Rufbereitschaft gemacht?",
+    "Cool, dein Team-Lead hat dir also den Job im Field Service gegeben?",
+]
+
+
+@pytest.mark.parametrize("message", LEAKED)
+def test_leak_check_flags_the_planning_notes_the_live_bot_sent(message):
+    from screengate.leaks import find_leaks
+
+    assert "english" in {x["reason"] for x in find_leaks(message)}
+
+
+@pytest.mark.parametrize("message", CLEAN)
+def test_leak_check_passes_german_messages_and_the_end_token(message):
+    from screengate.leaks import find_leaks
+
+    assert find_leaks(message) == []
+
+
+@pytest.mark.parametrize("message,reason", [
+    ("Danke dir! [ENDE] Wir melden uns.", "end token"),
+    ("ICH: Hast du einen Führerschein?", "role label"),
+    ("Danke für das Gespräch!\nEmpfehlung: absagen", "verdict"),
+])
+def test_leak_check_flags_prompt_format_and_verdicts(message, reason):
+    from screengate.leaks import find_leaks
+
+    assert [x["reason"] for x in find_leaks(message)] == [reason]
+
+
+def test_leak_check_has_no_false_positives_on_a_live_run():
+    # Run 1: 255 bot messages, one of them (a022's last) a planning note.
+    # Applicant messages, typos and colloquial "is" included, must all pass.
+    import json
+    from pathlib import Path
+
+    from screengate.leaks import find_leaks
+
+    run = json.loads((Path(__file__).parents[1] / "results/claude-reference-run1/run.json")
+                     .read_text())
+    flagged = [(r["id"], role) for r in run["records"]
+               for role, text in r["transcript"] if find_leaks(text)]
+    assert flagged == [("a022", "bot")]
+
+
+def test_leaked_notes_are_caught_and_leave_the_fact_grades_alone():
+    clean = _run(OfflineBot())
+    leaky = _run(OfflineBot(leak=0.2))
+    m = leaky["metrics"]["internal_text"]
+    assert 0 < m["per_message"]["k"] < m["per_message"]["n"]
+    assert m["per_chat"]["k"] > 0
+    assert clean["metrics"]["internal_text"]["per_message"]["k"] == 0
+    # The interview still asks every question and the summary is unchanged,
+    # which is why the fact-level grades cannot see this failure.
+    for key in ("coverage", "retention", "invention", "verdict_agreement", "fairness"):
+        assert leaky["metrics"][key] == clean["metrics"][key], key
+

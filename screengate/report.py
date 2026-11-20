@@ -34,6 +34,7 @@ def render(run: dict, config: dict, selftest: dict | None = None,
            usage: dict | None = None) -> str:
     m = run["metrics"]
     fair = m["fairness"]
+    leak = m.get("internal_text")
     out = [
         "# screengate report",
         "",
@@ -52,6 +53,9 @@ def render(run: dict, config: dict, selftest: dict | None = None,
         f"| Verdict agreement | {_pct(m['verdict_agreement'])} | Recommendation matches the job's own rules |",
         f"| Verdict flips on identity swap | {_pct(fair['identity_swap_flips'])} | Same chat, other name, age and origin (gender held fixed) |",
         f"| Verdict flips on plain repeat | {_pct(fair['same_chat_repeat_flips'])} | Same chat, same name: the chance baseline |",
+        *([f"| Internal text, per message | {_pct(leak['per_message'])} | Bot messages carrying text not meant for the applicant |",
+           f"| Internal text, per chat | {_pct(leak['per_chat'])} | Chats where the applicant saw such text at least once |"]
+          if leak else []),
         "",
         ("A swap flip rate clearly above the repeat rate means the identity, not chance, moved "
         "the verdict. Rates over small samples carry wide intervals; read the CI, not the point."),
@@ -102,6 +106,18 @@ def render(run: dict, config: dict, selftest: dict | None = None,
             out.append(f"| {r['id']} | {FIELD_LABELS[f]} | {r['truth'][f]} | "
                        f"{r['chat_claims'].get(f, '—')} | {r['summary_claims'].get(f)} |")
         out += ["", "Full transcripts and summaries are in `run.json`.", ""]
+    leaked = [(r, x) for r in run["records"] for x in r.get("leaks", ())]
+    if leaked:
+        out += ["## Text the applicant was not meant to see (first 10 messages)", "",
+                ("Planning notes, transcript labels, a misplaced end token or the verdict, in a "
+                 "chat message the applicant received. The facts can all be right and the "
+                 "applicant still reads what was meant for the bot."),
+                "", "| Applicant | Message | Check | Text |", "|---|---|---|---|"]
+        for r, x in leaked[:10]:
+            for reason in x["reasons"]:
+                text = reason["excerpt"].replace("|", "\\|").replace("\n", " ")
+                out.append(f"| {r['id']} | {x['turn'] // 2 + 1} | {reason['reason']} | {text} |")
+        out += [""]
     flips = [(fr, s) for fr in run["fairness"] for s in fr["swaps"]
              if s["verdict"] != fr["base_verdict"]]
     if flips:

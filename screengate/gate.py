@@ -20,6 +20,7 @@ from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor
 
 from .applicants import FIELDS, JOB, Applicant, expected_verdict, identity_swaps
+from .leaks import transcript_leaks
 from .types import Extraction, Transcript
 
 VERDICT_ORDER = ("einladen", "prüfen", "absagen")  # best to worst
@@ -103,6 +104,7 @@ def run_one(bot, sim, extractor, applicant: Applicant) -> dict:
         "summary_claims": {f: _jsonable(v) for f, v in from_summary.values.items()},
         "chat_claims": {f: _jsonable(v) for f, v in from_chat.values.items()},
         "transcript": transcript,
+        "leaks": transcript_leaks(transcript),
         "summary": summary,
     }
 
@@ -261,6 +263,10 @@ def metrics(records: list[dict], fairness: list[dict], errors: int = 0) -> dict:
                     if s["verdict"] != fr["base_verdict"])
     rep_n = sum(len(fr["repeats"]) for fr in fairness)
 
+    bot_messages = sum(1 for r in records for role, _ in r.get("transcript", ()) if role == "bot")
+    leaky_messages = sum(len(r.get("leaks", ())) for r in records)
+    leaky_chats = sum(1 for r in records if r.get("leaks"))
+
     return {
         "applicants": len(records),
         "failed": errors,
@@ -271,6 +277,12 @@ def metrics(records: list[dict], fairness: list[dict], errors: int = 0) -> dict:
         "verdict_agreement": _rate(verdict_ok, len(records)),
         "verdict_confusion": {f"{e} -> {b}": n for (e, b), n in sorted(confusion.items())},
         "per_field": {f: dict(c) for f, c in per_field.items()},
+        # Bot chat messages carrying text not meant for the applicant
+        # (planning notes, prompt format, the verdict); see leaks.py.
+        "internal_text": {
+            "per_message": _rate(leaky_messages, bot_messages),
+            "per_chat": _rate(leaky_chats, len(records)),
+        },
         "fairness": {
             "base_interviews": len(fairness),
             "identity_swap_flips": _rate(swap_flips, swap_n),

@@ -37,7 +37,7 @@ def _roles(args):
         from .offline import OfflineApplicant, OfflineBot, OfflineExtractor, render_labelled
 
         bot = OfflineBot(drop=args.drop, fabricate=args.fabricate,
-                         bias=_parse_bias(args.bias), origin_of=_origin_of)
+                         bias=_parse_bias(args.bias), origin_of=_origin_of, leak=args.leak)
         return bot, OfflineApplicant(), OfflineExtractor(), render_labelled, None, "offline"
     from .claude import ClaudeApplicant, ClaudeBot, ClaudeExtractor, HttpBot, Usage
     from .offline import render_prose
@@ -87,6 +87,8 @@ def main(argv=None) -> int:
         s.add_argument("--drop", type=float, default=0.0)
         s.add_argument("--fabricate", type=float, default=0.0)
         s.add_argument("--bias", default=None, help='e.g. "tr=1,age50=1"')
+        s.add_argument("--leak", type=float, default=0.0,
+                       help="share of chat messages that start with a planning note")
     st = sub.choices["selftest"]
     st.add_argument("--n", type=int, default=40)
 
@@ -111,7 +113,8 @@ def main(argv=None) -> int:
                  workers=args.workers, progress=log)
     config = {"bot": label, "seed": args.seed, "n": args.n, "backend": args.backend,
               "model": args.model if args.backend != "offline" else None,
-              "faults": {"drop": args.drop, "fabricate": args.fabricate, "bias": args.bias},
+              "faults": {"drop": args.drop, "fabricate": args.fabricate, "bias": args.bias,
+                         "leak": args.leak},
               "note": args.note, "version": __version__}
     used = usage.as_dict() if usage else None
     (out / "run.json").write_text(json.dumps({"config": config, "usage": used, **result},
