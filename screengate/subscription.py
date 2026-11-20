@@ -10,9 +10,9 @@ Code's, so nothing but the prompt reaches the model.
 The CLI takes one prompt, not a message list, so a multi-turn chat is passed as
 a rendered transcript with an instruction to write the next message. This
 rendering was the first suspect for the planning notes the bot sent applicants
-in the second live run. Replaying the final turns did not bear that out: a
-stricter instruction here left the rate where it was, and every leak came on a
-turn the model answered without thinking. The fix is in the bot (claude._Turn).
+in the second live run. Replaying the final turns did not bear that out: every
+leak came on a turn the model answered without thinking, and the fix in the
+bot (claude._Turn) stops the leak through this same rendering.
 """
 
 from __future__ import annotations

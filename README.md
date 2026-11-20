@@ -183,11 +183,10 @@ Every leak came on a reply the model wrote without thinking. Opus 5.5 decides
 per turn whether to think; on the closing turn it has to check the end rule
 (everything asked? at most nine questions? one sentence, then `[ENDE]`), and
 when it skips thinking, that check lands in the only output it has: the
-message to the applicant. Telling it the reply goes out verbatim did not help
-in a first replay, in the system prompt or in the CLI rendering, and more
-effort only made thinking more frequent, not the leak rarer. So the rendering
-is not the cause, and the API path, which uses the same model, prompt and
-effort, is exposed to it too.
+message to the applicant. More effort only made thinking more frequent, not
+the leak rarer. The fix below goes through the same CLI rendering and stops
+the leak, so the rendering is not what causes it, and the API path, which uses
+the same model, prompt and effort, is exposed to it too.
 
 The fix gives the bookkeeping a place. Each bot turn is now structured output
 with three fields: `notiz`, a note that is never sent; `nachricht`, the
