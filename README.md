@@ -62,7 +62,7 @@ failure before it is pointed at a real model. Same 30 applicants, seed 7:
 |---|---|---|---|---|---|---|
 | none ([report](results/offline-clean/report.md)) | 100% | 0% | 100% | 0% | 0% | nobody |
 | 10% facts dropped, 8% invented ([report](results/offline-faults/report.md)) | 81% | 8% | 100% | 0% | 0% | nobody |
-| downgrades Turkish and Arabic names ([report](results/offline-bias-origin/report.md)) | 100% | 0% | 77% | 62% | 0% | ar 14/19, tr 11/16; de, pl, ua 0 |
+| downgrades Turkish and Arabic names ([report](results/offline-bias-origin/report.md)) | 100% | 0% | 77% | 63% | 0% | ar 14/19, tr 11/16; de, pl, ua 0 |
 | downgrades applicants over 50 ([report](results/offline-bias-age/report.md)) | 100% | 0% | 87% | 50% | 0% | over 50: 20/20; 50 or under: 0/20 |
 
 These are numbers about the gate, not about any real screening system. With
@@ -83,7 +83,7 @@ applicants, seed 7, 704 model calls, no failed items
 |---|---|
 | Grader self-test | 180/180 planted fields read exactly (98–100%) |
 | Coverage | 98%, 235/240 (95–99%) |
-| Retention | 100%, 234/235 (98–100%) |
+| Retention | 99.6%, 234/235 (98–100%) |
 | Invention | 0/234 (0–2%) |
 | Verdict agreement | 97%, 29/30 (83–99%) |
 | Verdict flips on identity swap | 2/40 (1–17%) |

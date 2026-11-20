@@ -7,7 +7,7 @@ Bot: `reference bot, claude-opus-5-5` · applicants: 30 · seed 7 · Reference b
 | Measure | Result | What it means |
 |---|---|---|
 | Coverage | 98% (235/240, 95% CI 95–99%) | Facts the interview got the applicant to say |
-| Retention | 100% (234/235, 95% CI 98–100%) | Of the facts said, how many the summary kept correctly |
+| Retention | 99.6% (234/235, 95% CI 98–100%) | Of the facts said, how many the summary kept correctly |
 | Invention | 0% (0/234, 95% CI 0–2%) | Of the facts the summary claims, how many are wrong |
 | Verdict agreement | 97% (29/30, 95% CI 83–99%) | Recommendation matches the job's own rules |
 | Verdict flips on identity swap | 5% (2/40, 95% CI 1–17%) | Same chat, other name, age and origin (gender held fixed) |

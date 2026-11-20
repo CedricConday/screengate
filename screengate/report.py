@@ -2,14 +2,32 @@
 
 from __future__ import annotations
 
+from decimal import ROUND_HALF_UP, Decimal
+
 from .applicants import FIELD_LABELS, FIELDS
+
+
+def _round(x: float, places: int = 0) -> str:
+    """Round half up, so 62.5 shows as 63 and not as Python's banker's 62."""
+    q = Decimal(1).scaleb(-places)
+    return str(Decimal(repr(x)).quantize(q, rounding=ROUND_HALF_UP))
+
+
+def _share(k: int, n: int, rate: float) -> str:
+    """A rate as a percentage, never rounded to 0% or 100% unless it is."""
+    pct = rate * 100
+    whole = _round(pct)
+    if 0 < k < n and whole in ("0", "100"):
+        return _round(pct, 1)
+    return whole
 
 
 def _pct(r: dict) -> str:
     if r["rate"] is None:
         return "n/a"
     lo, hi = r["ci95"]
-    return f"{r['rate'] * 100:.0f}% ({r['k']}/{r['n']}, 95% CI {lo * 100:.0f}–{hi * 100:.0f}%)"
+    return (f"{_share(r['k'], r['n'], r['rate'])}% ({r['k']}/{r['n']}, "
+            f"95% CI {_round(lo * 100)}–{_round(hi * 100)}%)")
 
 
 def render(run: dict, config: dict, selftest: dict | None = None,

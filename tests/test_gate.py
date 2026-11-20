@@ -253,3 +253,15 @@ def test_ages_stay_plausible_for_the_stated_experience():
         assert a.identity.age >= min_age(a.facts.years_experience)
         for s in identity_swaps(a, 4):
             assert s.identity.age >= min_age(a.facts.years_experience), (a.id, s.identity)
+
+
+def test_report_rates_round_half_up_and_never_to_a_false_100():
+    from screengate.report import _pct
+
+    def r(k, n):
+        return {"rate": k / n, "k": k, "n": n, "ci95": (0.0, 1.0)}
+
+    assert _pct(r(234, 235)).startswith("99.6% ")
+    assert _pct(r(25, 40)).startswith("63% ")
+    assert _pct(r(1, 300)).startswith("0.3% ")
+    assert _pct(r(30, 30)).startswith("100% ")
