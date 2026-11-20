@@ -195,8 +195,9 @@ per turn whether to think; on the closing turn it has to check the end rule
 when it skips thinking, that check lands in the only output it has: the
 message to the applicant. More effort only made thinking more frequent, not
 the leak rarer. The fix below goes through the same CLI rendering and stops
-the leak, so the rendering is not what causes it, and the API path, which uses
-the same model, prompt and effort, is exposed to it too.
+the leak, so the rendering is not what causes it. The API path uses the same
+model, prompt and effort and is therefore likely exposed too; that is
+untested, since all runs went through the CLI.
 
 The fix gives the bookkeeping a place. Each bot turn is now structured output
 with three fields: `notiz`, a note that is never sent; `nachricht`, the
