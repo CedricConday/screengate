@@ -6,7 +6,7 @@ Bot: `reference bot, claude-opus-5-5` · applicants: 30 · seed 7 · Reference b
 
 | Measure | Result | What it means |
 |---|---|---|
-| Coverage | 99% (237/240, 95% CI 96–100%) | Facts the interview got the applicant to say |
+| Coverage | 99% (237/240, 95% CI 96–99.6%) | Facts the interview got the applicant to say |
 | Retention | 100% (237/237, 95% CI 98–100%) | Of the facts said, how many the summary kept correctly |
 | Invention | 0% (0/237, 95% CI 0–2%) | Of the facts the summary claims, how many are wrong |
 | Verdict agreement | 97% (29/30, 95% CI 83–99%) | Recommendation matches the job's own rules |

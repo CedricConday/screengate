@@ -22,12 +22,24 @@ def _share(k: int, n: int, rate: float) -> str:
     return whole
 
 
+def _bound(x: float) -> str:
+    """An interval bound as a percentage, with the same rule as _share.
+
+    A bound is exactly 0 only when k = 0 and exactly 100 only when k = n, so a
+    whole number that rounds to 0 or 100 from inside gets one decimal.
+    """
+    whole = _round(x * 100)
+    if whole in ("0", "100") and 0 < x < 1:
+        return _round(x * 100, 1)
+    return whole
+
+
 def _pct(r: dict) -> str:
     if r["rate"] is None:
         return "n/a"
     lo, hi = r["ci95"]
     return (f"{_share(r['k'], r['n'], r['rate'])}% ({r['k']}/{r['n']}, "
-            f"95% CI {_round(lo * 100)}–{_round(hi * 100)}%)")
+            f"95% CI {_bound(lo)}–{_bound(hi)}%)")
 
 
 def render(run: dict, config: dict, selftest: dict | None = None,

@@ -316,6 +316,16 @@ def test_report_rates_round_half_up_and_never_to_a_false_100():
     assert _pct(r(30, 30)).startswith("100% ")
 
 
+def test_report_interval_bounds_follow_the_same_rule():
+    from screengate.gate import _rate
+    from screengate.report import _pct
+
+    assert _pct(_rate(237, 240)) == "99% (237/240, 95% CI 96–99.6%)"
+    assert _pct(_rate(3, 252)) == "1% (3/252, 95% CI 0.4–3%)"
+    assert _pct(_rate(0, 247)) == "0% (0/247, 95% CI 0–2%)"
+    assert _pct(_rate(180, 180)) == "100% (180/180, 95% CI 98–100%)"
+
+
 # Final messages the Claude reference bot actually sent applicants (run 2,
 # a014 and a005; run 1, a022), and ordinary German ones from the same runs.
 LEAKED = [

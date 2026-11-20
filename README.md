@@ -51,7 +51,10 @@ in advance.
    and it counts against the group when its side got the worse verdict.
 
 Every rate is reported with a 95% Wilson interval, because a cohort of 30 is
-small and the point estimate alone overstates what it knows.
+small and the point estimate alone overstates what it knows. Rates and bounds
+are rounded half up to whole percent, the same in the reports and here; a
+value that would round to 0% or 100% without being exactly that keeps one
+decimal (99.6%, not 100%).
 
 ## Can the grader be trusted?
 
@@ -99,15 +102,15 @@ native multi-turn messages as the API backend does.
 
 | Measure | Run 3 (95% CI) | Run 2 (95% CI) |
 |---|---|---|
-| Grader self-test | 180/180 planted fields read exactly (98–100%) | 180/180 (98–100%) |
-| Coverage | 99%, 237/240 (96–100%) | 98%, 235/240 (95–99%) |
-| Retention | 100%, 237/237 (98–100%) | 99.6%, 234/235 (98–100%) |
-| Invention | 0/237 (0–2%) | 0/234 (0–2%) |
+| Grader self-test, planted fields read exactly | 100%, 180/180 (98–100%) | 100%, 180/180 (98–100%) |
+| Coverage | 99%, 237/240 (96–99.6%) | 98%, 235/240 (95–99%) |
+| Retention | 100%, 237/237 (98–100%) | 99.6%, 234/235 (98–99.9%) |
+| Invention | 0%, 0/237 (0–2%) | 0%, 0/234 (0–2%) |
 | Verdict agreement | 97%, 29/30 (83–99%) | 97%, 29/30 (83–99%) |
 | Verdict flips on identity swap | 15%, 6/40 (7–29%) | 5%, 2/40 (1–17%) |
 | Verdict flips on plain repeat | 10%, 2/20 (3–30%) | 0%, 0/20 (0–16%) |
-| Chats with text not meant for the applicant | 0/30 (0–11%) | 10%, 3/30 (3–26%) |
-| Bot messages with such text | 0/247 (0–1.5%) | 1.2%, 3/252 (0.4–3.4%) |
+| Chats with text not meant for the applicant | 0%, 0/30 (0–11%) | 10%, 3/30 (3–26%) |
+| Bot messages with such text | 0%, 0/247 (0–2%) | 1%, 3/252 (0.4–3%) |
 
 What the numbers say:
 
@@ -185,9 +188,9 @@ times per chat, counting leaks with the chat check
 
 | Bot | Goodbyes with a planning note | of which written without thinking |
 |---|---|---|
-| as in runs 1 and 2, effort medium | 7/90, 8% (4–15%) | 7 of 7 (65 of 90 replies had no thinking) |
-| the same, effort high | 10/90, 11% (6–19%) | 10 of 10 (40 of 90 had no thinking) |
-| with a separate note field (the fix) | 0/90, 0% (0–4%) | none (31 of 90 had no thinking) |
+| as in runs 1 and 2, effort medium | 8%, 7/90 (4–15%) | 7 of 7 (65 of 90 replies had no thinking) |
+| the same, effort high | 11%, 10/90 (6–19%) | 10 of 10 (40 of 90 had no thinking) |
+| with a separate note field (the fix) | 0%, 0/90 (0–4%) | none (31 of 90 had no thinking) |
 
 Every leak came on a reply the model wrote without thinking. Opus 5.5 decides
 per turn whether to think; on the closing turn it has to check the end rule
@@ -207,8 +210,8 @@ gate. The fix costs output tokens, since the notes are written on every turn:
 the 90 replayed goodbyes cost $1.58 against $0.30.
 
 In run 3 the bot's messages carried no planning notes, and the chat check
-went from 3/30 chats (3–26%) and 3/252 messages (0.4–3.4%) in run 2 to 0/30
-(0–11%) and 0/247 (0–1.5%).
+went from 3/30 chats (3–26%) and 3/252 messages (0.4–3%) in run 2 to 0/30
+(0–11%) and 0/247 (0–2%).
 
 Cost at API list prices, run through the `claude` CLI on a subscription
 (`--backend subscription`): about $11.13 for run 1, $10.62 for run 2 and $11.74
