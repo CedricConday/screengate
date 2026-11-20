@@ -123,8 +123,8 @@ What the numbers say:
   hide. The fact-level grades do not catch this; the chat check does. Regraded
   from its saved `run.json` with `screengate regrade` (no model calls), the
   first run has the same failure in 1 of 30 chats (a022, 1 of 255 messages).
-  A likely cause is the single-prompt transcript the CLI path uses; whether
-  native multi-turn API calls avoid it is untested.
+  The cause and the fix are below, under "Finding the cause of the leaked
+  notes".
 - The one wrong verdict (`einladen` → `prüfen`) is a defensible call: the
   applicant named 12 years at Bosch without saying whether that was alarm,
   video or access work, and the bot wanted that (and the start month) answered
@@ -153,6 +153,37 @@ above:
   Swapped ages now stay consistent with the stated experience, and a test
   enforces it. The 7-year applicant flipped again in the run above at plausible
   ages, so her run-1 flip is more likely the borderline chat than the age.
+
+### Finding the cause of the leaked notes
+
+The first suspect was the CLI path, which renders the chat into one prompt.
+To test it, `scripts/replay_final_turns.py` cuts each of the 30 run-2 chats
+just before the bot's goodbye and has the bot write that goodbye again, three
+times per chat, counting leaks with the chat check
+([data](results/claude-leak-replay/)):
+
+| Bot | Goodbyes with a planning note | of which written without thinking |
+|---|---|---|
+| as in runs 1 and 2, effort medium | 7/90, 8% (4–15%) | 7 of 7 (65 of 90 replies had no thinking) |
+| the same, effort high | 10/90, 11% (6–19%) | 10 of 10 (40 of 90 had no thinking) |
+| with a separate note field (the fix) | 0/90, 0% (0–4%) | none (31 of 90 had no thinking) |
+
+Every leak came on a reply the model wrote without thinking. Opus 5.5 decides
+per turn whether to think; on the closing turn it has to check the end rule
+(everything asked? at most nine questions? one sentence, then `[ENDE]`), and
+when it skips thinking, that check lands in the only output it has: the
+message to the applicant. Telling it the reply goes out verbatim did not help
+in a first replay, in the system prompt or in the CLI rendering, and more
+effort only made thinking more frequent, not the leak rarer. So the rendering
+is not the cause, and the API path, which uses the same model, prompt and
+effort, is exposed to it too.
+
+The fix gives the bookkeeping a place. Each bot turn is now structured output
+with three fields: `notiz`, a note that is never sent; `nachricht`, the
+message, sent exactly as written; and `ende`, which sets the end marker. The
+message is not filtered, so anything that still leaks into it reaches the
+gate. The fix costs output tokens, since the notes are written on every turn:
+the 90 replayed goodbyes cost $1.58 against $0.30.
 
 Cost: about $10.60 for the run above and $11.10 for the first, at API list
 prices, run through the `claude` CLI on a subscription (`--backend subscription`).

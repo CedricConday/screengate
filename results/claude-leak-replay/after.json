@@ -1,0 +1,562 @@
+{
+ "summary": {
+  "variant": "after",
+  "replies": 90,
+  "failed": 0,
+  "leaked": 0,
+  "without_thinking": 31,
+  "leaked_without_thinking": 0,
+  "usage": {
+   "calls": 90,
+   "input_tokens": 246906,
+   "output_tokens": 47548,
+   "served_by": {
+    "claude-opus-5-5": 90
+   },
+   "list_price_usd": 1.58
+  }
+ },
+ "results": [
+  {
+   "id": "a000",
+   "message": "Vielen Dank für deine Antworten, Karim. Unser Team schaut sich alles in Ruhe an und meldet sich dann bei dir! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 84
+  },
+  {
+   "id": "a000",
+   "message": "Vielen Dank für deine Antworten, Karim. Wir schauen uns alles in Ruhe an und melden uns bald bei dir! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 126
+  },
+  {
+   "id": "a000",
+   "message": "Vielen Dank für deine Antworten, Karim. Wir schauen uns alles in Ruhe an und melden uns bald bei dir! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 152
+  },
+  {
+   "id": "a001",
+   "message": "Vielen Dank für deine Zeit und deine Antworten, Serhii. Unser Team meldet sich bald bei dir mit den nächsten Schritten! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 122
+  },
+  {
+   "id": "a001",
+   "message": "Vielen Dank für deine Antworten und deine Zeit, Serhii, wir melden uns zeitnah bei dir! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 159
+  },
+  {
+   "id": "a001",
+   "message": "Vielen Dank für deine Antworten, Serhii! Unser Team meldet sich bald mit den nächsten Schritten bei dir. [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 81
+  },
+  {
+   "id": "a002",
+   "message": "Super, danke dir, Katrin, für deine Antworten – wir melden uns bald mit den nächsten Schritten bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a002",
+   "message": "Vielen Dank, Katrin, für deine Antworten – wir melden uns in Kürze mit den nächsten Schritten bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a002",
+   "message": "Vielen Dank für deine Antworten, Katrin, wir melden uns bald mit den nächsten Schritten bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a003",
+   "message": "Vielen Dank für deine Antworten, Jonas. Wir melden uns bald mit den nächsten Schritten bei dir! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 267
+  },
+  {
+   "id": "a003",
+   "message": "Danke dir für deine Antworten, Jonas, wir melden uns bald bei dir zu den nächsten Schritten! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 184
+  },
+  {
+   "id": "a003",
+   "message": "Vielen Dank für deine Antworten, Jonas. Wir melden uns bald bei dir wegen der nächsten Schritte! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 125
+  },
+  {
+   "id": "a004",
+   "message": "Vielen Dank für deine Antworten, Nour – wir melden uns bald bei dir mit den nächsten Schritten! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a004",
+   "message": "Vielen Dank für deine Antworten, Nour – wir melden uns zeitnah bei dir mit den nächsten Schritten! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a004",
+   "message": "Vielen Dank für deine Antworten, Nour, wir melden uns bald bei dir mit den nächsten Schritten! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a005",
+   "message": "Vielen Dank für deine Antworten, Tomasz, unser Team schaut sich alles in Ruhe an und meldet sich dann bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 156
+  },
+  {
+   "id": "a005",
+   "message": "Vielen Dank für deine Antworten, Tomasz! Unser Team schaut sich alles an und meldet sich bald bei dir. 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 63
+  },
+  {
+   "id": "a005",
+   "message": "Vielen Dank für deine offenen Antworten, Tomasz, unser Team schaut sich deine Bewerbung jetzt an und meldet sich bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 135
+  },
+  {
+   "id": "a006",
+   "message": "Vielen Dank für deine Antworten, Karim, wir melden uns in Kürze mit den nächsten Schritten bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 104
+  },
+  {
+   "id": "a006",
+   "message": "Vielen Dank für deine Antworten, Karim. Wir melden uns bald bei dir mit den nächsten Schritten! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 104
+  },
+  {
+   "id": "a006",
+   "message": "Vielen Dank für deine Antworten, Karim. Wir melden uns bald bei dir mit den nächsten Schritten! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 119
+  },
+  {
+   "id": "a007",
+   "message": "Super, danke dir! Eine kurze Rückfrage zum Starttermin: Meinst du Oktober 2027 oder könntest du auch schon früher bzw. sofort anfangen?",
+   "leaks": [],
+   "thinking_tokens": 195
+  },
+  {
+   "id": "a007",
+   "message": "Vielen Dank für deine Antworten, Lukas! Wir melden uns bald bei dir zu den nächsten Schritten. 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 201
+  },
+  {
+   "id": "a007",
+   "message": "Vielen Dank für deine Antworten, Lukas! Wir melden uns bald bei dir. 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 252
+  },
+  {
+   "id": "a008",
+   "message": "Vielen Dank für deine offenen Antworten, Olena – unser Team schaut sich alles in Ruhe an und meldet sich bald bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a008",
+   "message": "Vielen Dank für deine offenen Antworten, Olena, ich gebe alles an das Team weiter und wir melden uns bald bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 62
+  },
+  {
+   "id": "a008",
+   "message": "Vielen Dank für deine offenen Antworten, Olena, ich gebe alles an unser Team weiter und du hörst bald von uns! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 51
+  },
+  {
+   "id": "a009",
+   "message": "Vielen Dank, Zeynep, für deine Antworten – wir melden uns bald bei dir mit den nächsten Schritten! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a009",
+   "message": "Vielen Dank, Zeynep, für deine Antworten und deine Zeit. Wir melden uns bald bei dir, wie es weitergeht! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a009",
+   "message": "Vielen Dank für deine Antworten, Zeynep! Wir melden uns bald bei dir. [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a010",
+   "message": "Danke dir für deine offenen Antworten, Zeynep! Die Personalabteilung schaut sich alles an und meldet sich bei dir. 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 57
+  },
+  {
+   "id": "a010",
+   "message": "Vielen Dank, Zeynep, für deine offenen Antworten! Die Personalabteilung meldet sich bei dir, sobald es Neuigkeiten gibt. 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 69
+  },
+  {
+   "id": "a010",
+   "message": "Vielen Dank für deine offenen Antworten, Zeynep! Die Personalabteilung meldet sich bald bei dir. 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 64
+  },
+  {
+   "id": "a011",
+   "message": "Vielen Dank für deine Antworten, Elif. Wir melden uns bald bei dir mit den nächsten Schritten! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a011",
+   "message": "Vielen Dank, Elif, für deine Antworten – wir melden uns bald bei dir! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a011",
+   "message": "Vielen Dank für deine Antworten, Elif. Wir melden uns bald mit den nächsten Schritten bei dir! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a012",
+   "message": "Vielen Dank, Julia, für deine Antworten – wir melden uns bald bei dir mit den nächsten Schritten! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a012",
+   "message": "Vielen Dank, Julia, für deine Antworten. Wir melden uns bald bei dir zu den nächsten Schritten! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a012",
+   "message": "Vielen Dank, Julia, für deine Antworten – wir melden uns in Kürze bei dir mit den nächsten Schritten! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a013",
+   "message": "Vielen Dank für deine offenen Antworten, Agnieszka. Wir melden uns bald bei dir, wie es weitergeht! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 52
+  },
+  {
+   "id": "a013",
+   "message": "Danke dir, Agnieszka, für deine offenen Antworten – wir melden uns bald bei dir zu den nächsten Schritten! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 49
+  },
+  {
+   "id": "a013",
+   "message": "Danke dir, Agnieszka, für deine offenen Antworten – wir melden uns bald mit den nächsten Schritten bei dir! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 41
+  },
+  {
+   "id": "a014",
+   "message": "Vielen Dank für deine Antworten und deine Zeit, Julia, wir melden uns bald bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 69
+  },
+  {
+   "id": "a014",
+   "message": "Vielen Dank für deine Antworten, Julia – wir schauen uns alles in Ruhe an und melden uns bald bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a014",
+   "message": "Vielen Dank für deine Antworten, Julia. Wir melden uns bald bei dir, sobald wir uns deine Bewerbung genauer angesehen haben! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 65
+  },
+  {
+   "id": "a015",
+   "message": "Vielen Dank für deine offenen Antworten, Oksana – wir melden uns bald bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 70
+  },
+  {
+   "id": "a015",
+   "message": "Vielen Dank, Oksana, für deine offenen Antworten und deine Zeit, wir melden uns zeitnah mit den nächsten Schritten bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 68
+  },
+  {
+   "id": "a015",
+   "message": "Vielen Dank für deine offenen Antworten, Oksana. Wir melden uns bald bei dir zu den nächsten Schritten! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 59
+  },
+  {
+   "id": "a016",
+   "message": "Danke dir, Anna, für deine offenen Antworten und deine Zeit, wir melden uns bald bei dir mit einer Rückmeldung! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a016",
+   "message": "Danke dir für deine offenen Antworten, Anna. Ich gebe alles an unser Team weiter und wir melden uns bald bei dir! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a016",
+   "message": "Danke dir, Anna, für deine offenen Antworten, ich gebe alles an unser Team weiter und du bekommst bald eine Rückmeldung von uns! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a017",
+   "message": "Vielen Dank, Ahmed, für deine Antworten – wir melden uns bald mit den nächsten Schritten bei dir! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a017",
+   "message": "Vielen Dank für deine Antworten, Ahmed. Wir melden uns bald bei dir mit den nächsten Schritten! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a017",
+   "message": "Vielen Dank, Ahmed, für deine Antworten – wir melden uns bald bei dir mit den nächsten Schritten! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a018",
+   "message": "Danke dir für deine offenen Antworten, Jonas! Unser Team schaut sich alles an und meldet sich bei dir. [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a018",
+   "message": "Vielen Dank für deine Antworten, Jonas – wir melden uns zeitnah mit den nächsten Schritten bei dir! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 69
+  },
+  {
+   "id": "a018",
+   "message": "Danke dir für deine Antworten, Jonas. Wir schauen uns alles in Ruhe an und melden uns dann bei dir! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a019",
+   "message": "Vielen Dank für deine Zeit und die offenen Antworten, Ayşe. Wir melden uns bald bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 171
+  },
+  {
+   "id": "a019",
+   "message": "Vielen Dank für deine offenen Antworten, Ayşe. Unser Team meldet sich bald bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 64
+  },
+  {
+   "id": "a019",
+   "message": "Vielen Dank, Ayşe, für deine offenen Antworten und das angenehme Gespräch. Unser Team meldet sich bald bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 79
+  },
+  {
+   "id": "a020",
+   "message": "Vielen Dank für deine Antworten, Agnieszka, wir schauen uns alles in Ruhe an und melden uns bald bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 76
+  },
+  {
+   "id": "a020",
+   "message": "Vielen Dank für deine Antworten, Agnieszka. Unser Team meldet sich bald bei dir mit den nächsten Schritten! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 74
+  },
+  {
+   "id": "a020",
+   "message": "Vielen Dank für deine Antworten, Agnieszka. Unser Team meldet sich bald mit den nächsten Schritten bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 76
+  },
+  {
+   "id": "a021",
+   "message": "Vielen Dank, Katrin, für deine Antworten – wir melden uns bald bei dir mit den nächsten Schritten! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a021",
+   "message": "Vielen Dank für deine Antworten, Katrin, wir melden uns bald mit den nächsten Schritten bei dir! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a021",
+   "message": "Vielen Dank für deine Antworten, Katrin, wir melden uns bald mit den nächsten Schritten bei dir! [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a022",
+   "message": "Vielen Dank für deine Antworten, Nour, wir melden uns zeitnah bei dir wegen eines persönlichen Gesprächs! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 172
+  },
+  {
+   "id": "a022",
+   "message": "Vielen Dank für deine Antworten, Nour, wir melden uns bald bei dir mit den nächsten Schritten! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 26
+  },
+  {
+   "id": "a022",
+   "message": "Vielen Dank dir, Nour, für deine offenen Antworten, wir melden uns bald mit den nächsten Schritten bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 26
+  },
+  {
+   "id": "a023",
+   "message": "Vielen Dank für deine Antworten, Elif, wir melden uns in den nächsten Tagen bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 72
+  },
+  {
+   "id": "a023",
+   "message": "Vielen Dank für deine Antworten, Elif. Unser Team aus der Personalabteilung schaut sich alles an und meldet sich bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 285
+  },
+  {
+   "id": "a023",
+   "message": "Vielen Dank für deine Antworten, Elif. Unser Team aus der Personalabteilung meldet sich bald mit einer Rückmeldung bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 100
+  },
+  {
+   "id": "a024",
+   "message": "Danke dir für deine offenen Antworten, Karim. Wir melden uns bald bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 48
+  },
+  {
+   "id": "a024",
+   "message": "Danke dir für deine offenen Antworten, Karim, wir melden uns bald bei dir zu den nächsten Schritten! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 60
+  },
+  {
+   "id": "a024",
+   "message": "Danke dir für deine offenen Antworten, Karim, wir melden uns bald bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 52
+  },
+  {
+   "id": "a025",
+   "message": "Danke dir für deine offenen Antworten, Andrii, wir melden uns bald mit den nächsten Schritten bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a025",
+   "message": "Danke dir für deine offenen Antworten, Andrii! Wir melden uns bald bei dir. 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a025",
+   "message": "Danke dir für deine offenen Antworten, Andrii! Wir melden uns bald bei dir, wie es weitergeht. 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 0
+  },
+  {
+   "id": "a026",
+   "message": "Vielen Dank für deine Antworten, Tomasz! Unser Team schaut sich alles an und meldet sich bald bei dir. 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 56
+  },
+  {
+   "id": "a026",
+   "message": "Vielen Dank für deine offenen Antworten, Tomasz, unsere Personalabteilung meldet sich bald bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 86
+  },
+  {
+   "id": "a026",
+   "message": "Vielen Dank für deine offenen Antworten, Tomasz! Wir schauen uns alles in Ruhe an und melden uns bald bei dir. 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 88
+  },
+  {
+   "id": "a027",
+   "message": "Vielen Dank für deine Antworten, Iryna. Wir melden uns bald bei dir mit den nächsten Schritten! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 182
+  },
+  {
+   "id": "a027",
+   "message": "Super, danke dir! Nur kurz zur Sicherheit: Meinst du mit „ab Oktober“ den Oktober 2027?",
+   "leaks": [],
+   "thinking_tokens": 368
+  },
+  {
+   "id": "a027",
+   "message": "Vielen Dank für deine Antworten, Iryna, wir melden uns in Kürze bei dir mit den nächsten Schritten! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 129
+  },
+  {
+   "id": "a028",
+   "message": "Vielen Dank für deine Zeit und deine Antworten, Piotr, unser Team meldet sich bald bei dir mit den nächsten Schritten! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 255
+  },
+  {
+   "id": "a028",
+   "message": "Vielen Dank dir für deine Antworten, Piotr! Unser Team schaut sich alles in Ruhe an und meldet sich dann bei dir. 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 212
+  },
+  {
+   "id": "a028",
+   "message": "Vielen Dank für deine Antworten, Piotr! Unser Personalteam schaut sich alles in Ruhe an und meldet sich bei dir. 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 268
+  },
+  {
+   "id": "a029",
+   "message": "Vielen Dank für deine offenen Antworten, Fatima. Unser Team schaut sich alles in Ruhe an und meldet sich dann bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 57
+  },
+  {
+   "id": "a029",
+   "message": "Vielen Dank für deine offenen Antworten, Fatima. Wir melden uns bald bei dir, sobald sich unser Team deine Angaben angeschaut hat! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 114
+  },
+  {
+   "id": "a029",
+   "message": "Vielen Dank für deine Antworten und deine Zeit, Fatima, wir melden uns bald bei dir! 😊 [ENDE]",
+   "leaks": [],
+   "thinking_tokens": 82
+  }
+ ],
+ "failed": []
+}

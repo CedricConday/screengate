@@ -1,14 +1,18 @@
 """Run the Claude roles through the `claude` CLI instead of the API.
 
 This lets the gate run on a Claude subscription, with no API key. `CliClient`
-answers the two SDK calls the Claude roles make (`beta.messages.create` and
-`messages.parse`) by starting `claude -p` once per call. Each call runs with a
-fresh session, no tools, no MCP servers and no settings files, and with the
-role's own system prompt in place of Claude Code's, so nothing but the prompt
-reaches the model.
+answers the SDK calls the Claude roles make (`beta.messages.create`,
+`beta.messages.parse` and `messages.parse`) by starting `claude -p` once per
+call. Each call runs with a fresh session, no tools, no MCP servers and no
+settings files, and with the role's own system prompt in place of Claude
+Code's, so nothing but the prompt reaches the model.
 
 The CLI takes one prompt, not a message list, so a multi-turn chat is passed as
-a rendered transcript with an instruction to write the next message.
+a rendered transcript with an instruction to write the next message. This
+rendering was the first suspect for the planning notes the bot sent applicants
+in the second live run. Replaying the final turns did not bear that out: a
+stricter instruction here left the rate where it was, and every leak came on a
+turn the model answered without thinking. The fix is in the bot (claude._Turn).
 """
 
 from __future__ import annotations
@@ -48,7 +52,8 @@ class CliClient:
         # Removed by close() or on leaving a with-block.
         self._workdir = tempfile.TemporaryDirectory(prefix="screengate-cli-")
         self.cwd = self._workdir.name
-        self.beta = SimpleNamespace(messages=SimpleNamespace(create=self._create))
+        self.beta = SimpleNamespace(messages=SimpleNamespace(create=self._create,
+                                                             parse=self._parse))
         self.messages = SimpleNamespace(parse=self._parse)
 
     def close(self) -> None:

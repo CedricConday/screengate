@@ -177,45 +177,57 @@ def test_cohort_covers_every_verdict():
     assert verdicts == {"einladen", "prüfen", "absagen"}
 
 
+def _bot_client(stop="end_turn", turn=None, calls=None):
+    """A stand-in SDK client whose beta.messages.parse returns one bot turn."""
+    from screengate.claude import _Turn
+
+    def parse(**kw):
+        if calls is not None:
+            calls.append(kw)
+        return SimpleNamespace(
+            stop_reason=stop, stop_details=None, model="claude-opus-5-5",
+            usage=SimpleNamespace(input_tokens=10, output_tokens=5),
+            parsed_output=_Turn(**turn) if turn else None)
+    return SimpleNamespace(beta=SimpleNamespace(messages=SimpleNamespace(parse=parse)))
+
+
 def test_claude_bot_request_shape():
-    from screengate.claude import ClaudeBot
+    from screengate.claude import ClaudeBot, _Turn
 
     calls = []
-
-    def create(**kw):
-        calls.append(kw)
-        return SimpleNamespace(
-            stop_reason="end_turn", stop_details=None,
-            usage=SimpleNamespace(input_tokens=10, output_tokens=5),
-            content=[SimpleNamespace(type="text", text="Welche Ausbildung hast du?")])
-
-    client = SimpleNamespace(beta=SimpleNamespace(messages=SimpleNamespace(create=create)))
-    bot = ClaudeBot(client=client)
+    turn = {"notiz": "Noch nichts geklärt.", "nachricht": "Welche Ausbildung hast du?",
+            "ende": False}
+    bot = ClaudeBot(client=_bot_client(turn=turn, calls=calls))
     msg = bot.next_message({"name": "Anna Becker", "age": 30, "job": "x"}, [])
     assert msg == "Welche Ausbildung hast du?"
     kw = calls[0]
     assert kw["model"] == "claude-opus-5-5"
     assert kw["messages"][0]["role"] == "user"
     assert kw["fallbacks"] == "default"
+    assert kw["output_format"] is _Turn
     assert "temperature" not in kw and "thinking" not in kw
     assert set(FIELDS)  # fields exist for the extractor schema
+
+
+def test_claude_bot_sends_only_the_message_and_ends_on_the_flag():
+    from screengate.claude import END, ClaudeBot
+
+    header = {"name": "Anna Becker", "age": 30, "job": "x"}
+    turn = {"notiz": "All topics covered. Don't reveal rejection.",
+            "nachricht": "Danke dir für das Gespräch, wir melden uns bald!", "ende": True}
+    msg = ClaudeBot(client=_bot_client(turn=turn)).next_message(header, [])
+    assert msg == f"Danke dir für das Gespräch, wir melden uns bald! {END}"
+    assert "covered" not in msg
 
 
 def test_claude_bot_raises_on_truncated_or_empty_turns():
     from screengate.claude import ClaudeBot, Incomplete
 
-    def make(stop, text):
-        def create(**kw):
-            return SimpleNamespace(
-                stop_reason=stop, stop_details=None, model="claude-opus-5-5",
-                usage=SimpleNamespace(input_tokens=1, output_tokens=1),
-                content=[SimpleNamespace(type="text", text=text)] if text else [])
-        return SimpleNamespace(beta=SimpleNamespace(messages=SimpleNamespace(create=create)))
-
     header = {"name": "Anna Becker", "age": 30, "job": "x"}
-    for stop, text in (("max_tokens", "Welche Aus"), ("end_turn", "")):
+    empty = {"notiz": "", "nachricht": "  ", "ende": False}
+    for client in (_bot_client(stop="max_tokens"), _bot_client(turn=empty)):
         with pytest.raises(Incomplete):
-            ClaudeBot(client=make(stop, text)).next_message(header, [])
+            ClaudeBot(client=client).next_message(header, [])
 
 
 def test_extractor_schema_has_a_slot_for_unknown_values():
@@ -246,7 +258,12 @@ def test_subscription_client_maps_cli_output(monkeypatch):
         out = {"is_error": False, "stop_reason": "end_turn", "result": "Hast du einen Führerschein?",
                "usage": {"input_tokens": 3, "cache_creation_input_tokens": 7, "output_tokens": 4},
                "modelUsage": {"claude-opus-5-5": {}}, "total_cost_usd": 0.01}
-        if "--json-schema" in cmd:
+        schema = cmd[cmd.index("--json-schema") + 1] if "--json-schema" in cmd else ""
+        if "nachricht" in schema:
+            out.update(stop_reason="tool_use", structured_output={
+                "notiz": "Ausbildung geklärt.", "nachricht": "Hast du einen Führerschein?",
+                "ende": False})
+        elif schema:
             out.update(stop_reason="tool_use", structured_output={
                 "qualification": None, "years_experience": 4, "systems": ["Axis"],
                 "driving_licence": None, "german_level": None, "start_month": None,

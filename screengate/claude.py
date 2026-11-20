@@ -14,7 +14,7 @@ from collections import Counter
 from typing import Literal
 
 import anthropic
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel, Field, ValidationError
 
 from .applicants import FIELDS, JOB, MONTHS, QUALIFICATIONS, SYSTEMS, Applicant
 from .types import Extraction, Transcript
@@ -83,6 +83,30 @@ class _Claude:
             raise Incomplete(f"{self.model} returned no text (stop_reason={response.stop_reason})")
         return text
 
+    def parse(self, system: str, messages: list[dict], schema: type[BaseModel],
+              max_tokens: int = 16000) -> BaseModel:
+        """Like text(), with the answer constrained to a schema."""
+        try:
+            response = self.client.beta.messages.parse(
+                model=self.model,
+                max_tokens=max_tokens,
+                system=system,
+                messages=messages,
+                output_config={"effort": self.effort},
+                output_format=schema,
+                betas=["server-side-fallback-2026-07-01"],
+                fallbacks="default",
+            )
+        except ValidationError as e:
+            raise Incomplete(f"{self.model} did not return valid {schema.__name__}: {e}") from e
+        self.usage.add(response)
+        if response.stop_reason == "refusal":
+            raise Refused(f"{self.model} declined: {response.stop_details}")
+        if response.stop_reason == "max_tokens" or response.parsed_output is None:
+            raise Incomplete(f"{self.model} {schema.__name__} incomplete "
+                             f"(stop_reason={response.stop_reason})")
+        return response.parsed_output
+
 
 def _as_chat(transcript: Transcript, me: str) -> list[dict]:
     """The transcript from one side's point of view: its own turns are 'assistant'."""
@@ -104,7 +128,21 @@ Wünschenswert: {'; '.join(JOB['nice_to_have'])}.
 Stelle immer genau eine kurze Frage pro Nachricht, freundlich und per du. Kläre Ausbildung, \
 Berufserfahrung mit konkreten Systemen, Führerschein, Deutschniveau, frühesten Starttermin, \
 Gehaltswunsch und Bereitschaft zur Rufbereitschaft. Wenn alles geklärt ist, oder nach \
-höchstens neun Fragen, bedanke dich in einem Satz und schreibe ans Ende genau {END}."""
+höchstens neun Fragen, bedanke dich in einem Satz und setze ende auf true."""
+
+
+class _Turn(BaseModel):
+    # The model's reply is split by purpose. Before this, the chat message was
+    # its only output: on turns where adaptive thinking was skipped, the bot
+    # did its bookkeeping ("All topics covered. End with one sentence thanks
+    # and [ENDE].") in the message itself, and the applicant received it. The
+    # note gives that bookkeeping a place that is never sent; the message is
+    # sent exactly as written, so the gate still sees anything leaked into it.
+    notiz: str = Field(description="Interne Notiz nur für dich, wird nie verschickt: was ist "
+                                   "geklärt, was fehlt noch, wie viele Fragen hast du gestellt.")
+    nachricht: str = Field(description="Die Nachricht an die Person, genau so, wie sie "
+                                       "verschickt wird, auf Deutsch.")
+    ende: bool = Field(description="true, wenn das Gespräch mit dieser Nachricht endet.")
 
 SUMMARY_SYSTEM = """Du schreibst für die Personalabteilung eine Bewerber-Zusammenfassung aus einem \
 WhatsApp-Vorqualifizierungsgespräch. Schreibe einen kurzen Fließtext auf Deutsch mit allen \
@@ -123,7 +161,12 @@ class ClaudeBot:
         if sum(1 for r, _ in transcript if r == "bot") >= 10:
             return None
         system = BOT_SYSTEM + f"\n\nBewerbung von {header['name']}, {header['age']} Jahre."
-        return self.llm.text(system, _as_chat(transcript, "bot"))
+        turn = self.llm.parse(system, _as_chat(transcript, "bot"), _Turn)
+        message = turn.nachricht.strip()
+        if not message:
+            raise Incomplete(f"{self.llm.model} returned an empty chat message")
+        # The end marker is the transport's signal, set from the ende field.
+        return f"{message} {END}" if turn.ende else message
 
     def summarize(self, header: dict, transcript: Transcript) -> str:
         chat = "\n".join(
