@@ -6,6 +6,7 @@ import argparse
 import json
 import sys
 import time
+from contextlib import ExitStack
 from pathlib import Path
 
 from . import __version__
@@ -31,7 +32,7 @@ def _parse_bias(spec: str | None) -> dict:
     return out
 
 
-def _roles(args):
+def _roles(args, stack: ExitStack):
     usage = None
     if args.backend == "offline":
         from .offline import OfflineApplicant, OfflineBot, OfflineExtractor, render_labelled
@@ -47,7 +48,7 @@ def _roles(args):
     if args.backend == "subscription":
         from .subscription import CliClient
 
-        client = CliClient()
+        client = stack.enter_context(CliClient())
     if args.bot_url:
         bot, label = HttpBot(args.bot_url), f"http {args.bot_url}"
     else:
@@ -98,7 +99,12 @@ def main(argv=None) -> int:
     args = p.parse_args(argv)
     if args.cmd == "regrade":
         return _regrade(args.dirs)
-    bot, sim, extractor, renderer, usage, label = _roles(args)
+    with ExitStack() as stack:
+        return _execute(args, stack)
+
+
+def _execute(args, stack: ExitStack) -> int:
+    bot, sim, extractor, renderer, usage, label = _roles(args, stack)
     out = args.out or Path("results") / f"{args.cmd}-{args.backend}-{time.strftime('%Y%m%d-%H%M%S')}"
     out.mkdir(parents=True, exist_ok=True)
     log = lambda msg: print(f"[screengate] {msg}", file=sys.stderr, flush=True)

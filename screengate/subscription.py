@@ -18,6 +18,7 @@ import shutil
 import subprocess
 import tempfile
 from types import SimpleNamespace
+from typing import Self
 
 NEXT_TURN = ("Bisheriger Chatverlauf. Zeilen mit ICH sind deine eigenen Nachrichten, "
              "Zeilen mit GEGENÜBER die der anderen Seite.\n\n{chat}\n\n"
@@ -44,9 +45,20 @@ class CliClient:
         self.binary = shutil.which(binary) or binary
         self.timeout = timeout
         # An empty working directory, so no project CLAUDE.md is picked up.
-        self.cwd = tempfile.mkdtemp(prefix="screengate-cli-")
+        # Removed by close() or on leaving a with-block.
+        self._workdir = tempfile.TemporaryDirectory(prefix="screengate-cli-")
+        self.cwd = self._workdir.name
         self.beta = SimpleNamespace(messages=SimpleNamespace(create=self._create))
         self.messages = SimpleNamespace(parse=self._parse)
+
+    def close(self) -> None:
+        self._workdir.cleanup()
+
+    def __enter__(self) -> Self:
+        return self
+
+    def __exit__(self, *exc) -> None:
+        self.close()
 
     def _call(self, model, system, prompt, effort, schema=None) -> dict:
         cmd = [self.binary, "-p", "--model", model, "--system-prompt", system,

@@ -113,9 +113,7 @@ def swap_transcript(transcript: Transcript, old: Applicant, new: Applicant) -> T
     """The same chat with the old name and age replaced by the new ones.
 
     Full name, first name and surname (as in "Frau Yılmaz") are replaced, and
-    every standalone mention of the old age. Ages are 22-61 and no other
-    number in an interview falls in that range as a whole word except salary
-    digits, which are four digits or more, so the age swap cannot hit a fact.
+    every standalone mention of the old age (see _age_mention).
     """
     o_parts, n_parts = old.identity.name.split(), new.identity.name.split()
     out = []
@@ -123,9 +121,20 @@ def swap_transcript(transcript: Transcript, old: Applicant, new: Applicant) -> T
         text = text.replace(old.identity.name, new.identity.name)
         for o, n in ((o_parts[0], n_parts[0]), (o_parts[-1], n_parts[-1])):
             text = re.sub(rf"\b{re.escape(o)}\b", n, text)
-        text = re.sub(rf"(?<![\d.]){old.identity.age}(?![\d.])", str(new.identity.age), text)
+        text = _age_mention(old.identity.age).sub(str(new.identity.age), text)
         out.append((role, text))
     return out
+
+
+def _age_mention(age: int) -> re.Pattern:
+    """The age as a number of its own, not as the start of a salary or a decimal.
+
+    Ages are 22-61, which also opens salaries: "56000", "56.000", "56 000",
+    "56k", "56 Tsd." and "56 €" are all money, while "bin 56, ..." and "56."
+    at the end of a sentence are the age.
+    """
+    money = r"(?:\s?(?:k|K|Tsd|tsd|Tausend|tausend|EUR|Euro)\b|\s?€|\s\d{3}\b)"
+    return re.compile(rf"(?<![\d.,]){age}(?!\d|[.,]\d|{money})")
 
 
 def _identity(a: Applicant) -> dict:

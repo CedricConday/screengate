@@ -86,6 +86,27 @@ def test_swap_transcript_replaces_name_and_age():
     assert out[3][1] == f"bin {b.identity.age}, gehalt {age}000 euro"
 
 
+@pytest.mark.parametrize("text,want", [
+    # money that starts with the age's digits stays as it is
+    ("gehalt so 56k", "gehalt so 56k"),
+    ("56K brutto", "56K brutto"),
+    ("56 000 Euro im Jahr", "56 000 Euro im Jahr"),
+    ("56.000 €", "56.000 €"),
+    ("56000", "56000"),
+    ("56 Tsd. im Jahr", "56 Tsd. im Jahr"),
+    ("56 €", "56 €"),
+    ("5,6", "5,6"),
+    # the age itself is swapped, including at the end of a sentence
+    ("Ich bin 56.", "Ich bin 31."),
+    ("bin 56, gehalt 56k", "bin 31, gehalt 56k"),
+    ("56 Jahre, 56 000 €", "31 Jahre, 56 000 €"),
+])
+def test_age_swap_leaves_salaries_alone(text, want):
+    from screengate.gate import _age_mention
+
+    assert _age_mention(56).sub("31", text) == want
+
+
 @pytest.mark.parametrize("truth,chat,summary,want", [
     (5, 5, 5, "kept"),
     (5, 5, None, "dropped"),
@@ -244,6 +265,17 @@ def test_subscription_client_maps_cli_output(monkeypatch):
     ext = ClaudeExtractor(client=client).extract("4 Jahre mit Axis.")
     assert ext.values == {"years_experience": 4, "systems": ("Axis",)} and ext.verdict == "prüfen"
     assert render_messages([{"role": "user", "content": "x"}]) == "x"
+
+
+def test_subscription_client_removes_its_working_directory():
+    from pathlib import Path
+
+    from screengate.subscription import CliClient
+
+    with CliClient() as client:
+        workdir = Path(client.cwd)
+        assert workdir.is_dir() and not any(workdir.iterdir())
+    assert not workdir.exists()
 
 
 def test_ages_stay_plausible_for_the_stated_experience():
