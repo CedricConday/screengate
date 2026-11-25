@@ -237,6 +237,16 @@ for run 3. Run 3 used 207k output tokens against 127k in run 2. The prompts of
 the other roles are unchanged, so the difference is most likely the note the
 bot now writes on every turn.
 
+### Completion and languages (live, `results/claude-studio/`)
+
+10 applicants, one round-robin over Deutsch, Türkisch, Polnisch, Ukrainisch and
+Englisch, each answering in their own language and giving up after 5–12
+questions. 5 of 10 finished (24–76%); the 5 who quit did so after 5 or 6
+answers. Both Ukrainian applicants quit. Of the 5 finished chats, retention was
+40/40, invention 0/40, verdict agreement 5/5, and 5/5 were decidable without a
+callback (57–100%). The quality numbers hold; the loss is in completion, which a
+recruiter never sees.
+
 ## Use
 
 ```bash

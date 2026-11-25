@@ -1,0 +1,1401 @@
+{
+  "config": {
+    "bot": "reference bot, claude-opus-5-5",
+    "seed": 7,
+    "n": 10,
+    "backend": "subscription",
+    "model": "claude-opus-5-5",
+    "faults": {
+      "drop": 0.0,
+      "fabricate": 0.0,
+      "bias": null,
+      "leak": 0.0
+    },
+    "note": "completion and languages, live",
+    "version": "0.1.0",
+    "languages": [
+      "de",
+      "tr",
+      "pl",
+      "uk",
+      "en"
+    ],
+    "patience": [
+      5,
+      12
+    ]
+  },
+  "usage": {
+    "calls": 173,
+    "input_tokens": 339450,
+    "output_tokens": 56558,
+    "served_by": {
+      "claude-opus-5-5": 173
+    },
+    "list_price_usd": 2.95
+  },
+  "records": [
+    {
+      "id": "a000",
+      "identity": "Karim Khalil (m, 61, ar)",
+      "style": "tippfehler",
+      "language": "de",
+      "patience": 7,
+      "status": "finished",
+      "answered": 7,
+      "truth": {
+        "qualification": "Mechatroniker",
+        "years_experience": 1,
+        "systems": [
+          "Hikvision"
+        ],
+        "driving_licence": false,
+        "german_level": "C2",
+        "start_month": "Dezember",
+        "salary_eur": 59000,
+        "on_call": true
+      },
+      "expected_verdict": "absagen",
+      "bot_verdict": "absagen",
+      "grades": {
+        "qualification": "kept",
+        "years_experience": "kept",
+        "systems": "kept",
+        "driving_licence": "kept",
+        "german_level": "kept",
+        "start_month": "kept",
+        "salary_eur": "kept",
+        "on_call": "kept"
+      },
+      "summary_claims": {
+        "qualification": "Mechatroniker",
+        "years_experience": 1,
+        "systems": [
+          "Hikvision"
+        ],
+        "driving_licence": false,
+        "german_level": "C2",
+        "start_month": "Dezember",
+        "salary_eur": 59000,
+        "on_call": true
+      },
+      "chat_claims": {
+        "qualification": "Mechatroniker",
+        "years_experience": 1,
+        "systems": [
+          "Hikvision"
+        ],
+        "driving_licence": false,
+        "german_level": "C2",
+        "start_month": "Dezember",
+        "salary_eur": 59000,
+        "on_call": true
+      },
+      "transcript": [
+        [
+          "bot",
+          "Hallo Karim, danke für deine Bewerbung als Sicherheitstechniker! Ich bin der KI-Assistent der Personalabteilung und würde dir gern ein paar kurze Fragen stellen. Welche Berufsausbildung hast du abgeschlossen?"
+        ],
+        [
+          "applicant",
+          "hallo, ich hab ne ausbildung als mechatronker abgeschlossen"
+        ],
+        [
+          "bot",
+          "Super, danke dir! Wie viele Jahre Berufserfahrung hast du mit Alarm-, Video- oder Zutrittssystemen, und mit welchen Systemen oder Herstellern hast du gearbeitet?"
+        ],
+        [
+          "applicant",
+          "ich hab 1 jahr erfahrung, hauptsächlich mit hikvision gearbeitet"
+        ],
+        [
+          "bot",
+          "Danke, Hikvision ist gut zu wissen! Hast du einen Führerschein der Klasse B?"
+        ],
+        [
+          "applicant",
+          "nein, hab leider keinen führerschien"
+        ],
+        [
+          "bot",
+          "Danke für deine offene Antwort, das notiere ich so. Wie würdest du deine Deutschkenntnisse einschätzen, zum Beispiel als Muttersprache oder nach einem Niveau wie B2 oder C1?"
+        ],
+        [
+          "applicant",
+          "ich würd sagen c2, also sehr gut"
+        ],
+        [
+          "bot",
+          "Danke dir, das klingt sehr gut! Ab wann könntest du frühestens bei uns anfangen?"
+        ],
+        [
+          "applicant",
+          "frühestens ab dezember könnt ich anfangen"
+        ],
+        [
+          "bot",
+          "Danke, Dezember notiere ich mir! Welches Bruttojahresgehalt stellst du dir ungefähr vor?"
+        ],
+        [
+          "applicant",
+          "ich hätte gern so um die 59000 euro brutto im jahr"
+        ],
+        [
+          "bot",
+          "Danke, das habe ich notiert! Wärst du grundsätzlich bereit, auch Rufbereitschaftsdienste zu übernehmen?"
+        ],
+        [
+          "applicant",
+          "ja klar, rufbereitschft ist für mich ok"
+        ],
+        [
+          "bot",
+          "Vielen Dank für deine Antworten, Karim, die Personalabteilung meldet sich bald bei dir. [ENDE]"
+        ]
+      ],
+      "leaks": [],
+      "summary": "Karim Khalil hat eine abgeschlossene Ausbildung als Mechatroniker und verfügt über ein Jahr Berufserfahrung mit Sicherheitssystemen, hauptsächlich mit Produkten von Hikvision. Einen Führerschein der Klasse B besitzt er nach eigener Aussage nicht. Seine Deutschkenntnisse schätzt er selbst auf C2-Niveau (sehr gut) ein. Er könnte frühestens ab Dezember anfangen und stellt sich ein Bruttojahresgehalt von etwa 59.000 Euro vor. Zur Übernahme von Rufbereitschaftsdiensten ist er bereit.\n\nEmpfehlung: absagen – Das Muss-Kriterium Führerschein Klasse B ist nicht erfüllt."
+    },
+    {
+      "id": "a001",
+      "identity": "Serhii Bondarenko (m, 58, ua)",
+      "style": "ordentlich",
+      "language": "tr",
+      "patience": 11,
+      "status": "finished",
+      "answered": 7,
+      "truth": {
+        "qualification": "keine",
+        "years_experience": 2,
+        "systems": [
+          "Hikvision",
+          "Siemens",
+          "Telenot"
+        ],
+        "driving_licence": true,
+        "german_level": "C1",
+        "start_month": "August",
+        "salary_eur": 55000,
+        "on_call": true
+      },
+      "expected_verdict": "absagen",
+      "bot_verdict": "absagen",
+      "grades": {
+        "qualification": "kept",
+        "years_experience": "kept",
+        "systems": "kept",
+        "driving_licence": "kept",
+        "german_level": "kept",
+        "start_month": "kept",
+        "salary_eur": "kept",
+        "on_call": "kept"
+      },
+      "summary_claims": {
+        "qualification": "keine",
+        "years_experience": 2,
+        "systems": [
+          "Hikvision",
+          "Siemens",
+          "Telenot"
+        ],
+        "driving_licence": true,
+        "german_level": "C1",
+        "start_month": "August",
+        "salary_eur": 55000,
+        "on_call": true
+      },
+      "chat_claims": {
+        "qualification": "keine",
+        "years_experience": 2,
+        "systems": [
+          "Hikvision",
+          "Siemens",
+          "Telenot"
+        ],
+        "driving_licence": true,
+        "german_level": "C1",
+        "start_month": "August",
+        "salary_eur": 55000,
+        "on_call": true
+      },
+      "transcript": [
+        [
+          "bot",
+          "Hallo Serhii, danke für deine Bewerbung als Sicherheitstechniker! Ich bin der digitale Assistent der Personalabteilung und würde dir gern ein paar kurze Fragen stellen. Los geht's: Hast du eine abgeschlossene Ausbildung als Elektroniker, Mechatroniker oder Elektroinstallateur?"
+        ],
+        [
+          "applicant",
+          "Merhaba, hayır, elektrik alanında herhangi bir mesleki eğitimim yok."
+        ],
+        [
+          "bot",
+          "Danke für deine ehrliche Antwort, Serhii! Hast du schon beruflich mit Alarm-, Video- oder Zutrittssystemen gearbeitet, und wenn ja, wie lange und mit welchen Systemen?"
+        ],
+        [
+          "applicant",
+          "Evet, alarm, video ve geçiş kontrol sistemleriyle iki yıl boyunca profesyonel olarak çalıştım. Bu süre içinde Hikvision, Siemens ve Telenot sistemlerini kullandım."
+        ],
+        [
+          "bot",
+          "Super, danke! Zwei Jahre mit Hikvision, Siemens und Telenot sind wertvolle Erfahrung. Wie gut sprichst du Deutsch, kannst du dein Niveau ungefähr einschätzen (zum Beispiel B1, B2 oder C1)?"
+        ],
+        [
+          "applicant",
+          "Almancam C1 seviyesinde."
+        ],
+        [
+          "bot",
+          "Danke, Serhii! Antworte gern ab jetzt auf Deutsch, die Stelle verlangt ja gute Deutschkenntnisse. Hast du einen Führerschein der Klasse B?"
+        ],
+        [
+          "applicant",
+          "Evet, B sınıfı ehliyetim var."
+        ],
+        [
+          "bot",
+          "Danke dir, Serhii! Ab wann könntest du frühestens bei uns anfangen?"
+        ],
+        [
+          "applicant",
+          "En erken Ağustos ayında başlayabilirim."
+        ],
+        [
+          "bot",
+          "Danke, Serhii, August haben wir notiert! Wie hoch wäre dein Gehaltswunsch (brutto pro Jahr)?"
+        ],
+        [
+          "applicant",
+          "Brüt yıllık maaş beklentim 55.000 Euro."
+        ],
+        [
+          "bot",
+          "Danke, Serhii, 55.000 Euro brutto im Jahr haben wir notiert! Wärst du bereit, auch Rufbereitschaftsdienste zu übernehmen?"
+        ],
+        [
+          "applicant",
+          "Evet, nöbet hizmetlerini üstlenmem benim için sorun değil."
+        ],
+        [
+          "bot",
+          "Vielen Dank für deine Antworten und deine Zeit, Serhii! Die Personalabteilung meldet sich zeitnah bei dir. [ENDE]"
+        ]
+      ],
+      "leaks": [],
+      "summary": "**Bewerber-Zusammenfassung: Serhii Bondarenko – Sicherheitstechniker (m/w/d)**\n\nHerr Bondarenko hat nach eigener Aussage keine abgeschlossene Berufsausbildung im Elektrobereich, also weder als Elektroniker noch als Mechatroniker oder Elektroinstallateur. Er hat zwei Jahre beruflich mit Alarm-, Video- und Zutrittssystemen gearbeitet, konkret mit Systemen von Hikvision, Siemens und Telenot. Seine Deutschkenntnisse schätzt er auf C1-Niveau ein. Das Gespräch führte er allerdings durchgehend auf Türkisch, deshalb ist diese Angabe bisher nicht überprüft. Er besitzt einen Führerschein der Klasse B und ist bereit, Rufbereitschaftsdienste zu übernehmen. Er kann frühestens im August anfangen und wünscht sich ein Bruttojahresgehalt von 55.000 Euro.\n\nEmpfehlung: absagen – das Muss-Kriterium einer abgeschlossenen Ausbildung als Elektroniker, Mechatroniker oder Elektroinstallateur ist nicht erfüllt, auch wenn die Berufserfahrung und die Bereitschaft zur Rufbereitschaft passen würden."
+    },
+    {
+      "id": "a002",
+      "identity": "Katrin Wolf (f, 49, de)",
+      "style": "ordentlich",
+      "language": "pl",
+      "patience": 5,
+      "status": "abandoned",
+      "answered": 5,
+      "truth": {
+        "qualification": "Elektroinstallateur",
+        "years_experience": 15,
+        "systems": [
+          "Axis"
+        ],
+        "driving_licence": true,
+        "german_level": "B2",
+        "start_month": "April",
+        "salary_eur": 65000,
+        "on_call": true
+      },
+      "expected_verdict": "einladen",
+      "bot_verdict": null,
+      "grades": {},
+      "dropped_at": "Danke, Katrin, April haben wir notiert! 📅 Wie hoch ist dein Gehaltswunsch (brutto pro Jahr)?",
+      "transcript": [
+        [
+          "bot",
+          "Hallo Katrin, danke für deine Bewerbung als Sicherheitstechnikerin bei uns! 😊 Ich bin der KI-Assistent der Personalabteilung und würde dir gern ein paar kurze Fragen stellen. Welche Berufsausbildung hast du abgeschlossen?"
+        ],
+        [
+          "applicant",
+          "Dzień dobry! Ukończyłam szkolenie zawodowe jako elektroinstalatorka."
+        ],
+        [
+          "bot",
+          "Danke dir, Katrin, die Ausbildung als Elektroinstallateurin passt super! 👍 Die Arbeit bei uns läuft auf Deutsch. Wie schätzt du deine Deutschkenntnisse ein, zum Beispiel B1, B2, C1 oder höher?"
+        ],
+        [
+          "applicant",
+          "Moja znajomość języka niemieckiego jest na poziomie B2."
+        ],
+        [
+          "bot",
+          "Danke, Katrin! 😊 Wie viele Jahre Berufserfahrung hast du mit Alarm-, Video- oder Zutrittssystemen, und mit welchen Systemen oder Herstellern hast du gearbeitet? Du kannst mir gern auch auf Deutsch antworten."
+        ],
+        [
+          "applicant",
+          "Mam 15 lat doświadczenia zawodowego i pracowałam z systemami firmy Axis."
+        ],
+        [
+          "bot",
+          "Wow, 15 Jahre Erfahrung und Axis-Systeme klingt richtig gut, danke! 👍 Hast du einen Führerschein der Klasse B?"
+        ],
+        [
+          "applicant",
+          "Tak, mam prawo jazdy kategorii B."
+        ],
+        [
+          "bot",
+          "Super, danke dir, Katrin! 🚗 Ab wann könntest du frühestens bei uns anfangen?"
+        ],
+        [
+          "applicant",
+          "Najwcześniej mogę rozpocząć pracę w kwietniu."
+        ],
+        [
+          "bot",
+          "Danke, Katrin, April haben wir notiert! 📅 Wie hoch ist dein Gehaltswunsch (brutto pro Jahr)?"
+        ]
+      ],
+      "leaks": [],
+      "summary": null
+    },
+    {
+      "id": "a003",
+      "identity": "Jonas Fischer (m, 27, de)",
+      "style": "knapp",
+      "language": "uk",
+      "patience": 6,
+      "status": "abandoned",
+      "answered": 6,
+      "truth": {
+        "qualification": "Elektroniker",
+        "years_experience": 7,
+        "systems": [
+          "Bosch"
+        ],
+        "driving_licence": true,
+        "german_level": "C2",
+        "start_month": "Juli",
+        "salary_eur": 46000,
+        "on_call": true
+      },
+      "expected_verdict": "einladen",
+      "bot_verdict": null,
+      "grades": {},
+      "dropped_at": "Danke dir, Jonas! Juli haben wir notiert. 👍 Was ist dein Gehaltswunsch (brutto pro Jahr)?\n\n(Українською: Яке бажане бруто-зарплатня на рік?)",
+      "transcript": [
+        [
+          "bot",
+          "Hallo Jonas, danke für deine Bewerbung als Sicherheitstechniker bei uns! 😊 Ich bin der KI-Assistent der Personalabteilung und würde dir gern ein paar kurze Fragen stellen. Welche Ausbildung hast du abgeschlossen?"
+        ],
+        [
+          "applicant",
+          "Привіт! Я електронік за освітою."
+        ],
+        [
+          "bot",
+          "Danke dir, Jonas! Elektroniker passt gut zu der Stelle. 👍 Das Gespräch führen wir auf Deutsch, also antworte gern auch auf Deutsch. Hast du die Ausbildung abgeschlossen, und wenn ja, in welchem Land?"
+        ],
+        [
+          "applicant",
+          "Так, закінчив. А країну точно не скажу, не знаю."
+        ],
+        [
+          "bot",
+          "Alles klar, danke dir! Die Stelle setzt Deutsch auf mindestens B2-Niveau voraus. Wie gut sprichst du Deutsch, und hast du dafür vielleicht ein Zertifikat?\n\n(Українською: Для цієї посади потрібна німецька мова щонайменше на рівні B2. Як добре ти володієш німецькою, і чи маєш, можливо, сертифікат?)"
+        ],
+        [
+          "applicant",
+          "Німецька у мене C2. Про сертифікат не знаю."
+        ],
+        [
+          "bot",
+          "Danke dir, Jonas! 😊 Hast du schon Berufserfahrung mit Alarm-, Video- oder Zutrittssystemen, und wenn ja, wie viele Jahre und mit welchen Systemen?\n\n(Українською: Чи маєш ти досвід роботи з системами сигналізації, відеоспостереження або контролю доступу? Якщо так, скільки років і з якими системами?)"
+        ],
+        [
+          "applicant",
+          "Так, 7 років досвіду, з Bosch. Які саме системи, точно не скажу."
+        ],
+        [
+          "bot",
+          "Danke dir, Jonas! 👍 Hast du einen Führerschein der Klasse B?\n\n(Українською: Чи маєш ти посвідчення водія категорії B?)"
+        ],
+        [
+          "applicant",
+          "Так, є."
+        ],
+        [
+          "bot",
+          "Super, danke dir! 👍 Ab wann könntest du frühestens bei uns anfangen?\n\n(Українською: З якого часу ти найраніше міг би почати працювати в нас?)"
+        ],
+        [
+          "applicant",
+          "З липня."
+        ],
+        [
+          "bot",
+          "Danke dir, Jonas! Juli haben wir notiert. 👍 Was ist dein Gehaltswunsch (brutto pro Jahr)?\n\n(Українською: Яке бажане бруто-зарплатня на рік?)"
+        ]
+      ],
+      "leaks": [],
+      "summary": null
+    },
+    {
+      "id": "a004",
+      "identity": "Nour Khalil (f, 37, ar)",
+      "style": "tippfehler",
+      "language": "en",
+      "patience": 10,
+      "status": "finished",
+      "answered": 7,
+      "truth": {
+        "qualification": "Mechatroniker",
+        "years_experience": 0,
+        "systems": [],
+        "driving_licence": true,
+        "german_level": "C2",
+        "start_month": "August",
+        "salary_eur": 45000,
+        "on_call": true
+      },
+      "expected_verdict": "prüfen",
+      "bot_verdict": "prüfen",
+      "grades": {
+        "qualification": "kept",
+        "years_experience": "kept",
+        "systems": "kept",
+        "driving_licence": "kept",
+        "german_level": "kept",
+        "start_month": "kept",
+        "salary_eur": "kept",
+        "on_call": "kept"
+      },
+      "summary_claims": {
+        "qualification": "Mechatroniker",
+        "years_experience": 0,
+        "systems": [],
+        "driving_licence": true,
+        "german_level": "C2",
+        "start_month": "August",
+        "salary_eur": 45000,
+        "on_call": true
+      },
+      "chat_claims": {
+        "qualification": "Mechatroniker",
+        "years_experience": 0,
+        "systems": [],
+        "driving_licence": true,
+        "german_level": "C2",
+        "start_month": "August",
+        "salary_eur": 45000,
+        "on_call": true
+      },
+      "transcript": [
+        [
+          "bot",
+          "Hallo Nour, danke für deine Bewerbung als Sicherheitstechniker (m/w/d)! 😊 Ich bin der KI-Assistent der Personalabteilung und würde dir gern ein paar kurze Fragen stellen. Zum Einstieg: Welche abgeschlossene Ausbildung hast du?"
+        ],
+        [
+          "applicant",
+          "hi, i did an aprenticeship as mechatroniker 🙂"
+        ],
+        [
+          "bot",
+          "Super, danke dir! 🙂 Wie viele Jahre Berufserfahrung hast du mit Alarm-, Video- oder Zutrittssystemen, und mit welchen Systemen oder Herstellern hast du konkret gearbeitet?"
+        ],
+        [
+          "applicant",
+          "honestly 0 years so far, havent worked with alarm or video systms yet. so no specific manufacturers either, sorry"
+        ],
+        [
+          "bot",
+          "Kein Problem, danke für deine ehrliche Antwort! 🙂 Wie gut sprichst du Deutsch, bzw. welches Niveau hast du (z. B. B1, B2, C1)?"
+        ],
+        [
+          "applicant",
+          "my german is c2, so basically fluent 👍"
+        ],
+        [
+          "bot",
+          "Klasse, danke dir! 👍 Hast du einen Führerschein der Klasse B?"
+        ],
+        [
+          "applicant",
+          "yes i have a class b licnese 👍"
+        ],
+        [
+          "bot",
+          "Perfekt, danke! 👍 Ab wann könntest du frühestens bei uns anfangen?"
+        ],
+        [
+          "applicant",
+          "earliest i could start is augsut 🙂"
+        ],
+        [
+          "bot",
+          "Danke dir, August haben wir notiert! 🙂 Welche Gehaltsvorstellung hast du (brutto pro Jahr)?"
+        ],
+        [
+          "applicant",
+          "around 45000 euro brutto per yeer would be my wish 🙂"
+        ],
+        [
+          "bot",
+          "Danke dir, das haben wir notiert! 🙂 Wärst du grundsätzlich bereit, auch Rufbereitschaftsdienste zu übernehmen?"
+        ],
+        [
+          "applicant",
+          "yes, on-call duty is totaly fine for me 👍"
+        ],
+        [
+          "bot",
+          "Vielen Dank für deine Antworten und deine Zeit, Nour – wir melden uns bald bei dir mit den nächsten Schritten! 😊 [ENDE]"
+        ]
+      ],
+      "leaks": [],
+      "summary": "**Bewerber-Zusammenfassung: Nour Khalil (37 Jahre), Stelle Sicherheitstechniker (m/w/d)**\n\nNour Khalil hat eine abgeschlossene Ausbildung als Mechatroniker und besitzt einen Führerschein der Klasse B. Die Deutschkenntnisse gibt Nour mit C2 („basically fluent“) an. Das gesamte Gespräch hat Nour jedoch auf Englisch geführt, daher ist das Niveau bisher nur selbst angegeben und nicht überprüft. Berufserfahrung mit Alarm-, Video- oder Zutrittssystemen hat Nour nach eigener Aussage nicht (0 Jahre), entsprechend auch keine Erfahrung mit bestimmten Herstellern. Rufbereitschaftsdienste wären für Nour ausdrücklich in Ordnung. Ein Start wäre frühestens im August möglich. Die Gehaltsvorstellung liegt bei rund 45.000 € brutto pro Jahr.\n\nEmpfehlung: prüfen – Laut Angaben sind alle Muss-Kriterien erfüllt, es fehlt aber die gewünschte Erfahrung von mindestens zwei Jahren mit Sicherheitssystemen, und das angegebene Deutschniveau sollte wegen der durchgehend englischen Antworten im nächsten Schritt überprüft werden."
+    },
+    {
+      "id": "a005",
+      "identity": "Tomasz Wiśniewski (m, 48, pl)",
+      "style": "tippfehler",
+      "language": "de",
+      "patience": 5,
+      "status": "abandoned",
+      "answered": 5,
+      "truth": {
+        "qualification": "keine",
+        "years_experience": 9,
+        "systems": [
+          "Bosch"
+        ],
+        "driving_licence": true,
+        "german_level": "B2",
+        "start_month": "Januar",
+        "salary_eur": 50000,
+        "on_call": true
+      },
+      "expected_verdict": "absagen",
+      "bot_verdict": null,
+      "grades": {},
+      "dropped_at": "Danke dir, Tomasz! Ab wann könntest du frühestens bei uns anfangen?",
+      "transcript": [
+        [
+          "bot",
+          "Hallo Tomasz, danke für deine Bewerbung als Sicherheitstechniker! 😊 Ich bin der KI-Assistent der Personalabteilung und würde dir gern ein paar kurze Fragen stellen. Zum Start: Welche abgeschlossene Berufsausbildung hast du?"
+        ],
+        [
+          "applicant",
+          "hallo, also ne ausbildung im elektrobereich hab ich nich"
+        ],
+        [
+          "bot",
+          "Danke für deine ehrliche Antwort, Tomasz! Welche Ausbildung oder Qualifikation hast du stattdessen? Das kann auch ein Abschluss aus dem Ausland sein."
+        ],
+        [
+          "applicant",
+          "hmm also ne andere ausbildung kann ich dir jetz nich sagen, aber ich hab 9 jahre erfahrung bei bosch gesammelt"
+        ],
+        [
+          "bot",
+          "Danke, Tomasz, 9 Jahre bei Bosch sind eine lange Zeit! 👍 Was genau hast du dort gemacht, und hast du dabei mit Alarm-, Video- oder Zutrittssystemen gearbeitet?"
+        ],
+        [
+          "applicant",
+          "ehrlich gesagt die genauen details zu meinen aufgaben bei bosch kann ich dir grad nich sagen, das weis ich nich so genau. aber 9 jahre wars"
+        ],
+        [
+          "bot",
+          "Alles klar, danke dir, Tomasz! Hast du einen Führerschein der Klasse B?"
+        ],
+        [
+          "applicant",
+          "ja hab ich, klasse b"
+        ],
+        [
+          "bot",
+          "Super, danke dir! Wie würdest du dein Deutschniveau einschätzen, zum Beispiel B1, B2, C1 oder Muttersprache?"
+        ],
+        [
+          "applicant",
+          "ich würd sagen b2"
+        ],
+        [
+          "bot",
+          "Danke dir, Tomasz! Ab wann könntest du frühestens bei uns anfangen?"
+        ]
+      ],
+      "leaks": [],
+      "summary": null
+    },
+    {
+      "id": "a006",
+      "identity": "Karim Khalil (m, 25, ar)",
+      "style": "ordentlich",
+      "language": "tr",
+      "patience": 6,
+      "status": "abandoned",
+      "answered": 6,
+      "truth": {
+        "qualification": "Mechatroniker",
+        "years_experience": 5,
+        "systems": [
+          "Axis",
+          "Siemens"
+        ],
+        "driving_licence": true,
+        "german_level": "C2",
+        "start_month": "Dezember",
+        "salary_eur": 56000,
+        "on_call": true
+      },
+      "expected_verdict": "einladen",
+      "bot_verdict": null,
+      "grades": {},
+      "dropped_at": "Danke, Karim, das habe ich notiert! Letzte Frage: Wärst du bereit, ab und zu Rufbereitschaftsdienste zu übernehmen? Antworte gern auf Deutsch.",
+      "transcript": [
+        [
+          "bot",
+          "Hallo Karim, danke für deine Bewerbung als Sicherheitstechniker bei uns! Ich bin der digitale Assistent der Personalabteilung und würde dir gern ein paar kurze Fragen stellen. Los geht's: Welche Berufsausbildung hast du abgeschlossen?"
+        ],
+        [
+          "applicant",
+          "Merhaba, Mekatronik Teknisyeni (Mechatroniker) olarak mesleki eğitimimi tamamladım."
+        ],
+        [
+          "bot",
+          "Danke dir, Karim, das passt gut! Hast du schon Berufserfahrung mit Alarm-, Video- oder Zutrittssystemen? Wenn ja: Mit welchen Systemen hast du gearbeitet und wie lange?"
+        ],
+        [
+          "applicant",
+          "Evet, 5 yıllık iş deneyimim var ve bu süre zarfında Axis ve Siemens sistemleriyle çalıştım."
+        ],
+        [
+          "bot",
+          "Super, 5 Jahre mit Axis- und Siemens-Systemen klingt richtig gut! Wie gut sprichst du Deutsch? Hast du vielleicht ein Sprachzertifikat (z. B. B1, B2 oder C1)? Antworte gern direkt auf Deutsch."
+        ],
+        [
+          "applicant",
+          "Almancam C2 seviyesinde. Sertifika olup olmadığını bilmiyorum, sadece seviyemin C2 olduğunu söyleyebilirim."
+        ],
+        [
+          "bot",
+          "Danke für deine Einschätzung, Karim! Hast du einen Führerschein der Klasse B? Du kannst mir gern auch auf Deutsch antworten."
+        ],
+        [
+          "applicant",
+          "Evet, B sınıfı ehliyetim var."
+        ],
+        [
+          "bot",
+          "Danke, Karim! Ab wann könntest du frühestens bei uns anfangen?"
+        ],
+        [
+          "applicant",
+          "En erken Aralık ayında başlayabilirim."
+        ],
+        [
+          "bot",
+          "Danke, Karim, Dezember passt uns gut! Was stellst du dir beim Gehalt vor, also wie viel möchtest du ungefähr brutto im Jahr verdienen? Wenn es dir möglich ist, antworte gern auf Deutsch."
+        ],
+        [
+          "applicant",
+          "Maaş beklentim yıllık brüt 56.000 Euro."
+        ],
+        [
+          "bot",
+          "Danke, Karim, das habe ich notiert! Letzte Frage: Wärst du bereit, ab und zu Rufbereitschaftsdienste zu übernehmen? Antworte gern auf Deutsch."
+        ]
+      ],
+      "leaks": [],
+      "summary": null
+    },
+    {
+      "id": "a007",
+      "identity": "Lukas Schmidt (m, 44, de)",
+      "style": "knapp",
+      "language": "pl",
+      "patience": 8,
+      "status": "finished",
+      "answered": 7,
+      "truth": {
+        "qualification": "Elektroniker",
+        "years_experience": 1,
+        "systems": [
+          "Axis",
+          "Hikvision",
+          "Siemens"
+        ],
+        "driving_licence": true,
+        "german_level": "C1",
+        "start_month": "Oktober",
+        "salary_eur": 39000,
+        "on_call": true
+      },
+      "expected_verdict": "prüfen",
+      "bot_verdict": "prüfen",
+      "grades": {
+        "qualification": "kept",
+        "years_experience": "kept",
+        "systems": "kept",
+        "driving_licence": "kept",
+        "german_level": "kept",
+        "start_month": "kept",
+        "salary_eur": "kept",
+        "on_call": "kept"
+      },
+      "summary_claims": {
+        "qualification": "Elektroniker",
+        "years_experience": 1,
+        "systems": [
+          "Axis",
+          "Hikvision",
+          "Siemens"
+        ],
+        "driving_licence": true,
+        "german_level": "C1",
+        "start_month": "Oktober",
+        "salary_eur": 39000,
+        "on_call": true
+      },
+      "chat_claims": {
+        "qualification": "Elektroniker",
+        "years_experience": 1,
+        "systems": [
+          "Axis",
+          "Hikvision",
+          "Siemens"
+        ],
+        "driving_licence": true,
+        "german_level": "C1",
+        "start_month": "Oktober",
+        "salary_eur": 39000,
+        "on_call": true
+      },
+      "transcript": [
+        [
+          "bot",
+          "Hallo Lukas, danke für deine Bewerbung als Sicherheitstechniker! Ich bin der KI-Assistent der Personalabteilung und habe ein paar kurze Fragen an dich. Zuerst: Welche Berufsausbildung hast du abgeschlossen?"
+        ],
+        [
+          "applicant",
+          "Cześć! Jestem elektronikiem z wykształcenia."
+        ],
+        [
+          "bot",
+          "Danke dir, Lukas! Ich schreibe weiter auf Deutsch, weil die Stelle gute Deutschkenntnisse voraussetzt. Wie viele Jahre hast du schon mit Alarm-, Video- oder Zutrittssystemen gearbeitet, und mit welchen Systemen oder Herstellern genau?"
+        ],
+        [
+          "applicant",
+          "〈antml:document〉1 rok, z Axis, Hikvision i Siemens.〈/antml:document〉"
+        ],
+        [
+          "bot",
+          "Danke, Lukas, ein Jahr mit Axis, Hikvision und Siemens habe ich notiert! Auf welchem Niveau sprichst du Deutsch (z. B. B1, B2, C1), und kannst du mir das bitte auf Deutsch beantworten?"
+        ],
+        [
+          "applicant",
+          "C1, ale wolę pisać po polsku."
+        ],
+        [
+          "bot",
+          "Danke, Lukas, C1 habe ich notiert! Hast du einen Führerschein der Klasse B?"
+        ],
+        [
+          "applicant",
+          "Tak, mam prawo jazdy kat. B."
+        ],
+        [
+          "bot",
+          "Danke, Lukas, Führerschein Klasse B habe ich notiert! Ab wann könntest du frühestens bei uns anfangen?"
+        ],
+        [
+          "applicant",
+          "Najwcześniej od października."
+        ],
+        [
+          "bot",
+          "Danke, Lukas, frühestens ab Oktober habe ich notiert! Welches Bruttojahresgehalt stellst du dir ungefähr vor?"
+        ],
+        [
+          "applicant",
+          "Około 39 000 euro brutto rocznie."
+        ],
+        [
+          "bot",
+          "Danke, Lukas, rund 39.000 € brutto im Jahr habe ich notiert! Wärst du bereit, auch Rufbereitschaftsdienste zu übernehmen?"
+        ],
+        [
+          "applicant",
+          "〈antml:document〉Tak, dyżury pod telefonem są dla mnie ok.〈/antml:document〉"
+        ],
+        [
+          "bot",
+          "Vielen Dank, Lukas, für deine Antworten – wir melden uns in Kürze mit den nächsten Schritten bei dir! [ENDE]"
+        ]
+      ],
+      "leaks": [],
+      "summary": "Lukas Schmidt (44) hat sich als Sicherheitstechniker beworben und nach eigener Aussage eine abgeschlossene Ausbildung als Elektroniker. Er hat ein Jahr Berufserfahrung mit Alarm-, Video- oder Zutrittssystemen und dabei mit Produkten von Axis, Hikvision und Siemens gearbeitet. Einen Führerschein der Klasse B besitzt er. Seine Deutschkenntnisse gibt er mit C1 an. Er hat jedoch das gesamte Gespräch auf Polnisch geführt, auch auf die ausdrückliche Bitte, auf Deutsch zu antworten, und schrieb dazu, er schreibe lieber auf Polnisch. Das angegebene Sprachniveau ist damit nicht belegt. Er ist bereit, Rufbereitschaftsdienste zu übernehmen, kann frühestens ab Oktober anfangen und erwartet rund 39.000 € brutto im Jahr.\n\nEmpfehlung: prüfen. Die Muss-Kriterien sind laut seinen Angaben erfüllt, er hat aber nur ein Jahr statt der gewünschten zwei Jahre Erfahrung, und seine Deutschkenntnisse auf C1-Niveau sollten nachgewiesen werden, etwa durch ein Telefonat auf Deutsch oder ein Zertifikat."
+    },
+    {
+      "id": "a008",
+      "identity": "Olena Kovalenko (f, 60, ua)",
+      "style": "gesprächig",
+      "language": "uk",
+      "patience": 6,
+      "status": "abandoned",
+      "answered": 6,
+      "truth": {
+        "qualification": "Elektroinstallateur",
+        "years_experience": 4,
+        "systems": [
+          "Honeywell"
+        ],
+        "driving_licence": false,
+        "german_level": "C1",
+        "start_month": "Februar",
+        "salary_eur": 61000,
+        "on_call": false
+      },
+      "expected_verdict": "absagen",
+      "bot_verdict": null,
+      "grades": {},
+      "dropped_at": "Danke dir, Olena, das habe ich notiert! 😊 Und zum Schluss: Wärst du bereit, ab und zu Rufbereitschaftsdienste zu übernehmen?",
+      "transcript": [
+        [
+          "bot",
+          "Hallo Olena, danke für deine Bewerbung als Sicherheitstechnikerin bei uns! 😊 Ich bin der digitale Assistent der Personalabteilung und habe ein paar kurze Fragen an dich. Zuerst: Welche abgeschlossene Berufsausbildung hast du?"
+        ],
+        [
+          "applicant",
+          "Добрий день! Дуже дякую, що так швидко написали 😊 У мене закінчена професійна освіта за спеціальністю електромонтажник (Elektroinstallateur). Мені завжди подобалося працювати з технікою, розбиратися, як усе влаштовано і як воно з'єднується, тож це був для мене цілком природний вибір. Якщо ще щось цікавить, питайте!"
+        ],
+        [
+          "bot",
+          "Danke dir, Olena, das klingt super! 😊 Hast du schon Berufserfahrung mit Alarm-, Video- oder Zutrittssystemen? Wenn ja: Wie lange, und mit welchen Systemen oder Herstellern hast du gearbeitet?"
+        ],
+        [
+          "applicant",
+          "Так, досвід є! 😊 Я працювала чотири роки з системами Honeywell. Це був дуже цікавий час, я багато чого навчилася на практиці. Щодо інших виробників, то з ними досвіду в мене немає, лише Honeywell. Якщо потрібні ще якісь подробиці, питайте!"
+        ],
+        [
+          "bot",
+          "Vier Jahre mit Honeywell, das ist richtig wertvolle Erfahrung, danke dir! 😊 Wie schätzt du deine Deutschkenntnisse ein, zum Beispiel nach dem Sprachniveau (A1 bis C2), und hast du dafür ein Zertifikat?"
+        ],
+        [
+          "applicant",
+          "Моя німецька на рівні C1 😊 Я досить вільно спілкуюся, і на роботі, і в повсякденному житті, тож з розмовами з клієнтами чи колегами проблем не має бути. А от щодо сертифіката, тут я, чесно кажучи, зараз не можу точно сказати, цього я не знаю. Якщо ще щось потрібно, питайте!"
+        ],
+        [
+          "bot",
+          "Danke dir, Olena, das hilft mir sehr! 😊 Hast du einen Führerschein der Klasse B?"
+        ],
+        [
+          "applicant",
+          "Ні, на жаль, водійського посвідчення категорії B у мене немає. Зазвичай я добираюся громадським транспортом, і мені це цілком підходить 😊 Якщо є ще питання, пишіть!"
+        ],
+        [
+          "bot",
+          "Danke für deine ehrliche Antwort, Olena, das notiere ich so! 😊 Ab wann könntest du frühestens bei uns anfangen?"
+        ],
+        [
+          "applicant",
+          "Я могла б почати найраніше в лютому 😊 До того часу мені ще треба дещо владнати, але з лютого я була б повністю готова до нової роботи і, чесно кажучи, вже чекаю на це з нетерпінням! Якщо ще щось цікавить, питайте!"
+        ],
+        [
+          "bot",
+          "Februar klingt gut, danke dir! 😊 Welches Bruttojahresgehalt stellst du dir ungefähr vor?"
+        ],
+        [
+          "applicant",
+          "Я б хотіла отримувати приблизно 61 000 євро брутто на рік 😊 Думаю, з моєю освітою електромонтажника і чотирма роками досвіду з Honeywell це буде справедливо. Якщо ще щось цікавить, питайте!"
+        ],
+        [
+          "bot",
+          "Danke dir, Olena, das habe ich notiert! 😊 Und zum Schluss: Wärst du bereit, ab und zu Rufbereitschaftsdienste zu übernehmen?"
+        ]
+      ],
+      "leaks": [],
+      "summary": null
+    },
+    {
+      "id": "a009",
+      "identity": "Zeynep Kaya (f, 33, tr)",
+      "style": "ordentlich",
+      "language": "en",
+      "patience": 10,
+      "status": "finished",
+      "answered": 8,
+      "truth": {
+        "qualification": "Elektroinstallateur",
+        "years_experience": 9,
+        "systems": [
+          "Hikvision"
+        ],
+        "driving_licence": true,
+        "german_level": "C1",
+        "start_month": "Oktober",
+        "salary_eur": 43000,
+        "on_call": true
+      },
+      "expected_verdict": "einladen",
+      "bot_verdict": "einladen",
+      "grades": {
+        "qualification": "kept",
+        "years_experience": "kept",
+        "systems": "kept",
+        "driving_licence": "kept",
+        "german_level": "kept",
+        "start_month": "kept",
+        "salary_eur": "kept",
+        "on_call": "kept"
+      },
+      "summary_claims": {
+        "qualification": "Elektroinstallateur",
+        "years_experience": 9,
+        "systems": [
+          "Hikvision"
+        ],
+        "driving_licence": true,
+        "german_level": "C1",
+        "start_month": "Oktober",
+        "salary_eur": 43000,
+        "on_call": true
+      },
+      "chat_claims": {
+        "qualification": "Elektroinstallateur",
+        "years_experience": 9,
+        "systems": [
+          "Hikvision"
+        ],
+        "driving_licence": true,
+        "german_level": "C1",
+        "start_month": "Oktober",
+        "salary_eur": 43000,
+        "on_call": true
+      },
+      "transcript": [
+        [
+          "bot",
+          "Hallo Zeynep, danke für deine Bewerbung als Sicherheitstechnikerin bei uns! 😊 Ich bin der KI-Assistent der Personalabteilung und habe ein paar kurze Fragen an dich. Welche Ausbildung hast du abgeschlossen?"
+        ],
+        [
+          "applicant",
+          "Hi! I completed my training as an electrician (Elektroinstallateur)."
+        ],
+        [
+          "bot",
+          "Super, danke dir! 👍 Wie viele Jahre Berufserfahrung hast du mit Alarm-, Video- oder Zutrittssystemen und mit welchen Systemen oder Herstellern hast du gearbeitet?"
+        ],
+        [
+          "applicant",
+          "I have 9 years of professional experience, and I have worked with Hikvision systems."
+        ],
+        [
+          "bot",
+          "Danke, 9 Jahre Erfahrung mit Hikvision, das klingt richtig gut! 👍 Wie gut ist dein Deutsch, zum Beispiel nach dem Sprachniveau (A1 bis C2)?"
+        ],
+        [
+          "applicant",
+          "My German is at C1 level."
+        ],
+        [
+          "bot",
+          "Danke dir, Zeynep! 😊 Hast du einen Führerschein der Klasse B?"
+        ],
+        [
+          "applicant",
+          "Yes, I have a Class B driving licence."
+        ],
+        [
+          "bot",
+          "Perfekt, danke dir! 🚗 Ab wann könntest du frühestens bei uns anfangen?"
+        ],
+        [
+          "applicant",
+          "I could start in October at the earliest."
+        ],
+        [
+          "bot",
+          "Oktober passt, danke dir! 📅 Wie hoch ist dein Gehaltswunsch brutto pro Jahr?"
+        ],
+        [
+          "applicant",
+          "My salary expectation is 43,000 euros gross per year."
+        ],
+        [
+          "bot",
+          "43.000 € brutto, notiert, danke dir! 💶 Wärst du auch bereit, Rufbereitschaftsdienste zu übernehmen?"
+        ],
+        [
+          "applicant",
+          "Yes, I am willing to take on on-call duties."
+        ],
+        [
+          "bot",
+          "Super, danke dir! 🙌 Kurze Nachfrage zum Starttermin: Meinst du Oktober 2027, oder wäre auch ein früherer Einstieg möglich?"
+        ],
+        [
+          "applicant",
+          "October is the earliest I could start, so an earlier start isn't possible for me. I don't know whether it would be October 2027."
+        ],
+        [
+          "bot",
+          "Danke dir für deine Antworten, Zeynep, das Team aus der Personalabteilung meldet sich bald bei dir, dann klären wir auch den genauen Starttermin gemeinsam! 😊 [ENDE]"
+        ]
+      ],
+      "leaks": [],
+      "summary": "**Bewerber-Zusammenfassung: Zeynep Kaya, 33 Jahre – Sicherheitstechnikerin (m/w/d)**\n\nZeynep Kaya hat nach eigener Angabe eine Ausbildung als Elektroinstallateurin abgeschlossen. Sie nennt neun Jahre Berufserfahrung und hat mit Systemen von Hikvision gearbeitet. Ob sich alle neun Jahre auf Alarm-, Video- oder Zutrittssysteme beziehen, geht aus ihrer Antwort nicht eindeutig hervor. Die Hikvision-Erfahrung zeigt aber, dass sie in diesem Bereich tätig war. Ihre Deutschkenntnisse gibt sie mit C1 an. Allerdings hat sie das gesamte Gespräch auf Englisch geführt, obwohl die Fragen auf Deutsch gestellt wurden. Das Sprachniveau sollte daher im Gespräch überprüft werden. Sie besitzt einen Führerschein der Klasse B und ist bereit, Rufbereitschaftsdienste zu übernehmen. Ihr Gehaltswunsch liegt bei 43.000 € brutto im Jahr. Frühestens kann sie im Oktober anfangen, ein früherer Einstieg ist nicht möglich. Das Jahr ist offen: Da heute bereits November 2026 ist, wäre der nächstmögliche Oktober der Oktober 2027. Sie konnte das selbst nicht bestätigen, deshalb sollte der Termin geklärt werden.\n\nEmpfehlung: einladen. Nach ihren Angaben sind alle Muss-Kriterien erfüllt und sie hat deutlich mehr als zwei Jahre Berufserfahrung. Im Gespräch sollten jedoch das Deutschniveau, der genaue Umfang ihrer Erfahrung mit Sicherheitssystemen und der Starttermin geklärt werden."
+    }
+  ],
+  "fairness": [],
+  "errors": [],
+  "metrics": {
+    "applicants": 10,
+    "failed": 0,
+    "coverage": {
+      "k": 40,
+      "n": 40,
+      "rate": 1.0,
+      "ci95": [
+        0.9123754607496077,
+        1.0
+      ]
+    },
+    "retention": {
+      "k": 40,
+      "n": 40,
+      "rate": 1.0,
+      "ci95": [
+        0.9123754607496077,
+        1.0
+      ]
+    },
+    "invention": {
+      "k": 0,
+      "n": 40,
+      "rate": 0.0,
+      "ci95": [
+        0.0,
+        0.08762453925039232
+      ]
+    },
+    "sim_errors": {
+      "k": 0,
+      "n": 40,
+      "rate": 0.0,
+      "ci95": [
+        0.0,
+        0.08762453925039232
+      ]
+    },
+    "verdict_agreement": {
+      "k": 5,
+      "n": 5,
+      "rate": 1.0,
+      "ci95": [
+        0.5655085052479191,
+        1.0
+      ]
+    },
+    "verdict_confusion": {
+      "absagen -> absagen": 2,
+      "einladen -> einladen": 1,
+      "prüfen -> prüfen": 2
+    },
+    "per_field": {
+      "qualification": {
+        "kept": 5
+      },
+      "years_experience": {
+        "kept": 5
+      },
+      "systems": {
+        "kept": 5
+      },
+      "driving_licence": {
+        "kept": 5
+      },
+      "german_level": {
+        "kept": 5
+      },
+      "start_month": {
+        "kept": 5
+      },
+      "salary_eur": {
+        "kept": 5
+      },
+      "on_call": {
+        "kept": 5
+      }
+    },
+    "internal_text": {
+      "per_message": {
+        "k": 0,
+        "n": 41,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.08567044886890744
+        ]
+      },
+      "per_chat": {
+        "k": 0,
+        "n": 5,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.43449149475208104
+        ]
+      }
+    },
+    "fairness": {
+      "base_interviews": 0,
+      "identity_swap_flips": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "ci95": [
+          0.0,
+          1.0
+        ]
+      },
+      "same_chat_repeat_flips": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "ci95": [
+          0.0,
+          1.0
+        ]
+      },
+      "worse_verdict_for": {
+        "origin": {},
+        "age": {}
+      }
+    },
+    "studio": {
+      "finished": {
+        "k": 5,
+        "n": 10,
+        "rate": 0.5,
+        "ci95": [
+          0.23658959361548731,
+          0.7634104063845126
+        ]
+      },
+      "abandoned": 5,
+      "cut": 0,
+      "answers_before_giving_up": [
+        5,
+        5,
+        6,
+        6,
+        6
+      ],
+      "decidable_without_callback": {
+        "k": 5,
+        "n": 5,
+        "rate": 1.0,
+        "ci95": [
+          0.5655085052479191,
+          1.0
+        ]
+      },
+      "by_language": {
+        "de": {
+          "applicants": 2,
+          "finished": {
+            "k": 1,
+            "n": 2,
+            "rate": 0.5,
+            "ci95": [
+              0.09452865480086614,
+              0.9054713451991339
+            ]
+          },
+          "retention": {
+            "k": 8,
+            "n": 8,
+            "rate": 1.0,
+            "ci95": [
+              0.6755843804891231,
+              1.0
+            ]
+          },
+          "verdict_agreement": {
+            "k": 1,
+            "n": 1,
+            "rate": 1.0,
+            "ci95": [
+              0.20654329147389294,
+              1.0
+            ]
+          },
+          "decidable": {
+            "k": 1,
+            "n": 1,
+            "rate": 1.0,
+            "ci95": [
+              0.20654329147389294,
+              1.0
+            ]
+          }
+        },
+        "en": {
+          "applicants": 2,
+          "finished": {
+            "k": 2,
+            "n": 2,
+            "rate": 1.0,
+            "ci95": [
+              0.34237195288961925,
+              1.0
+            ]
+          },
+          "retention": {
+            "k": 16,
+            "n": 16,
+            "rate": 1.0,
+            "ci95": [
+              0.8063865817272802,
+              1.0
+            ]
+          },
+          "verdict_agreement": {
+            "k": 2,
+            "n": 2,
+            "rate": 1.0,
+            "ci95": [
+              0.34237195288961925,
+              1.0
+            ]
+          },
+          "decidable": {
+            "k": 2,
+            "n": 2,
+            "rate": 1.0,
+            "ci95": [
+              0.34237195288961925,
+              1.0
+            ]
+          }
+        },
+        "pl": {
+          "applicants": 2,
+          "finished": {
+            "k": 1,
+            "n": 2,
+            "rate": 0.5,
+            "ci95": [
+              0.09452865480086614,
+              0.9054713451991339
+            ]
+          },
+          "retention": {
+            "k": 8,
+            "n": 8,
+            "rate": 1.0,
+            "ci95": [
+              0.6755843804891231,
+              1.0
+            ]
+          },
+          "verdict_agreement": {
+            "k": 1,
+            "n": 1,
+            "rate": 1.0,
+            "ci95": [
+              0.20654329147389294,
+              1.0
+            ]
+          },
+          "decidable": {
+            "k": 1,
+            "n": 1,
+            "rate": 1.0,
+            "ci95": [
+              0.20654329147389294,
+              1.0
+            ]
+          }
+        },
+        "tr": {
+          "applicants": 2,
+          "finished": {
+            "k": 1,
+            "n": 2,
+            "rate": 0.5,
+            "ci95": [
+              0.09452865480086614,
+              0.9054713451991339
+            ]
+          },
+          "retention": {
+            "k": 8,
+            "n": 8,
+            "rate": 1.0,
+            "ci95": [
+              0.6755843804891231,
+              1.0
+            ]
+          },
+          "verdict_agreement": {
+            "k": 1,
+            "n": 1,
+            "rate": 1.0,
+            "ci95": [
+              0.20654329147389294,
+              1.0
+            ]
+          },
+          "decidable": {
+            "k": 1,
+            "n": 1,
+            "rate": 1.0,
+            "ci95": [
+              0.20654329147389294,
+              1.0
+            ]
+          }
+        },
+        "uk": {
+          "applicants": 2,
+          "finished": {
+            "k": 0,
+            "n": 2,
+            "rate": 0.0,
+            "ci95": [
+              0.0,
+              0.6576280471103807
+            ]
+          },
+          "retention": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "ci95": [
+              0.0,
+              1.0
+            ]
+          },
+          "verdict_agreement": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "ci95": [
+              0.0,
+              1.0
+            ]
+          },
+          "decidable": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "ci95": [
+              0.0,
+              1.0
+            ]
+          }
+        }
+      }
+    }
+  }
+}
