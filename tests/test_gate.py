@@ -438,3 +438,94 @@ def test_regrade_skips_directories_without_a_run(tmp_path, capsys):
     assert main(["regrade", str(other), str(run_dir)]) == 0
     assert f"{other}: no run.json, skipped" in capsys.readouterr().err
     assert json.loads((run_dir / "run.json").read_text()) == before
+
+
+# --- completion, languages, decidability (Studio checks) ---------------------------
+
+def _studio_run(bot=None, n=30, **cohort_kw):
+    from screengate.applicants import studio_cohort
+
+    return run(bot or OfflineBot(), OfflineApplicant(), OfflineExtractor(),
+               studio_cohort(n, 7, **cohort_kw), workers=2, fairness_n=5)
+
+
+def test_studio_cohort_defaults_equal_the_plain_cohort():
+    from screengate.applicants import studio_cohort
+
+    assert studio_cohort(30, 7) == cohort(30, 7)
+    langs = studio_cohort(30, 7, languages=("de", "tr", "pl"), patience=(3, 9))
+    for a, b in zip(langs, cohort(30, 7)):
+        assert (a.facts, a.identity, a.style) == (b.facts, b.identity, b.style)
+    assert {a.language for a in langs} == {"de", "tr", "pl"}
+    assert all(3 <= a.patience <= 9 for a in langs)
+    with pytest.raises(ValueError):
+        studio_cohort(5, 7, languages=("xx",))
+
+
+def test_without_patience_everyone_finishes_and_the_old_metrics_hold():
+    m = _studio_run()["metrics"]
+    assert m["studio"]["finished"]["rate"] == 1.0
+    assert m["studio"]["abandoned"] == 0
+    assert m["studio"]["decidable_without_callback"]["rate"] == 1.0
+    assert m["retention"]["rate"] == 1.0 and m["applicants"] == 30
+
+
+def test_impatient_applicants_give_up_and_leave_the_quality_rates_alone():
+    # The offline bot asks 7 questions; patience 3-9 makes some applicants quit.
+    res = _studio_run(patience=(3, 9))
+    s = res["metrics"]["studio"]
+    quit_ = [r for r in res["records"] if r["status"] == "abandoned"]
+    assert quit_ and s["abandoned"] == len(quit_)
+    assert all(r["patience"] < 7 and r["answered"] == r["patience"] for r in quit_)
+    assert all(r["summary"] is None and r["grades"] == {} for r in quit_)
+    assert s["finished"]["k"] == 30 - len(quit_)
+    # Finished applications are still perfect: giving up is not counted as a dropped fact.
+    assert res["metrics"]["retention"]["rate"] == 1.0
+    assert res["metrics"]["applicants"] == 30
+    assert sorted(r["answered"] for r in quit_) == s["answers_before_giving_up"]
+
+
+def test_dropped_decision_facts_make_summaries_undecidable():
+    m = _studio_run(OfflineBot(drop=0.3))["metrics"]
+    assert m["studio"]["decidable_without_callback"]["rate"] < 1.0
+
+
+def test_metrics_are_split_by_language():
+    m = _studio_run(languages=("de", "tr", "en"))["metrics"]
+    by = m["studio"]["by_language"]
+    assert set(by) == {"de", "tr", "en"}
+    assert sum(v["applicants"] for v in by.values()) == 30
+
+
+def test_claude_applicant_is_told_to_answer_in_its_language():
+    from dataclasses import replace
+
+    from screengate.claude import ClaudeApplicant
+
+    seen = []
+
+    def create(**kw):
+        seen.append(kw["system"])
+        return SimpleNamespace(stop_reason="end_turn", content=[SimpleNamespace(type="text", text="ok")],
+                               usage=SimpleNamespace(input_tokens=1, output_tokens=1,
+                                                     cache_read_input_tokens=0,
+                                                     cache_creation_input_tokens=0),
+                               model="claude-opus-5-5")
+
+    client = SimpleNamespace(beta=SimpleNamespace(messages=SimpleNamespace(create=create)))
+    a = cohort(1, 7)[0]
+    sim = ClaudeApplicant(client=client)
+    sim.reply(replace(a, language="tr"), [("bot", "Welche Ausbildung hast du?")])
+    sim.reply(a, [("bot", "Welche Ausbildung hast du?")])
+    assert "auf Türkisch" in seen[0]
+    assert "Türkisch" not in seen[1]
+
+
+def test_report_shows_completion_and_languages():
+    from screengate.report import render
+
+    res = _studio_run(languages=("de", "uk"), patience=(3, 9))
+    text = render(res, {"bot": "offline", "seed": 7, "patience": [3, 9]})
+    assert "## Completion and languages" in text
+    assert "Ukrainisch" in text and "Finished applications" in text
+    assert "Where they gave up" in text

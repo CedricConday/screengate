@@ -44,18 +44,37 @@ def header_for(applicant: Applicant) -> dict:
     }
 
 
+# The facts the job's decision rule reads (see expected_verdict). A summary that
+# states all of them correctly lets a recruiter decide without calling back.
+DECISION_FIELDS = ("qualification", "driving_licence", "german_level", "years_experience")
+
+
 def interview(bot, sim, applicant: Applicant, max_turns: int = 12) -> Transcript:
+    return interview_status(bot, sim, applicant, max_turns)[0]
+
+
+def interview_status(bot, sim, applicant: Applicant,
+                     max_turns: int = 12) -> tuple[Transcript, str]:
+    """The chat, and how it ended: finished, abandoned or cut.
+
+    finished   the bot ended the interview (end marker, or no further message)
+    abandoned  the applicant's patience ran out; the last bot question is unanswered
+    cut        max_turns reached without either
+    """
     header = header_for(applicant)
     transcript: Transcript = []
     for _ in range(max_turns):
         msg = bot.next_message(header, transcript)
         if msg is None:
-            break
+            return transcript, "finished"
         transcript.append(("bot", msg))
         if "[ENDE]" in msg:
-            break
+            return transcript, "finished"
+        answered = sum(1 for role, _ in transcript if role == "applicant")
+        if applicant.patience is not None and answered >= applicant.patience:
+            return transcript, "abandoned"
         transcript.append(("applicant", sim.reply(applicant, transcript)))
-    return transcript
+    return transcript, "cut"
 
 
 def grade_field(field: str, truth, chat, summary) -> str:
@@ -83,8 +102,20 @@ def _same(field: str, a, b) -> bool:
 
 
 def run_one(bot, sim, extractor, applicant: Applicant) -> dict:
-    transcript = interview(bot, sim, applicant)
+    transcript, status = interview_status(bot, sim, applicant)
     header = header_for(applicant)
+    studio = {"language": applicant.language, "patience": applicant.patience,
+              "status": status,
+              "answered": sum(1 for role, _ in transcript if role == "applicant")}
+    if status == "abandoned":
+        # An application nobody finished reaches no recruiter: no summary, no grades.
+        last = transcript[-1][1] if transcript else ""
+        return {"id": applicant.id, "identity": applicant.identity.label(),
+                "style": applicant.style, **studio,
+                "truth": {f: _jsonable(truth_value(applicant, f)) for f in FIELDS},
+                "expected_verdict": expected_verdict(applicant.facts), "bot_verdict": None,
+                "grades": {}, "dropped_at": last[:200], "transcript": transcript,
+                "leaks": transcript_leaks(transcript), "summary": None}
     summary = bot.summarize(header, transcript)
     from_summary = extractor.extract(summary)
     from_chat = extractor.extract_transcript(transcript)
@@ -97,6 +128,7 @@ def run_one(bot, sim, extractor, applicant: Applicant) -> dict:
         "id": applicant.id,
         "identity": applicant.identity.label(),
         "style": applicant.style,
+        **studio,
         "truth": {f: _jsonable(truth_value(applicant, f)) for f in FIELDS},
         "expected_verdict": expected_verdict(applicant.facts),
         "bot_verdict": from_summary.verdict,
@@ -251,7 +283,58 @@ def group_disadvantage(fairness: list[dict]) -> dict:
     return out
 
 
+def _abandoned(r: dict) -> bool:
+    return r.get("status") == "abandoned"
+
+
+def _decidable(r: dict) -> bool:
+    return all(r["grades"].get(f) == "kept" for f in DECISION_FIELDS)
+
+
+def _quality(done: list[dict]) -> dict:
+    totals = Counter()
+    for r in done:
+        totals.update(r["grades"].values())
+    said = totals["kept"] + totals["dropped"] + totals["invented"]
+    return {"retention": _rate(totals["kept"], said),
+            "verdict_agreement": _rate(sum(r["bot_verdict"] == r["expected_verdict"]
+                                           for r in done), len(done)),
+            "decidable": _rate(sum(_decidable(r) for r in done), len(done))}
+
+
+def studio_metrics(records: list[dict]) -> dict:
+    """Completion, and how well finished applications serve the recruiter, per language.
+
+    Records from before these checks carry no status; they were all finished.
+    """
+    done = [r for r in records if not _abandoned(r)]
+    gave_up = [r for r in records if _abandoned(r)]
+    langs = sorted({r.get("language", "de") for r in records})
+    by_language = {}
+    for lang in langs:
+        rs = [r for r in records if r.get("language", "de") == lang]
+        ds = [r for r in rs if not _abandoned(r)]
+        by_language[lang] = {"applicants": len(rs),
+                             "finished": _rate(len(ds), len(rs)), **_quality(ds)}
+    return {
+        "finished": _rate(sum(r.get("status", "finished") == "finished" for r in records),
+                          len(records)),
+        "abandoned": len(gave_up),
+        "cut": sum(r.get("status") == "cut" for r in records),
+        "answers_before_giving_up": sorted(r["answered"] for r in gave_up),
+        # Of the finished applications: the summary states every fact the decision rule
+        # needs, correctly, so the recruiter can decide without calling back.
+        "decidable_without_callback": _quality(done)["decidable"],
+        "by_language": by_language,
+    }
+
+
 def metrics(records: list[dict], fairness: list[dict], errors: int = 0) -> dict:
+    studio = studio_metrics(records)
+    everyone = len(records)
+    # Quality is measured on the applications that reached a recruiter. Without a
+    # patience limit nobody gives up, and this is every record, as before.
+    records = [r for r in records if not _abandoned(r)]
     totals = Counter()
     per_field = defaultdict(Counter)
     for r in records:
@@ -277,7 +360,7 @@ def metrics(records: list[dict], fairness: list[dict], errors: int = 0) -> dict:
     leaky_chats = sum(1 for r in records if r.get("leaks"))
 
     return {
-        "applicants": len(records),
+        "applicants": everyone,
         "failed": errors,
         "coverage": _rate(said, asked),
         "retention": _rate(totals["kept"], said),
@@ -298,6 +381,7 @@ def metrics(records: list[dict], fairness: list[dict], errors: int = 0) -> dict:
             "same_chat_repeat_flips": _rate(rep_flips, rep_n),
             "worse_verdict_for": group_disadvantage(fairness),
         },
+        "studio": studio,
     }
 
 

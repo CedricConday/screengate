@@ -16,7 +16,7 @@ from typing import Literal
 import anthropic
 from pydantic import BaseModel, Field, ValidationError
 
-from .applicants import FIELDS, JOB, MONTHS, QUALIFICATIONS, SYSTEMS, Applicant
+from .applicants import FIELDS, JOB, LANGUAGES, MONTHS, QUALIFICATIONS, SYSTEMS, Applicant
 from .types import Extraction, Transcript
 
 DEFAULT_MODEL = "claude-opus-5-5"
@@ -214,6 +214,8 @@ class ClaudeApplicant:
             "nichts dazu; wenn etwas gefragt wird, das nicht in deinen Fakten steht, sag, "
             f"dass du es nicht weißt. {STYLE_HINTS[applicant.style]} Schreib nur die Chat-"
             "Nachricht selbst."
+            + (f" Schreib deine Antworten auf {LANGUAGES[applicant.language]}, auch wenn der "
+               "Assistent Deutsch schreibt." if applicant.language != "de" else "")
         )
         return self.llm.text(system, _as_chat(transcript, "applicant"))
 

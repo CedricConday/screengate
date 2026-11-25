@@ -10,7 +10,7 @@ from contextlib import ExitStack
 from pathlib import Path
 
 from . import __version__
-from .applicants import NAMES, cohort
+from .applicants import NAMES, studio_cohort
 from .gate import extraction_selftest, regrade, run
 from .report import render
 
@@ -83,6 +83,10 @@ def main(argv=None) -> int:
     r.add_argument("--bot-effort", default="medium")
     r.add_argument("--no-selftest", action="store_true")
     r.add_argument("--note", default=None, help="one line shown under the report title")
+    r.add_argument("--languages", default="de",
+                   help="languages applicants answer in, round-robin, e.g. de,tr,pl,uk,en")
+    r.add_argument("--patience", default=None,
+                   help='bot questions an applicant answers before giving up, e.g. "4-10"')
     for s in sub.choices.values():
         # Offline fault knobs; they prove the gate sees each failure.
         s.add_argument("--drop", type=float, default=0.0)
@@ -124,14 +128,20 @@ def _execute(args, stack: ExitStack) -> int:
             print(json.dumps(selftest["accuracy"], indent=2))
             return 0
 
-    result = run(bot, sim, extractor, cohort(args.n, args.seed), fairness_n=args.fairness_n,
+    languages = tuple(x.strip() for x in args.languages.split(",") if x.strip())
+    patience = tuple(int(x) for x in args.patience.split("-")) if args.patience else None
+    if patience and (len(patience) != 2 or patience[0] < 1 or patience[0] > patience[1]):
+        raise SystemExit(f"--patience wants a range like 4-10, got {args.patience!r}")
+    applicants = studio_cohort(args.n, args.seed, languages, patience)
+    result = run(bot, sim, extractor, applicants, fairness_n=args.fairness_n,
                  swaps=args.swaps, repeats=args.repeats, seed=args.seed,
                  workers=args.workers, progress=log)
     config = {"bot": label, "seed": args.seed, "n": args.n, "backend": args.backend,
               "model": args.model if args.backend != "offline" else None,
               "faults": {"drop": args.drop, "fabricate": args.fabricate, "bias": args.bias,
                          "leak": args.leak},
-              "note": args.note, "version": __version__}
+              "note": args.note, "version": __version__,
+              "languages": list(languages), "patience": list(patience) if patience else None}
     used = usage.as_dict() if usage else None
     (out / "run.json").write_text(json.dumps({"config": config, "usage": used, **result},
                                              ensure_ascii=False, indent=2))

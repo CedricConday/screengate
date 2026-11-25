@@ -19,6 +19,10 @@ MONTHS = (
     "Juli", "August", "September", "Oktober", "November", "Dezember",
 )
 STYLES = ("ordentlich", "knapp", "tippfehler", "gesprächig")
+# Chat languages an applicant may answer in. The bot is free to keep writing German;
+# what is measured is whether the application still gets finished and summarised.
+LANGUAGES = {"de": "Deutsch", "tr": "Türkisch", "pl": "Polnisch", "uk": "Ukrainisch",
+             "en": "Englisch"}
 VERDICTS = ("einladen", "prüfen", "absagen")
 
 # Field names shared by applicants, extraction and grading.
@@ -120,6 +124,9 @@ class Applicant:
     identity: Identity
     facts: Facts
     style: str
+    language: str = "de"  # key of LANGUAGES: the language the applicant answers in
+    # How many bot questions the applicant answers before giving up; None = never gives up.
+    patience: int | None = None
 
     def with_identity(self, identity: Identity, suffix: str) -> Applicant:
         return replace(self, id=f"{self.id}{suffix}", identity=identity)
@@ -184,6 +191,26 @@ def cohort(n: int, seed: int = 7) -> list[Applicant]:
             style=style_rng.choice(STYLES),
         )
         for i in range(n)
+    ]
+
+
+def studio_cohort(n: int, seed: int = 7, languages: tuple[str, ...] = ("de",),
+                  patience: tuple[int, int] | None = None) -> list[Applicant]:
+    """cohort(n, seed), each applicant also given a chat language and a patience.
+
+    Languages go round-robin in applicant order, so the groups are equally large.
+    Patience, the number of bot questions an applicant answers before giving up,
+    is drawn from its own stream in the closed range given. Facts, identity and
+    style are exactly those of cohort(n, seed); with the defaults the two are equal.
+    """
+    for lang in languages:
+        if lang not in LANGUAGES:
+            raise ValueError(f"unknown language {lang!r}; use one of {', '.join(LANGUAGES)}")
+    rng = random.Random(f"patience-{seed}")
+    return [
+        replace(a, language=languages[i % len(languages)],
+                patience=rng.randint(*patience) if patience else None)
+        for i, a in enumerate(cohort(n, seed))
     ]
 
 

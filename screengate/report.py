@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from decimal import ROUND_HALF_UP, Decimal
 
-from .applicants import FIELD_LABELS, FIELDS
+from .applicants import FIELD_LABELS, FIELDS, LANGUAGES
 
 
 def _round(x: float, places: int = 0) -> str:
@@ -50,6 +50,7 @@ def render(run: dict, config: dict, selftest: dict | None = None,
     m = run["metrics"]
     fair = m["fairness"]
     leak = m.get("internal_text")
+    studio = m.get("studio")
     out = [
         "# screengate report",
         "",
@@ -68,6 +69,9 @@ def render(run: dict, config: dict, selftest: dict | None = None,
         f"| Verdict agreement | {_pct(m['verdict_agreement'])} | Recommendation matches the job's own rules |",
         f"| Verdict flips on identity swap | {_pct(fair['identity_swap_flips'])} | Same chat, other name, age and origin (gender held fixed) |",
         f"| Verdict flips on plain repeat | {_pct(fair['same_chat_repeat_flips'])} | Same chat, same name: the chance baseline |",
+        *([f"| Finished applications | {_pct(studio['finished'])} | Applicants who reached the end of the interview |",
+           f"| Decidable without a callback | {_pct(studio['decidable_without_callback'])} | Finished applications whose summary states every fact the decision rule needs, correctly |"]
+          if studio else []),
         *([f"| Internal text, per message | {_pct(leak['per_message'])} | Bot messages carrying text not meant for the applicant |",
            f"| Internal text, per chat | {_pct(leak['per_chat'])} | Chats where the applicant saw such text at least once |"]
           if leak else []),
@@ -86,6 +90,28 @@ def render(run: dict, config: dict, selftest: dict | None = None,
             f"**{_pct(selftest['accuracy'])} read exactly as planted.**"),
             "",
         ]
+    if studio and (studio["abandoned"] or len(studio["by_language"]) > 1):
+        out += ["## Completion and languages", "",
+                (f"Applicants were given a patience: the number of questions they answer "
+                 f"before giving up ({config.get('patience') and '–'.join(map(str, config['patience'])) or 'none'}). "
+                 f"{studio['abandoned']} gave up"
+                 + (f", after {', '.join(map(str, studio['answers_before_giving_up']))} answers"
+                    if studio["abandoned"] else "")
+                 + ". Abandoned chats get no summary and are left out of every quality rate; "
+                 "a recruiter never sees them."),
+                "", "| Language | Applicants | Finished | Retention | Verdict agreement | Decidable without callback |",
+                "|---|---|---|---|---|---|"]
+        for lang, q in studio["by_language"].items():
+            out.append(f"| {LANGUAGES.get(lang, lang)} | {q['applicants']} | {_pct(q['finished'])} | "
+                       f"{_pct(q['retention'])} | {_pct(q['verdict_agreement'])} | {_pct(q['decidable'])} |")
+        gave_up = [r for r in run["records"] if r.get("status") == "abandoned"]
+        if gave_up:
+            out += ["", "Where they gave up (the question left unanswered, first 10):", "",
+                    "| Applicant | Answers given | Last bot message |", "|---|---|---|"]
+            for r in gave_up[:10]:
+                text = (r.get("dropped_at") or "").replace("|", "\\|").replace("\n", " ")
+                out.append(f"| {r['id']} | {r['answered']} | {text} |")
+        out += [""]
     out += ["## Per fact", "",
             "| Fact | kept | dropped | invented | invented, never said | not covered | sim error |",
             "|---|---|---|---|---|---|---|"]
